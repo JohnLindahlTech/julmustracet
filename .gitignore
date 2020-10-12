@@ -1,3 +1,6 @@
+# Hidden files
+.env*
+
 # Logs
 logs
 *.log
