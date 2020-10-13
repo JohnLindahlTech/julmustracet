@@ -40,8 +40,7 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "prettier --write",
-      "eslint",
-      "git add"
+      "eslint"
     ]
   },
   "dependencies": {
