@@ -1,9 +1,12 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Provider } from "next-auth/client";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
-import messages from "../../compiled-lang/sv.json";
+import { getMessages } from "../translations/messages";
+import { getLocale } from "../translations/getLocales";
+
 const GlobalStyle = createGlobalStyle`
 body {
   font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
@@ -43,13 +46,17 @@ const theme = {
 };
 
 const App = ({ Component, pageProps }) => {
+  const router = useRouter();
   const { session } = pageProps;
+  const { lang } = router.query;
+  const locale = getLocale(lang as string);
+  const messages = getMessages(locale);
   return (
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Provider session={session}>
-          <IntlProvider locale="sv" defaultLocale="sv" messages={messages}>
+          <IntlProvider locale={locale} defaultLocale="sv" messages={messages}>
             <Layout>
               <Component {...pageProps} />
             </Layout>

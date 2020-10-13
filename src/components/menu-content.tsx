@@ -24,7 +24,7 @@ import {
 } from "../routes";
 import { useSession } from "next-auth/client";
 import { Hidden, Toolbar, Typography } from "@material-ui/core";
-import Link from "next/link";
+import Link from "./langLink";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

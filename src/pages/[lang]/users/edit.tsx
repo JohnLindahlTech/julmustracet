@@ -4,6 +4,10 @@ import { Button } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 import { useSession } from "next-auth/client";
+export {
+  getStaticProps,
+  getStaticPaths,
+} from "../../../translations/getStaticPath";
 
 // TODO TRANSLATE
 

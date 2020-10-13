@@ -1,20 +1,18 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import Head from "next/head";
+import { getInitialLocale } from "../translations/getInitialLocales";
+import { useRouter } from "next/router";
 
-const NextAuth = () => (
-  <>
-    <main>
-      <h1>
-        <FormattedMessage defaultMessage="JulmustRacet" />
-      </h1>
-      <p>
-        <FormattedMessage defaultMessage="Användartopplista" />
-      </p>
-      <p>
-        <FormattedMessage defaultMessage="Märkestopplista" />
-      </p>
-    </main>
-  </>
-);
+const Index: React.FC = () => {
+  const router = useRouter();
+  React.useEffect(() => {
+    router.replace(`/${getInitialLocale()}`);
+  });
+  return (
+    <Head>
+      <meta name="robots" content="noindex, nofollow" />
+    </Head>
+  );
+};
 
-export default NextAuth;
+export default Index;

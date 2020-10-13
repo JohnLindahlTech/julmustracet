@@ -1,14 +1,14 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-const Add = () => (
+const Brand = () => (
   <>
     <main>
       <h1>
-        <FormattedMessage defaultMessage="Lägg till dryck" />
+        <FormattedMessage defaultMessage="Tillverkardetaljer" />
       </h1>
     </main>
   </>
 );
 
-export default Add;
+export default Brand;

@@ -11,6 +11,7 @@ import {
   BrandDetails,
   AddDrink,
 } from "../routes";
+import LangPicker from "./langPicker";
 
 const Footer = () => {
   const [user, setUser] = useState("Kebeb");
@@ -18,6 +19,7 @@ const Footer = () => {
   return (
     <div style={{ height: 1000 }}>
       <hr />
+      <LangPicker />
       <ul>
         <li>
           <Link {...Home}>
@@ -30,7 +32,9 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link href={UserDetails.href(user)}>{user}</Link>
+          <Link href={{ pathname: UserDetails.href, query: { user } }}>
+            {user}
+          </Link>
           <TextField
             id="user"
             value={user}
@@ -39,16 +43,18 @@ const Footer = () => {
         </li>
         <li>
           <Link {...UserEdit}>
-            <FormattedMessage defaultMessage="Redigera Användare" />
+            <FormattedMessage defaultMessage="Redigera profil" />
           </Link>
         </li>
         <li>
           <Link {...Brands}>
-            <FormattedMessage defaultMessage="Märken" />
+            <FormattedMessage defaultMessage="Tillverkare" />
           </Link>
         </li>
         <li>
-          <Link href={BrandDetails.href(brand)}>{brand}</Link>
+          <Link href={{ pathname: BrandDetails.href, query: { brand } }}>
+            {brand}
+          </Link>
         </li>
         <TextField
           id="brand"

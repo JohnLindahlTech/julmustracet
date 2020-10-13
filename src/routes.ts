@@ -1,8 +1,10 @@
-const userPath = "/konsumenter";
-const brandPath = "/tillverkare";
+const root = "/[lang]";
+const userPath = `${root}/users`;
+const brandPath = `${root}/brands`;
+const authAPI = `/api/auth`;
 
 export const Home = {
-  href: "/",
+  href: root,
 };
 
 export const Users = {
@@ -10,7 +12,7 @@ export const Users = {
 };
 
 export const UserDetails = {
-  href: (user) => `${userPath}/${user}`,
+  href: `${userPath}/[user]`,
 };
 
 export const UserEdit = {
@@ -22,17 +24,17 @@ export const Brands = {
 };
 
 export const BrandDetails = {
-  href: (brand) => `${brandPath}/${brand}`,
+  href: `${brandPath}/[brand]`,
 };
 
 export const AddDrink = {
-  href: "/ny",
+  href: `${root}/add`,
 };
 
 export const LogIn = {
-  href: "/api/auth/signin",
+  href: `${authAPI}/signin`,
 };
 
 export const LogOut = {
-  href: "/api/auth/signout",
+  href: `${authAPI}/signout`,
 };
