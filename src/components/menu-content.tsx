@@ -11,6 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import { useIntl, FormattedMessage } from "react-intl";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
   Home,
@@ -34,56 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-const menuItems = [
-  {
-    label: "Home",
-    key: Home.href,
-    href: Home.href,
-    Icon: HomeIcon,
-  },
-  {
-    label: "Top Users",
-    key: Users.href,
-    href: Users.href,
-    Icon: UsersIcon,
-  },
-  {
-    label: "Top Brands",
-    key: Brands.href,
-    href: Brands.href,
-    Icon: BottleIcon,
-  },
-  <Divider key="div1" />,
-  {
-    label: "Log in",
-    key: LogIn.href,
-    href: LogIn.href,
-    requireLoggedOut: true,
-    Icon: LogInIcon,
-  },
-  {
-    label: "Add Drink",
-    key: AddDrink.href,
-    href: AddDrink.href,
-    requireLoggedIn: true,
-    Icon: AddIcon,
-  },
-  {
-    label: "Edit Profile",
-    key: UserEdit.href,
-    href: UserEdit.href,
-    requireLoggedIn: true,
-    Icon: UserEditIcon,
-  },
-  {
-    label: "Log Out",
-    key: LogOut.href,
-    href: LogOut.href,
-    requireLoggedIn: true,
-    Icon: LogoutIcon,
-  },
-];
 
 const MenuItem = ({ item, session }) => {
   if (isValidElement(item)) {
@@ -112,11 +63,63 @@ const MenuItem = ({ item, session }) => {
 const MenuContent: FC = () => {
   const [session, loading] = useSession();
   const classes = useStyles();
+  const intl = useIntl();
+  const menuItems = [
+    {
+      label: intl.formatMessage({ defaultMessage: "Start" }),
+      key: Home.href,
+      href: Home.href,
+      Icon: HomeIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Användare" }),
+      key: Users.href,
+      href: Users.href,
+      Icon: UsersIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Tillverkare" }),
+      key: Brands.href,
+      href: Brands.href,
+      Icon: BottleIcon,
+    },
+    <Divider key="div1" />,
+    {
+      label: intl.formatMessage({ defaultMessage: "Logga in" }),
+      key: LogIn.href,
+      href: LogIn.href,
+      requireLoggedOut: true,
+      Icon: LogInIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Lägg till dryck" }),
+      key: AddDrink.href,
+      href: AddDrink.href,
+      requireLoggedIn: true,
+      Icon: AddIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Redigera profil" }),
+      key: UserEdit.href,
+      href: UserEdit.href,
+      requireLoggedIn: true,
+      Icon: UserEditIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Logga ut" }),
+      key: LogOut.href,
+      href: LogOut.href,
+      requireLoggedIn: true,
+      Icon: LogoutIcon,
+    },
+  ];
   return (
     <div>
       <Toolbar>
         <Hidden smUp implementation="css">
-          <Typography>JulmustRacet</Typography>
+          <Typography>
+            <FormattedMessage defaultMessage="JulmustRacet" />
+          </Typography>
         </Hidden>
       </Toolbar>
       <Divider />

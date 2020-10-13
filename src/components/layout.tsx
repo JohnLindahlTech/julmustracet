@@ -13,6 +13,7 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
+import { FormattedMessage } from "react-intl";
 import Footer from "./footer";
 import MenuContent from "./menu-content";
 import ProfileArea from "./profile-area";
@@ -82,7 +83,7 @@ const Layout: FC = (props) => {
             <MenuIcon size="24" />
           </IconButton>
           <Typography variant="h6" className={classes.pageTitle}>
-            JulmustRacet
+            <FormattedMessage defaultMessage="JulmustRacet" />
           </Typography>
           <ProfileArea />
         </Toolbar>

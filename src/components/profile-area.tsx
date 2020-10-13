@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { UserEdit } from "../routes";
+import { FormattedMessage } from "react-intl";
+import { LogIn, UserEdit } from "../routes";
 import Link from "next/link";
 import { signin, useSession } from "next-auth/client";
 import Button from "@material-ui/core/Button";
@@ -48,8 +49,8 @@ const LoggedOut = () => {
   };
 
   return (
-    <Button color="inherit" href="/api/auth/signin" onClick={onSignInClick}>
-      Log in
+    <Button color="inherit" href={LogIn.href} onClick={onSignInClick}>
+      <FormattedMessage defaultMessage="Logga in" />
     </Button>
   );
 };

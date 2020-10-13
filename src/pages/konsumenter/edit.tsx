@@ -5,6 +5,8 @@ import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 import { useSession } from "next-auth/client";
 
+// TODO TRANSLATE
+
 const schema = object({
   email: string().email().required("Required"),
   name: string().required("Required").nullable().max(32).label("Username"),

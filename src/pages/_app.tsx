@@ -1,8 +1,9 @@
 import React from "react";
 import { Provider } from "next-auth/client";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
-
+import messages from "../../compiled-lang/sv.json";
 const GlobalStyle = createGlobalStyle`
 body {
   font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
@@ -48,9 +49,11 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Provider session={session}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <IntlProvider locale="sv" defaultLocale="sv" messages={messages}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </IntlProvider>
         </Provider>
       </ThemeProvider>
     </>

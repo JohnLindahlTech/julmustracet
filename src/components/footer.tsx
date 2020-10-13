@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "./link";
+import { FormattedMessage } from "react-intl";
 import {
   Home,
   Users,
@@ -19,10 +20,14 @@ const Footer = () => {
       <hr />
       <ul>
         <li>
-          <Link {...Home}>Home</Link>
+          <Link {...Home}>
+            <FormattedMessage defaultMessage="Start" />
+          </Link>
         </li>
         <li>
-          <Link {...Users}>Users</Link>
+          <Link {...Users}>
+            <FormattedMessage defaultMessage="Användare" />
+          </Link>
         </li>
         <li>
           <Link href={UserDetails.href(user)}>{user}</Link>
@@ -33,10 +38,14 @@ const Footer = () => {
           />
         </li>
         <li>
-          <Link {...UserEdit}>UserEdit</Link>
+          <Link {...UserEdit}>
+            <FormattedMessage defaultMessage="Redigera Användare" />
+          </Link>
         </li>
         <li>
-          <Link {...Brands}>Brands</Link>
+          <Link {...Brands}>
+            <FormattedMessage defaultMessage="Märken" />
+          </Link>
         </li>
         <li>
           <Link href={BrandDetails.href(brand)}>{brand}</Link>
@@ -47,7 +56,9 @@ const Footer = () => {
           onChange={(e) => setBrand(e.target.value)}
         />
         <li>
-          <Link {...AddDrink}>AddDrink</Link>
+          <Link {...AddDrink}>
+            <FormattedMessage defaultMessage="Lägg till dryck" />
+          </Link>
         </li>
       </ul>
     </div>

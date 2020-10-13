@@ -1,35 +1,38 @@
+const userPath = "/konsumenter";
+const brandPath = "/tillverkare";
+
 export const Home = {
   href: "/",
 };
 
 export const Users = {
-  href: "/user",
+  href: userPath,
 };
 
 export const UserDetails = {
-  href: (user) => `/user/${user}`,
+  href: (user) => `${userPath}/${user}`,
 };
 
 export const UserEdit = {
-  href: "/user/edit",
+  href: `${userPath}/edit`,
 };
 
 export const Brands = {
-  href: "/brand",
+  href: brandPath,
 };
 
 export const BrandDetails = {
-  href: (brand) => `/brand/${brand}`,
+  href: (brand) => `${brandPath}/${brand}`,
 };
 
 export const AddDrink = {
-  href: "/add",
+  href: "/ny",
 };
 
 export const LogIn = {
-  href: "/login",
+  href: "/api/auth/signin",
 };
 
 export const LogOut = {
-  href: "/logout",
+  href: "/api/auth/signout",
 };
