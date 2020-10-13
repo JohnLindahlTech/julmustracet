@@ -8,8 +8,6 @@ export {
 
 const Home = (props) => {
   const router = useRouter();
-  console.log(router.query.lang);
-  console.log(props);
   return <div>{router.query.lang}</div>;
 };
 
