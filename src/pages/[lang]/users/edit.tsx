@@ -12,8 +12,15 @@ export {
 // TODO TRANSLATE
 
 const schema = object({
-  email: string().email().required("Required"),
-  name: string().required("Required").nullable().max(32).label("Username"),
+  email: string("TRANSLATE string")
+    .email("TRANSLATE email")
+    .required("TRANSLATE Required")
+    .label("TRANSLATE email"),
+  name: string("TRANSLATE string")
+    .required("TRANSLATE Required")
+    .nullable("TRANSLATE nullable")
+    .max(32, "TRANSLATE max")
+    .label("TRANSLATE Username"),
   // image: string().url("Avatar link must be a valid url (start with https://)").nullable().notRequired().max(1000).matches(/^https/i, { message: "Must start with https://", excludeEmptyString: true }).label('Avatar link'),
 });
 
@@ -39,14 +46,14 @@ const UserForm = ({ user }) => {
             component={TextField}
             name="email"
             type="email"
-            label="Email"
+            label="TRANSLATE Email"
             disabled
             placeholder="tomten@julmustracet.se"
           />
           <Field
             component={TextField}
             name="name"
-            label="Username"
+            label="TRANSLATE Username"
             placeholder="Tomten"
           />
           <Button
@@ -55,7 +62,7 @@ const UserForm = ({ user }) => {
             disabled={isSubmitting}
             onClick={submitForm}
           >
-            Submit
+            TRANSLATE Submit
           </Button>
         </Form>
       )}
@@ -64,11 +71,11 @@ const UserForm = ({ user }) => {
 };
 
 const NoUser = () => {
-  return <p>Please Log In!</p>;
+  return <p>TRANSLATE Please Log In!</p>;
 };
 
 const Loading = () => {
-  return <p>Loading!</p>;
+  return <p>TRANSLATE Loading!</p>;
 };
 
 const EditUser = () => {
@@ -76,7 +83,7 @@ const EditUser = () => {
   return (
     <>
       <main>
-        <h1>Edit User</h1>
+        <h1>TRANSLATE Edit User</h1>
         {loading && <Loading />}
         {!loading && (!session || !session.user) && <NoUser />}
         {session && session.user && <UserForm user={session.user} />}

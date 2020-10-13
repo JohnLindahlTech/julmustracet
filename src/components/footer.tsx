@@ -32,7 +32,9 @@ const Footer = () => {
           </Link>
         </li>
         <li>
-          <Link href={{ pathname: UserDetails.href, query: { user } }}>
+          <Link
+            href={{ pathname: UserDetails.href, query: { user, lang: "sv" } }}
+          >
             {user}
           </Link>
           <TextField

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import Link from "./langLink";
 import FlagSV from "./flags/sv";
 import FlagUK from "./flags/uk";
 import { setLocale } from "../translations/localStorage";
