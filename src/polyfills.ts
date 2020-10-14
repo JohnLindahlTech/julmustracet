@@ -3,6 +3,7 @@ import { shouldPolyfill as shouldPolyfillPluralRules } from "@formatjs/intl-plur
 import { shouldPolyfill as shouldPolyfillNumberFormat } from "@formatjs/intl-numberformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillDateTimeFormat } from "@formatjs/intl-datetimeformat/should-polyfill";
 import { shouldPolyfill as shouldPolyfillRelativeTimeFormat } from "@formatjs/intl-relativetimeformat/should-polyfill";
+import { EN } from "./translations/config";
 
 /**
  * Dynamically polyfill Intl API & its locale data
@@ -27,14 +28,14 @@ export async function polyfill(locale = "") {
   if ((Intl.PluralRules as any).polyfilled) {
     const lang = locale.split("-")[0];
     switch (lang) {
-      default:
+      case EN:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-pluralrules" */ "@formatjs/intl-pluralrules/locale-data/en"
           )
         );
         break;
-      case "sv":
+      default:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-pluralrules" */ "@formatjs/intl-pluralrules/locale-data/sv"
@@ -53,14 +54,14 @@ export async function polyfill(locale = "") {
 
   if ((Intl.NumberFormat as any).polyfilled) {
     switch (locale) {
-      default:
+      case EN:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-numberformat" */ "@formatjs/intl-numberformat/locale-data/en"
           )
         );
         break;
-      case "sv":
+      default:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-numberformat" */ "@formatjs/intl-numberformat/locale-data/sv"
@@ -80,14 +81,14 @@ export async function polyfill(locale = "") {
   if ((Intl.DateTimeFormat as any).polyfilled) {
     dataPolyfills.push(import("@formatjs/intl-datetimeformat/add-all-tz"));
     switch (locale) {
-      default:
+      case EN:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-datetimeformat" */ "@formatjs/intl-datetimeformat/locale-data/en"
           )
         );
         break;
-      case "sv":
+      default:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-datetimeformat" */ "@formatjs/intl-datetimeformat/locale-data/sv"
@@ -106,14 +107,14 @@ export async function polyfill(locale = "") {
 
   if ((Intl as any).RelativeTimeFormat.polyfilled) {
     switch (locale) {
-      default:
+      case EN:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-relativetimeformat" */ "@formatjs/intl-relativetimeformat/locale-data/en"
           )
         );
         break;
-      case "sv":
+      default:
         dataPolyfills.push(
           import(
             /* webpackChunkName: "intl-relativetimeformat" */ "@formatjs/intl-relativetimeformat/locale-data/sv"

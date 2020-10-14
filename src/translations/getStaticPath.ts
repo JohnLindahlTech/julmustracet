@@ -1,12 +1,20 @@
-export async function getStaticProps() {
-  return {
-    props: {},
-  };
-}
+import { GetStaticProps, GetStaticPaths } from "next";
+import { EN, SV } from "./config";
+// import { getMessages } from "./messages";
 
-export async function getStaticPaths() {
+export const getStaticProps: GetStaticProps = async (context) => {
+  // const { lang } = context.params;
+  // const messages = await getMessages(lang);
   return {
-    paths: [{ params: { lang: "sv" } }, { params: { lang: "en" } }],
+    props: {
+      // messages,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: { lang: SV } }, { params: { lang: EN } }],
     fallback: false,
   };
-}
+};

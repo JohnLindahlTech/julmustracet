@@ -2,6 +2,17 @@
 const routes = require("./src/routes");
 
 module.exports = {
+  async redirects() {
+    return [
+      routes.Users.sv.redirect,
+      routes.UserEdit.sv.redirect,
+      routes.UserDetails.sv.redirect,
+      routes.Brands.sv.redirect,
+      routes.BrandDetails.sv.redirect,
+      routes.AddDrink.sv.redirect,
+      routes.Rules.sv.redirect,
+    ];
+  },
   async rewrites() {
     return [
       // routes.Home.sv,

@@ -1,8 +1,11 @@
-export const defaultLocale = "sv" as const;
+export const SV = "sv";
+export const EN = "en";
 
-export const locales = ["en", "sv"] as const;
+export const defaultLocale = SV;
+
+export const locales = [EN, SV] as const;
 
 export const languageNames = {
-  en: "English",
-  sv: "Svenska",
+  [EN]: "English",
+  [SV]: "Svenska",
 };

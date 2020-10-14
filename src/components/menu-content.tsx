@@ -25,6 +25,7 @@ import {
 import { useSession } from "next-auth/client";
 import { Hidden, Toolbar, Typography } from "@material-ui/core";
 import Link from "./langLink";
+import LangPicker from "./langPicker";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -131,6 +132,14 @@ const MenuContent: FC = () => {
             session={!loading && session}
           />
         ))}
+      </List>
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <LangPicker />
+          </ListItemIcon>
+        </ListItem>
       </List>
     </div>
   );

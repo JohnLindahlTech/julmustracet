@@ -22,6 +22,11 @@ module.exports = {
         source: `/${svUserPath}`,
         destination: `/${svLang}/${userPath}`,
       },
+      redirect: {
+        source: `/_next/data/:deployment/${svUserPath}.json`,
+        destination: `/_next/data/:deployment/${svLang}/${userPath}.json`,
+        permanent: true,
+      },
     },
   },
 
@@ -32,6 +37,11 @@ module.exports = {
       rewrite: {
         source: `/${svUserPath}/redigera`,
         destination: `/${svLang}/${userPath}/edit`,
+      },
+      redirect: {
+        source: `/_next/data/:deployment/${svUserPath}/redigera.json`,
+        destination: `/_next/data/:deployment/${svLang}/${userPath}/edit.json`,
+        permanent: true,
       },
     },
   },
@@ -44,6 +54,11 @@ module.exports = {
         source: `/${svUserPath}/:user`,
         destination: `/${svLang}/${userPath}/:user`,
       },
+      redirect: {
+        source: `/_next/data/:deployment/${svUserPath}/:user.json`,
+        destination: `/_next/data/:deployment/${svLang}/${userPath}/:user.json`,
+        permanent: true,
+      },
     },
   },
 
@@ -54,6 +69,11 @@ module.exports = {
       rewrite: {
         source: `/${svBrandPath}`,
         destination: `/${svLang}/${brandPath}`,
+      },
+      redirect: {
+        source: `/_next/data/:deployment/${svBrandPath}.json`,
+        destination: `/_next/data/:deployment/${svLang}/${brandPath}.json`,
+        permanent: true,
       },
     },
   },
@@ -66,27 +86,42 @@ module.exports = {
         source: `/${svBrandPath}/:brand`,
         destination: `/${svLang}/${brandPath}/:brand`,
       },
+      redirect: {
+        source: `/_next/data/:deployment/${svBrandPath}/:brand.json`,
+        destination: `/_next/data/:deployment/${svLang}/${brandPath}/:brand.json`,
+        permanent: true,
+      },
     },
   },
 
   AddDrink: {
-    href: `${root}/add`,
+    href: `/${root}/add`,
     sv: {
       href: `/ny`,
       rewrite: {
         source: `/ny`,
         destination: `/${svLang}/add`,
       },
+      redirect: {
+        source: `/_next/data/:deployment/ny.json`,
+        destination: `/_next/data/:deployment/${svLang}/add.json`,
+        permanent: true,
+      },
     },
   },
 
   Rules: {
-    href: `${root}/rules`,
+    href: `/${root}/rules`,
     sv: {
       href: `/regler`,
       rewrite: {
         source: `/regler`,
         destination: `/${svLang}/rules`,
+      },
+      redirect: {
+        source: `/_next/data/:deployment/regler.json`,
+        destination: `/_next/data/:deployment/${svLang}/rules.json`,
+        permanent: true,
       },
     },
   },
