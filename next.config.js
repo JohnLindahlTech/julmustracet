@@ -4,6 +4,7 @@ const routes = require("./src/routes");
 module.exports = {
   async redirects() {
     return [
+      routes.Home.sv.redirect,
       routes.Users.sv.redirect,
       routes.UserEdit.sv.redirect,
       routes.UserDetails.sv.redirect,
@@ -11,11 +12,14 @@ module.exports = {
       routes.BrandDetails.sv.redirect,
       routes.AddDrink.sv.redirect,
       routes.Rules.sv.redirect,
+      routes.LogIn.sv.redirect,
+      routes.LogOut.sv.redirect,
+      routes.VerifyEmail.sv.redirect,
     ];
   },
   async rewrites() {
     return [
-      // routes.Home.sv,
+      routes.Home.sv.rewrite,
       routes.Users.sv.rewrite,
       routes.UserEdit.sv.rewrite,
       routes.UserDetails.sv.rewrite,
@@ -24,9 +28,8 @@ module.exports = {
       routes.AddDrink.sv.rewrite,
       routes.Rules.sv.rewrite,
       routes.LogIn.sv.rewrite,
-      routes.LogIn.en.rewrite,
       routes.LogOut.sv.rewrite,
-      routes.LogOut.en.rewrite,
+      routes.VerifyEmail.sv.rewrite,
     ];
   },
 };

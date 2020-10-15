@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { UserEdit } from "../../../routes";
+import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
 
 const options = {
   // @link https://next-auth.js.org/configuration/providers
@@ -110,11 +110,11 @@ const options = {
   // The routes shown here are the default URLs that will be used.
   // @link https://next-auth.js.org/configuration/pages
   pages: {
-    // signIn: '/api/auth/signin',
-    // signOut: '/api/auth/signout',
-    // error: '/api/auth/error', // Error code passed in query string as ?error=
-    // verifyRequest: '/api/auth/verify-request', // (used for check email message)
-    newUser: UserEdit.href, // If set, new users will be directed here on first sign in
+    signIn: LogIn.sv.href,
+    signOut: LogOut.sv.href,
+    error: "/api/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: VerifyEmail.sv.href, // (used for check email message)
+    newUser: UserEdit.sv.href, // If set, new users will be directed here on first sign in
   },
 
   // Additional options

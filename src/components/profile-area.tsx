@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import { LogIn, UserEdit } from "../routes";
-import Link from "next/link";
+import Link from "./langLink";
 import { signin, useSession } from "next-auth/client";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";

@@ -1,20 +1,19 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import withEnsuredSession from "../../hocs/withEnsuredSession";
 
 export {
   getStaticProps,
   getStaticPaths,
 } from "../../translations/getStaticPath";
 
-const Add = () => (
+const VerifyRequest = () => (
   <>
     <main>
       <h1>
-        <FormattedMessage defaultMessage="Lägg till dryck" />
+        <FormattedMessage defaultMessage="Kontrollera din epost för inloggningslänk" />
       </h1>
     </main>
   </>
 );
 
-export default withEnsuredSession()(Add);
+export default VerifyRequest;

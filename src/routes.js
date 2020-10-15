@@ -1,163 +1,209 @@
-const root = "[lang]";
+const deploymentPath = "/_next/data/:deployment";
+
+const lang = "[lang]";
 const svLang = "sv";
 
-const userPath = `users`;
-const svUserPath = `konsumenter`;
+const usersPath = `users`;
+const userPath = "[user]";
+const userRegex = ":user";
+const svUsersPath = `konsumenter`;
 
-const brandPath = `brands`;
-const svBrandPath = `tillverkare`;
+const brandsPath = `brands`;
+const brandPath = "[brand]";
+const brandRegex = ":brand";
+const svBrandsPath = `tillverkare`;
 
-const authAPI = `/api/auth`;
+const rules = "rules";
+const svRules = "regler";
+
+const edit = "edit";
+const svEdit = "redigera";
+
+const add = "add";
+const svAdd = "ny";
+
+const login = "login";
+const svLogin = "loggain";
+
+const logout = "logout";
+const svLogout = "loggaut";
+
+const verifyEmail = "verify-email";
+const svVerifyEmail = "verifiera-epost";
 
 module.exports = {
   Home: {
-    href: `/${root}`,
+    href: `/${lang}`,
+    sv: {
+      href: "/",
+      rewrite: {
+        source: `/`,
+        destination: `/${svLang}`,
+      },
+      redirect: {
+        source: `${deploymentPath}/index.json`,
+        destination: `${deploymentPath}/${svLang}.json`,
+        permanent: true,
+      },
+    },
   },
 
   Users: {
-    href: `/${root}/${userPath}`,
+    href: `/${lang}/${usersPath}`,
     sv: {
-      href: `/${svUserPath}`,
+      href: `/${svUsersPath}`,
       rewrite: {
-        source: `/${svUserPath}`,
-        destination: `/${svLang}/${userPath}`,
+        source: `/${svUsersPath}`,
+        destination: `/${svLang}/${usersPath}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/${svUserPath}.json`,
-        destination: `/_next/data/:deployment/${svLang}/${userPath}.json`,
+        source: `${deploymentPath}/${svUsersPath}.json`,
+        destination: `${deploymentPath}/${svLang}/${usersPath}.json`,
         permanent: true,
       },
     },
   },
 
   UserEdit: {
-    href: `/${root}/${userPath}/edit`,
+    href: `/${lang}/${usersPath}/${edit}`,
     sv: {
-      href: `/${svUserPath}/redigera`,
+      href: `/${svUsersPath}/${svEdit}`,
       rewrite: {
-        source: `/${svUserPath}/redigera`,
-        destination: `/${svLang}/${userPath}/edit`,
+        source: `/${svUsersPath}/${svEdit}`,
+        destination: `/${svLang}/${usersPath}/${edit}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/${svUserPath}/redigera.json`,
-        destination: `/_next/data/:deployment/${svLang}/${userPath}/edit.json`,
+        source: `${deploymentPath}/${svUsersPath}/${svEdit}.json`,
+        destination: `${deploymentPath}/${svLang}/${usersPath}/${edit}.json`,
         permanent: true,
       },
     },
   },
 
   UserDetails: {
-    href: `/${root}/${userPath}/[user]`,
+    href: `/${lang}/${usersPath}/${userPath}`,
     sv: {
-      href: `/${svUserPath}/[user]`,
+      href: `/${svUsersPath}/${userPath}`,
       rewrite: {
-        source: `/${svUserPath}/:user`,
-        destination: `/${svLang}/${userPath}/:user`,
+        source: `/${svUsersPath}/${userRegex}`,
+        destination: `/${svLang}/${usersPath}/${userRegex}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/${svUserPath}/:user.json`,
-        destination: `/_next/data/:deployment/${svLang}/${userPath}/:user.json`,
+        source: `${deploymentPath}/${svUsersPath}/${userRegex}.json`,
+        destination: `${deploymentPath}/${svLang}/${usersPath}/${userRegex}.json`,
         permanent: true,
       },
     },
   },
 
   Brands: {
-    href: `/${root}/${brandPath}`,
+    href: `/${lang}/${brandsPath}`,
     sv: {
-      href: `/${svBrandPath}`,
+      href: `/${svBrandsPath}`,
       rewrite: {
-        source: `/${svBrandPath}`,
-        destination: `/${svLang}/${brandPath}`,
+        source: `/${svBrandsPath}`,
+        destination: `/${svLang}/${brandsPath}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/${svBrandPath}.json`,
-        destination: `/_next/data/:deployment/${svLang}/${brandPath}.json`,
+        source: `${deploymentPath}/${svBrandsPath}.json`,
+        destination: `${deploymentPath}/${svLang}/${brandsPath}.json`,
         permanent: true,
       },
     },
   },
 
   BrandDetails: {
-    href: `/${root}/${brandPath}/[brand]`,
+    href: `/${lang}/${brandsPath}/${brandPath}`,
     sv: {
-      href: `/${svBrandPath}/[brand]`,
+      href: `/${svBrandsPath}/${brandPath}`,
       rewrite: {
-        source: `/${svBrandPath}/:brand`,
-        destination: `/${svLang}/${brandPath}/:brand`,
+        source: `/${svBrandsPath}/${brandRegex}`,
+        destination: `/${svLang}/${brandsPath}/${brandRegex}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/${svBrandPath}/:brand.json`,
-        destination: `/_next/data/:deployment/${svLang}/${brandPath}/:brand.json`,
+        source: `${deploymentPath}/${svBrandsPath}/${brandRegex}.json`,
+        destination: `${deploymentPath}/${svLang}/${brandsPath}/${brandRegex}.json`,
         permanent: true,
       },
     },
   },
 
   AddDrink: {
-    href: `/${root}/add`,
+    href: `/${lang}/${add}`,
     sv: {
-      href: `/ny`,
+      href: `/${svAdd}`,
       rewrite: {
-        source: `/ny`,
-        destination: `/${svLang}/add`,
+        source: `/${svAdd}`,
+        destination: `/${svLang}/${add}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/ny.json`,
-        destination: `/_next/data/:deployment/${svLang}/add.json`,
+        source: `${deploymentPath}/${svAdd}.json`,
+        destination: `${deploymentPath}/${svLang}/${add}.json`,
         permanent: true,
       },
     },
   },
 
   Rules: {
-    href: `/${root}/rules`,
+    href: `/${lang}/${rules}`,
     sv: {
-      href: `/regler`,
+      href: `/${svRules}`,
       rewrite: {
-        source: `/regler`,
-        destination: `/${svLang}/rules`,
+        source: `/${svRules}`,
+        destination: `/${svLang}/${rules}`,
       },
       redirect: {
-        source: `/_next/data/:deployment/regler.json`,
-        destination: `/_next/data/:deployment/${svLang}/rules.json`,
+        source: `${deploymentPath}/${svRules}.json`,
+        destination: `${deploymentPath}/${svLang}/${rules}.json`,
         permanent: true,
       },
     },
   },
 
   LogIn: {
-    href: `${authAPI}/signin`,
+    href: `/${lang}/${login}`,
     sv: {
-      href: `/loggain`,
+      href: `/${svLogin}`,
       rewrite: {
-        source: `/loggain`,
-        destination: `${authAPI}/signin`,
+        source: `/${svLogin}`,
+        destination: `/${svLang}/${login}`,
       },
-    },
-    en: {
-      href: `/login`,
-      rewrite: {
-        source: `/login`,
-        destination: `${authAPI}/signin`,
+      redirect: {
+        source: `${deploymentPath}/${svLogin}.json`,
+        destination: `${deploymentPath}/${svLang}/${login}.json`,
+        permanent: true,
       },
     },
   },
 
   LogOut: {
-    href: `${authAPI}/signout`,
+    href: `/${lang}/${logout}`,
     sv: {
-      href: `/loggaut`,
+      href: `/${svLogout}`,
       rewrite: {
-        source: `/loggaut`,
-        destination: `${authAPI}/signin`,
+        source: `/${svLogout}`,
+        destination: `/${svLang}/${logout}`,
+      },
+      redirect: {
+        source: `${deploymentPath}/${svLogout}.json`,
+        destination: `${deploymentPath}/${svLang}/${logout}.json`,
+        permanent: true,
       },
     },
-    en: {
-      href: `/logout`,
+  },
+
+  VerifyEmail: {
+    href: `/${lang}/${verifyEmail}`,
+    sv: {
+      href: `/${svVerifyEmail}`,
       rewrite: {
-        source: `/logout`,
-        destination: `${authAPI}/signin`,
+        source: `/${svVerifyEmail}`,
+        destination: `/${svLang}/${verifyEmail}`,
+      },
+      redirect: {
+        source: `${deploymentPath}/${svVerifyEmail}.json`,
+        destination: `${deploymentPath}/${svLang}/${verifyEmail}.json`,
+        permanent: true,
       },
     },
   },

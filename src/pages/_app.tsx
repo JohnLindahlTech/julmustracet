@@ -6,8 +6,7 @@ import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
 import { getMessages } from "../translations/messages";
 import { getLocale } from "../translations/getLocales";
-import { EN, SV } from "../translations/config";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { defaultLocale } from "../translations/config";
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -58,7 +57,11 @@ const App = ({ Component, pageProps }) => {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Provider session={session}>
-          <IntlProvider locale={locale} defaultLocale={SV} messages={messages}>
+          <IntlProvider
+            locale={locale}
+            defaultLocale={defaultLocale}
+            messages={messages}
+          >
             <Layout>
               <Component {...pageProps} />
             </Layout>
