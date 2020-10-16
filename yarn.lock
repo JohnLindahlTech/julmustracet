@@ -4270,10 +4270,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formik-material-ui-lab@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/formik-material-ui-lab/-/formik-material-ui-lab-0.0.5.tgz#560d4bfa9815d39dc0f290dbed9b4f905bf5d0e9"
-  integrity sha512-beLimoEpmszMKekk8WiZG71r0sGtaH/vICSq3piaZEA9iPcJgaLC+wtF+AAe0TSTUtzm8SuzE12hbpX+XuWeew==
+formik-material-ui-lab@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/formik-material-ui-lab/-/formik-material-ui-lab-0.0.6.tgz#b56233be9051c13d726bd67fef6a7de1dd17f38e"
+  integrity sha512-5EELfeZnpeMmX7urmixlpgTrQrU47/doNnzYlCoM6TTwxU3QW4ArAAMu6i0gAOyXwozGudL3POVfQZwhEiZ7Gw==
 
 formik-material-ui-pickers@^0.0.11:
   version "0.0.11"

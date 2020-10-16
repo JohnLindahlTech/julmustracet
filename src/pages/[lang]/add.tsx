@@ -7,24 +7,17 @@ import { TextField } from "formik-material-ui";
 import { TextField as Text } from "@material-ui/core";
 import { object, string, number, date } from "yup";
 import { DateTimePicker } from "formik-material-ui-pickers";
-import { Autocomplete } from "../../components/AutoComplete";
+import { Autocomplete } from "formik-material-ui-lab";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { isAfter } from "date-fns";
+import { maxLimitDate, minLimitDate } from "../../lib/rules";
 
 export {
   getStaticProps,
   getStaticPaths,
 } from "../../translations/getStaticPath";
-
-const minLimitDate = new Date();
-minLimitDate.setUTCMonth(11, 1);
-minLimitDate.setUTCHours(-1, 0, 0, 0);
-
-const maxLimitDate = new Date();
-maxLimitDate.setUTCMonth(11, 21);
-maxLimitDate.setUTCHours(-1, 0, 0, -1);
 
 type Option = {
   id: number;
