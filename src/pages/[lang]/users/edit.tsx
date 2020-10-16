@@ -44,40 +44,38 @@ const UserForm = ({ user }) => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Field
-            component={TextField}
-            name="email"
-            type="email"
-            label="TRANSLATE Email"
-            disabled
-            placeholder="tomten@julmustracet.se"
-          />
-          <Field
-            component={TextField}
-            name="name"
-            label="TRANSLATE Username"
-            placeholder="Tomten"
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-            onClick={submitForm}
-          >
-            TRANSLATE Submit
-          </Button>
+          <div>
+            <Field
+              component={TextField}
+              name="email"
+              type="email"
+              label="TRANSLATE Email"
+              disabled
+              placeholder="tomten@julmustracet.se"
+            />
+          </div>
+          <div>
+            <Field
+              component={TextField}
+              name="name"
+              label="TRANSLATE Username"
+              placeholder="Tomten"
+            />
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+              onClick={submitForm}
+            >
+              TRANSLATE Submit
+            </Button>
+          </div>
         </Form>
       )}
     </Formik>
   );
-};
-
-const NoUser = () => {
-  return <p>TRANSLATE Please Log In!</p>;
-};
-
-const Loading = () => {
-  return <p>TRANSLATE Loading!</p>;
 };
 
 const EditUser = () => {
@@ -86,8 +84,6 @@ const EditUser = () => {
     <>
       <main>
         <h1>TRANSLATE Edit User</h1>
-        {loading && <Loading />}
-        {!loading && (!session || !session.user) && <NoUser />}
         {session && session.user && <UserForm user={session.user} />}
       </main>
     </>

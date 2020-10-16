@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
+("");
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,8 +15,9 @@ import {
 } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import Footer from "./footer";
-import MenuContent from "./menu-content";
+import MenuContent from "./menu/menu-content";
 import ProfileArea from "./profile-area";
+import Paper from "@material-ui/core/Paper";
 
 const drawerWidth = 240;
 
@@ -46,14 +47,15 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+    },
+    contentPaper: {
+      padding: theme.spacing(2),
     },
   })
 );
@@ -70,7 +72,6 @@ const Layout: FC = (props) => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
@@ -119,8 +120,14 @@ const Layout: FC = (props) => {
         </Hidden>
       </nav>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {children}
+        <Toolbar />
+        <Paper
+          classes={{
+            root: classes.contentPaper,
+          }}
+        >
+          {children}
+        </Paper>
         <Footer />
       </main>
     </div>

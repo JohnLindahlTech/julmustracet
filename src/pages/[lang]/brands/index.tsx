@@ -10,7 +10,7 @@ const Brands = () => (
   <>
     <main>
       <h1>
-        <FormattedMessage defaultMessage="Tillverkarestopplista" />
+        <FormattedMessage defaultMessage="Märkesligan" />
       </h1>
     </main>
   </>

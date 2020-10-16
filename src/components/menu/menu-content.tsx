@@ -1,4 +1,4 @@
-import React, { FC, Fragment, isValidElement } from "react";
+import React, { FC } from "react";
 import Divider from "@material-ui/core/Divider";
 import { Home as HomeIcon } from "@styled-icons/fa-solid/Home";
 import { WineBottle as BottleIcon } from "@styled-icons/fa-solid/WineBottle";
@@ -7,12 +7,10 @@ import { SignInAlt as LogInIcon } from "@styled-icons/fa-solid/SignInAlt";
 import { SignOutAlt as LogoutIcon } from "@styled-icons/fa-solid/SignOutAlt";
 import { PlusCircle as AddIcon } from "@styled-icons/fa-solid/PlusCircle";
 import { UserEdit as UserEditIcon } from "@styled-icons/fa-solid/UserEdit";
+import { Book as RulesIcon } from "@styled-icons/fa-solid/Book";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
 import { useIntl, FormattedMessage } from "react-intl";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
   Home,
   Users,
@@ -21,51 +19,18 @@ import {
   LogOut,
   UserEdit,
   AddDrink,
-} from "../routes";
+  Rules,
+} from "../../routes";
 import { useSession } from "next-auth/client";
 import { Hidden, Toolbar, Typography } from "@material-ui/core";
-import Link from "./langLink";
-import LangPicker from "./langPicker";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    toolbar: theme.mixins.toolbar,
-    noStyleLink: {
-      textDecoration: "inherit",
-      color: "inherit",
-    },
-  })
-);
-
-const MenuItem = ({ item, session }) => {
-  if (isValidElement(item)) {
-    return item;
-  }
-  if (item.requireLoggedOut && session) {
-    return <Fragment />;
-  }
-  if (item.requireLoggedIn && !session) {
-    return <Fragment />;
-  }
-  return (
-    <li>
-      <Link href={item.href} passHref>
-        <ListItem button component="a">
-          <ListItemIcon>
-            <item.Icon size="32" />
-          </ListItemIcon>
-          <ListItemText primary={item.label} />
-        </ListItem>
-      </Link>
-    </li>
-  );
-};
+import MenuItem, { MenuItemProps } from "./MenuItem";
+import MenuLangPicker from "./MenuLangPicker";
 
 const MenuContent: FC = () => {
   const [session, loading] = useSession();
-  const classes = useStyles();
   const intl = useIntl();
-  const menuItems = [
+  const menuItems: Array<MenuItemProps["item"] | JSX.Element> = [
     {
       label: intl.formatMessage({ defaultMessage: "Start" }),
       key: Home.href,
@@ -73,16 +38,22 @@ const MenuContent: FC = () => {
       Icon: HomeIcon,
     },
     {
-      label: intl.formatMessage({ defaultMessage: "Användare" }),
+      label: intl.formatMessage({ defaultMessage: "Användarligan" }),
       key: Users.href,
       href: Users.href,
       Icon: UsersIcon,
     },
     {
-      label: intl.formatMessage({ defaultMessage: "Tillverkare" }),
+      label: intl.formatMessage({ defaultMessage: "Märkesligan" }),
       key: Brands.href,
       href: Brands.href,
       Icon: BottleIcon,
+    },
+    {
+      label: intl.formatMessage({ defaultMessage: "Regler" }),
+      key: Rules.href,
+      href: Rules.href,
+      Icon: RulesIcon,
     },
     <Divider key="div1" />,
     {
@@ -113,6 +84,8 @@ const MenuContent: FC = () => {
       requireLoggedIn: true,
       Icon: LogoutIcon,
     },
+    <Divider key="div2" />,
+    <MenuLangPicker key="langPicker" />,
   ];
   return (
     <div>
@@ -132,14 +105,6 @@ const MenuContent: FC = () => {
             session={!loading && session}
           />
         ))}
-      </List>
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemIcon>
-            <LangPicker />
-          </ListItemIcon>
-        </ListItem>
       </List>
     </div>
   );

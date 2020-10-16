@@ -10,7 +10,7 @@ const Users = () => (
   <>
     <main>
       <h1>
-        <FormattedMessage defaultMessage="Användartopplista" />
+        <FormattedMessage defaultMessage="Användarligan" />
       </h1>
     </main>
   </>

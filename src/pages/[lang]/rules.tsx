@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
@@ -8,11 +9,9 @@ export {
 
 const Rules = () => (
   <>
-    <main>
-      <h1>
-        <FormattedMessage defaultMessage="Regler" />
-      </h1>
-    </main>
+    <Typography variant="h1">
+      <FormattedMessage defaultMessage="Regler" />
+    </Typography>
   </>
 );
 

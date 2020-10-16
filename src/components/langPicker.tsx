@@ -1,39 +1,15 @@
 import React, { FC, useCallback } from "react";
 import { useRouter } from "next/router";
 import Link from "./langLink";
-import FlagUK from "./flags/uk";
-import FlagSV from "./flags/sv";
 import { setLocale } from "../translations/localStorage";
-import {
-  makeStyles,
-  createStyles,
-  useTheme,
-  Theme,
-} from "@material-ui/core/styles";
 import { EN, SV } from "../translations/config";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      position: "relative",
-      display: "inline-block",
-      height: theme.spacing(4),
-      width: theme.spacing(4),
-    },
-    flag: {
-      position: "absolute",
-      left: 0,
-      top: 0,
-    },
-  })
-);
+import LangPickerIcon from "./LangPickerIcon";
+import { Locale } from "../translations/types";
 
 const LangPicker: FC = () => {
-  const theme = useTheme();
-  const classes = useStyles();
   const router = useRouter();
   const { query, pathname } = router;
-  const { lang } = router.query;
+  const { lang } = router.query as { lang: Locale };
   const newLang = lang === SV ? EN : SV;
 
   const onLocaleChange = useCallback(() => {
@@ -51,18 +27,7 @@ const LangPicker: FC = () => {
       }}
     >
       <a onClick={onLocaleChange}>
-        <div className={classes.container}>
-          <div className={classes.flag}>
-            <FlagSV
-              disabled={lang === EN}
-              height={theme.spacing(4)}
-              hideRight
-            />
-          </div>
-          <div className={classes.flag}>
-            <FlagUK disabled={lang === SV} height={theme.spacing(4)} hideLeft />
-          </div>
-        </div>
+        <LangPickerIcon lang={lang} />
       </a>
     </Link>
   );

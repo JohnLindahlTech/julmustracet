@@ -1,50 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Provider } from "next-auth/client";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
 import { getMessages } from "../translations/messages";
 import { getLocale } from "../translations/getLocales";
 import { defaultLocale } from "../translations/config";
-
-const GlobalStyle = createGlobalStyle`
-body {
-  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-    'Arial', sans-serif;
-  line-height: 1.4rem;
-  padding: 0;
-  max-width: 680px;
-  margin: 0 auto;
-  color: #333;
-}
-
-h1 {
-  margin: 0 0 2rem 0;
-  font-size: 2.5rem;
-  line-height: 3rem;
-  font-weight: 300;
-}
-
-h4 {
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-a {
-  font-weight: 500;
-}
-
-hr {
-  border: 1px solid #ddd;
-}
-
-`;
-const theme = {
-  colors: {
-    primary: "#0070f3",
-  },
-};
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "../theme";
+import Head from "next/head";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -52,10 +17,25 @@ const App = ({ Component, pageProps }) => {
   const { lang } = router.query;
   const messages = getMessages(lang);
   const locale = getLocale(lang as string);
+
+  useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector("#jss-server-side");
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <>
-      <GlobalStyle />
+      <Head>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
+      </Head>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Provider session={session}>
           <IntlProvider
             locale={locale}
