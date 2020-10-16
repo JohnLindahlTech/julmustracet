@@ -2,12 +2,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { FormattedMessage } from "react-intl";
-import React, { useCallback } from "react";
-import LangPicker from "../langPicker";
+import React from "react";
 import Link from "../langLink";
 import { useRouter } from "next/router";
 import { Locale } from "../../translations/types";
 import { EN, SV } from "../../translations/config";
+import LangPickerIcon from "../LangPickerIcon";
 
 const MenuLangPicker = () => {
   const router = useRouter();
@@ -29,7 +29,7 @@ const MenuLangPicker = () => {
       >
         <ListItem button component="a">
           <ListItemIcon>
-            <LangPicker />
+            <LangPickerIcon lang={lang} />
           </ListItemIcon>
           <ListItemText
             primary={<FormattedMessage defaultMessage="Change to english" />}
