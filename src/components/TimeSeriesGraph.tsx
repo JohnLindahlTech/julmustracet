@@ -69,7 +69,6 @@ const TimeSeriesChart = ({ data }) => {
           offset={20}
           labelFormatter={(label) => format(new Date(label), "Pp", { locale })}
           formatter={(value, name, props) => {
-            console.log({ value, name, props });
             return intl.formatMessage(
               { defaultMessage: "{value} liter" },
               {
