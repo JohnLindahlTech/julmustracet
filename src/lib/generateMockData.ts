@@ -44,7 +44,7 @@ function generatePoint(id: number, time: Date): Point {
     user: getRandomName(),
     brand: getRandomBrand(),
     amount: getRandomAmount(),
-    time,
+    time: time.getTime(),
   };
 }
 

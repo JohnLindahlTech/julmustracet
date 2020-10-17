@@ -1,5 +1,5 @@
 export type GraphPoint = {
-  time: string | Date;
+  time: number;
   value: number;
 };
 

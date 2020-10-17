@@ -67,6 +67,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-intl": "^5.8.6",
+    "recharts": "^1.8.5",
     "sqlite3": "^5.0.0",
     "styled-components": "^5.2.0",
     "styled-icons": "^10.22.0",

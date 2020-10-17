@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { DataGrid, SortDirection } from "@material-ui/data-grid";
+import { DataGrid, SortDirection } from "@material-ui/data-grid"; // TODO Change to the raw Table for Responsive
 import generateMockData from "../../../lib/generateMockData";
 import mapGraphData from "../../../lib/mapGraphData";
 import mapGridData from "../../../lib/mapGridData";
 import LangLink from "../../../components/langLink";
 import { Link } from "@material-ui/core";
 import { UserDetails } from "../../../routes";
+import TimeSeriesChart from "../../../components/TimeSeriesGraph";
 
 export {
   getStaticProps,
@@ -59,7 +60,7 @@ const Users = () => {
         field: "name",
         type: "string",
         headerName: intl.formatMessage({ defaultMessage: "Namn" }),
-        width: 300,
+        width: 500,
         renderCell: NameCell,
       },
       {
@@ -71,7 +72,7 @@ const Users = () => {
             maximumFractionDigits: 2,
           }),
         headerName: intl.formatMessage({ defaultMessage: "Mängd (Liter)" }),
-        width: 150,
+        width: 200,
       },
     ],
   };
@@ -82,6 +83,7 @@ const Users = () => {
         <h1>
           <FormattedMessage defaultMessage="Användarligan" />
         </h1>
+        <TimeSeriesChart data={graphData.slice(0, 5)} />
         <div style={{ display: "flex", height: "100vh" }}>
           <div style={{ flexGrow: 1 }}>
             <DataGrid rows={gridData} {...gridProps} />

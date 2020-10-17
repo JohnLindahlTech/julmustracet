@@ -3,5 +3,5 @@ export type Point = {
   amount: number;
   brand: string;
   user: string;
-  time: string | Date;
+  time: number;
 };
