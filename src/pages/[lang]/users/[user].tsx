@@ -27,6 +27,11 @@ const Achievement = (props: AchievementProps) => {
 
 const AchievementsMock = [
   {
+    title: "Cheater",
+    description: "Registrerat orimligt mycket dryck.",
+    activated: false,
+  },
+  {
     title: "First!",
     description: "Registrerat 1 drucken must",
     activated: true,
