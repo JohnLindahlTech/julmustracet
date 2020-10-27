@@ -55,11 +55,13 @@ const Graph = ({ data }) => {
         >
           <Label
             value={intl.formatMessage({ defaultMessage: "Dag" })}
-            position="insideBottom"
+            position="bottom"
+            offset={-10}
           />
         </XAxis>
         <YAxis dataKey="value" name="Value">
           <Label
+            position="center"
             value={intl.formatMessage({ defaultMessage: "Mängd (Liter)" })}
             angle={-90}
           />
