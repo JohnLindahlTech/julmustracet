@@ -37,5 +37,8 @@ export default function mapGraphData(
       value: s.data[s.data.length - 1]?.value,
     });
   });
+  done.sort((a, b) => {
+    return b.data[b.data.length - 1]?.value - a.data[a.data.length - 1]?.value;
+  });
   return done;
 }

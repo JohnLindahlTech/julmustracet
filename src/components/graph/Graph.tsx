@@ -1,22 +1,23 @@
-import React from "react";
-import { format, formatISO, lightFormat } from "date-fns";
+import React, { useEffect, useRef, useState } from "react";
+import { format, lightFormat } from "date-fns";
 import { useIntl } from "react-intl";
 import { red, blue, green, yellow, orange } from "@material-ui/core/colors";
-
 import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
-  AreaChart,
+  LineChart,
   Tooltip,
   XAxis,
   YAxis,
-  Area,
+  Line,
   Label,
   LabelList,
 } from "recharts";
 import { useRouter } from "next/router";
-import getDateFnsLocale from "../translations/date-fns-locale";
+import getDateFnsLocale from "../../translations/date-fns-locale";
+import ToolTip from "./ToolTip";
+import useCalculateActiveData from "../../hooks/useCalculateActiveData";
 
 const colors = [
   blue[500],
@@ -26,23 +27,27 @@ const colors = [
   red[500],
 ].reverse();
 
-// TODO TimeSeries with multiple series require synced points for correct tooltip.
-
-const TimeSeriesChart = ({ data }) => {
+const Graph = ({ data }) => {
   const intl = useIntl();
+  const [time, setTime] = useState(0);
+  const calculateActiveData = useCalculateActiveData(data);
   const router = useRouter();
   const { lang } = router.query;
   const locale = getDateFnsLocale(lang as string);
   return (
     <ResponsiveContainer width="95%" height={500}>
-      <AreaChart>
+      <LineChart
+        onMouseMove={(props) => {
+          setTime(props.activeLabel);
+        }}
+      >
         <XAxis
           dataKey="time"
           domain={["dataMin", "dataMax"]}
           name="Time"
           interval={0}
           allowDecimals={false}
-          tickCount={21}
+          tickCount={20}
           tickFormatter={(unixTime) => {
             return lightFormat(new Date(unixTime), "d");
           }}
@@ -62,13 +67,14 @@ const TimeSeriesChart = ({ data }) => {
         <CartesianGrid />
         <Legend verticalAlign="bottom" align="center" layout="horizontal" />
         <Tooltip
-          itemSorter={({ value }) => {
-            return value;
+          itemSorter={({ value: a }, { value: b }) => {
+            return b - a;
           }}
-          allowEscapeViewBox={{ x: false, y: true }}
+          allowEscapeViewBox={{ x: false, y: false }}
           offset={20}
+          content={<ToolTip data={calculateActiveData(time)} />}
           labelFormatter={(label) => format(new Date(label), "Pp", { locale })}
-          formatter={(value, name, props) => {
+          formatter={(value) => {
             return intl.formatMessage(
               { defaultMessage: "{value} liter" },
               {
@@ -81,22 +87,23 @@ const TimeSeriesChart = ({ data }) => {
           }}
         />
         {data.map((s, i) => (
-          <Area
-            type="monotone"
+          <Line
+            type="stepAfter"
             dataKey="value"
             data={s.data}
             name={s.name}
             key={s.name}
             dot={{ stroke: colors[i % colors.length], strokeWidth: 1 }}
             stroke={colors[i % colors.length]}
+            strokeWidth={3}
             fill={colors[i % colors.length]}
           >
             <LabelList dataKey="amount" position="insideTop" />
-          </Area>
+          </Line>
         ))}
-      </AreaChart>
+      </LineChart>
     </ResponsiveContainer>
   );
 };
 
-export default TimeSeriesChart;
+export default Graph;

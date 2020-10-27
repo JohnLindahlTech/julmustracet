@@ -1,6 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { FormattedMessage } from "react-intl";
+import Users from "../../components/users";
+import Brands from "../../components/brands";
 
 export {
   getStaticProps,
@@ -16,9 +18,11 @@ const Home = () => {
       <Typography variant="h2">
         <FormattedMessage defaultMessage="Användarligan" />
       </Typography>
+      <Users />
       <Typography variant="h2">
         <FormattedMessage defaultMessage="Märkesligan" />
       </Typography>
+      <Brands />
     </div>
   );
 };

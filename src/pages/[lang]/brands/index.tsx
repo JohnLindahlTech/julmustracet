@@ -1,19 +1,22 @@
 import React from "react";
+import { Typography } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
+import Brands from "../../../components/brands";
 
 export {
   getStaticProps,
   getStaticPaths,
 } from "../../../translations/getStaticPath";
 
-const Brands = () => (
+const BrandsPage = () => (
   <>
     <main>
-      <h1>
+      <Typography variant="h1">
         <FormattedMessage defaultMessage="Märkesligan" />
-      </h1>
+      </Typography>
+      <Brands />
     </main>
   </>
 );
 
-export default Brands;
+export default BrandsPage;
