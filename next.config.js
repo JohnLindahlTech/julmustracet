@@ -2,6 +2,10 @@
 const routes = require("./src/routes");
 
 module.exports = {
+  i18n: {
+    locales: ["en", "sv"],
+    defaultLocale: "sv",
+  },
   async redirects() {
     return [
       routes.Home.sv.redirect,

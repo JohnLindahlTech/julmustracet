@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import { LogIn, UserEdit } from "../routes";
-import Link from "./langLink";
+import LangLink from "./langLink";
 import { signin, useSession } from "next-auth/client";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const LoggedIn = ({ user }) => {
   const classes = useStyles();
   return (
-    <Link {...UserEdit} passHref>
+    <LangLink {...UserEdit} passHref>
       <Button
         color="inherit"
         endIcon={
@@ -38,7 +38,7 @@ const LoggedIn = ({ user }) => {
           {user.name || user.email}
         </Typography>
       </Button>
-    </Link>
+    </LangLink>
   );
 };
 
@@ -49,9 +49,11 @@ const LoggedOut = () => {
   };
 
   return (
-    <Button color="inherit" href={LogIn.href} onClick={onSignInClick}>
-      <FormattedMessage defaultMessage="Logga in" />
-    </Button>
+    <LangLink {...LogIn} passHref>
+      <Button color="inherit">
+        <FormattedMessage defaultMessage="Logga in" />
+      </Button>
+    </LangLink>
   );
 };
 

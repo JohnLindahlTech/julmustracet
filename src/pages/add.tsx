@@ -10,14 +10,9 @@ import { DateTimePicker } from "formik-material-ui-pickers";
 import { Autocomplete } from "formik-material-ui-lab";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import withEnsuredSession from "../../hocs/withEnsuredSession";
+import withEnsuredSession from "../hocs/withEnsuredSession";
 import { isAfter } from "date-fns";
-import { maxLimitDate, minLimitDate } from "../../lib/rules";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../translations/getStaticPath";
+import { maxLimitDate, minLimitDate } from "../lib/rules";
 
 type Option = {
   id: number;

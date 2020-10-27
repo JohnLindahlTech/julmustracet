@@ -2,13 +2,8 @@ import React, { useCallback } from "react";
 import { signOut } from "next-auth/client";
 import { Button } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
-import { Home } from "../../routes";
-import withEnsuredSession from "../../hocs/withEnsuredSession";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../translations/getStaticPath";
+import { Home } from "../routes";
+import withEnsuredSession from "../hocs/withEnsuredSession";
 
 const LogOut = (props) => {
   const onSignoutClick = useCallback((e) => {

@@ -1,11 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../translations/getStaticPath";
-
 const VerifyRequest = () => (
   <>
     <main>

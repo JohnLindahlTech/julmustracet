@@ -16,9 +16,9 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+import MuiLink from "@material-ui/core/Link";
 import { FormattedMessage, FormattedNumber } from "react-intl";
-import LangLink from "../langLink";
+import NextLink from "../langLink";
 import { UrlObject } from "../../types/url";
 
 interface Data {
@@ -283,9 +283,9 @@ export default function TopList(props: TopListProps) {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row">
-                        <LangLink href={getDetailsLink(row)} passHref>
-                          <Link>{row.name}</Link>
-                        </LangLink>
+                        <NextLink href={getDetailsLink(row)} passHref>
+                          <MuiLink>{row.name}</MuiLink>
+                        </NextLink>
                       </TableCell>
                       <TableCell align="right">
                         <FormattedNumber

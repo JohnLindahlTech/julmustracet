@@ -1,13 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { FormattedMessage } from "react-intl";
-import Users from "../../components/users";
-import Brands from "../../components/brands";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../translations/getStaticPath";
+import Users from "../components/users";
+import Brands from "../components/brands";
 
 const Home = () => {
   return (

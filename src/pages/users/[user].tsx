@@ -2,7 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
-import { Card, CardContent, Grid, GridSpacing } from "@material-ui/core";
+import { Card, CardContent, Grid } from "@material-ui/core";
 
 type AchievementProps = {
   title: string;

@@ -4,12 +4,7 @@ import { Button } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 import { useSession } from "next-auth/client";
-import withEnsuredSession from "../../../hocs/withEnsuredSession";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../../translations/getStaticPath";
+import withEnsuredSession from "../../hocs/withEnsuredSession";
 
 // TODO TRANSLATE
 

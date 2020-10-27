@@ -3,39 +3,36 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { FormattedMessage } from "react-intl";
 import React from "react";
-import Link from "../langLink";
-import { useRouter } from "next/router";
+import LangLink from "../langLink";
 import { Locale } from "../../translations/types";
 import { EN, SV } from "../../translations/config";
 import LangPickerIcon from "../LangPickerIcon";
+import useLangRouter from "../../hooks/useLangRouter";
 
 const MenuLangPicker = () => {
-  const router = useRouter();
-  const { query, pathname } = router;
-  const { lang } = router.query as { lang: Locale };
-  const newLang = lang === SV ? EN : SV;
+  const router = useLangRouter();
+  const { query, pathname, locale } = router;
+  const newLocale = locale === SV ? EN : SV;
 
   return (
     <li>
-      <Link
+      <LangLink
         href={{
           pathname,
-          query: {
-            ...query,
-            lang: newLang,
-          },
+          query,
         }}
+        locale={newLocale}
         passHref
       >
         <ListItem button component="a">
           <ListItemIcon>
-            <LangPickerIcon lang={lang} />
+            <LangPickerIcon lang={newLocale as Locale} />
           </ListItemIcon>
           <ListItemText
             primary={<FormattedMessage defaultMessage="Change to english" />}
           />
         </ListItem>
-      </Link>
+      </LangLink>
     </li>
   );
 };

@@ -4,8 +4,8 @@ import useLangRouter from "../hooks/useLangRouter";
 
 const LangLink = (props) => {
   const router = useLangRouter();
-  const { href } = props;
-  const newHref = router.getLocalizedHref(href);
+  const { href, locale } = props;
+  const newHref = router.getLocalizedHref(href, locale);
   return <Link {...props} href={newHref} />;
 };
 

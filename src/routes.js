@@ -1,6 +1,5 @@
 const deploymentPath = "/_next/data/:deployment";
 
-const lang = "[lang]";
 const svLang = "sv";
 
 const usersPath = `users`;
@@ -33,7 +32,7 @@ const svVerifyEmail = "verifiera-epost";
 
 module.exports = {
   Home: {
-    href: `/${lang}`,
+    href: `/`,
     sv: {
       href: "/",
       rewrite: {
@@ -49,7 +48,7 @@ module.exports = {
   },
 
   Users: {
-    href: `/${lang}/${usersPath}`,
+    href: `/${usersPath}`,
     sv: {
       href: `/${svUsersPath}`,
       rewrite: {
@@ -65,7 +64,7 @@ module.exports = {
   },
 
   UserEdit: {
-    href: `/${lang}/${usersPath}/${edit}`,
+    href: `/${usersPath}/${edit}`,
     sv: {
       href: `/${svUsersPath}/${svEdit}`,
       rewrite: {
@@ -81,7 +80,7 @@ module.exports = {
   },
 
   UserDetails: {
-    href: `/${lang}/${usersPath}/${userPath}`,
+    href: `/${usersPath}/${userPath}`,
     sv: {
       href: `/${svUsersPath}/${userPath}`,
       rewrite: {
@@ -97,7 +96,7 @@ module.exports = {
   },
 
   Brands: {
-    href: `/${lang}/${brandsPath}`,
+    href: `/${brandsPath}`,
     sv: {
       href: `/${svBrandsPath}`,
       rewrite: {
@@ -113,7 +112,7 @@ module.exports = {
   },
 
   BrandDetails: {
-    href: `/${lang}/${brandsPath}/${brandPath}`,
+    href: `/${brandsPath}/${brandPath}`,
     sv: {
       href: `/${svBrandsPath}/${brandPath}`,
       rewrite: {
@@ -129,7 +128,7 @@ module.exports = {
   },
 
   AddDrink: {
-    href: `/${lang}/${add}`,
+    href: `/${add}`,
     sv: {
       href: `/${svAdd}`,
       rewrite: {
@@ -145,7 +144,7 @@ module.exports = {
   },
 
   Rules: {
-    href: `/${lang}/${rules}`,
+    href: `/${rules}`,
     sv: {
       href: `/${svRules}`,
       rewrite: {
@@ -161,7 +160,7 @@ module.exports = {
   },
 
   LogIn: {
-    href: `/${lang}/${login}`,
+    href: `/${login}`,
     sv: {
       href: `/${svLogin}`,
       rewrite: {
@@ -177,7 +176,7 @@ module.exports = {
   },
 
   LogOut: {
-    href: `/${lang}/${logout}`,
+    href: `/${logout}`,
     sv: {
       href: `/${svLogout}`,
       rewrite: {
@@ -193,7 +192,7 @@ module.exports = {
   },
 
   VerifyEmail: {
-    href: `/${lang}/${verifyEmail}`,
+    href: `/${verifyEmail}`,
     sv: {
       href: `/${svVerifyEmail}`,
       rewrite: {

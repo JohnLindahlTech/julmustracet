@@ -5,14 +5,9 @@ import { Button } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import { object, string } from "yup";
-import withEnsuredSession from "../../hocs/withEnsuredSession";
-import { LOGGED_OUT } from "../../hooks/useEnsureSession";
-import { Home } from "../../routes";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../translations/getStaticPath";
+import withEnsuredSession from "../hocs/withEnsuredSession";
+import { LOGGED_OUT } from "../hooks/useEnsureSession";
+import { Home } from "../routes";
 
 const LogIn = (props) => {
   const intl = useIntl();

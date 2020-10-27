@@ -5,8 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
 import { getMessages } from "../translations/messages";
-import { getLocale } from "../translations/getLocales";
-import { defaultLocale } from "../translations/config";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Head from "next/head";
@@ -14,9 +12,8 @@ import Head from "next/head";
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   const { session } = pageProps;
-  const { lang } = router.query;
-  const messages = getMessages(lang);
-  const locale = getLocale(lang as string);
+  const { locale, defaultLocale } = router;
+  const messages = getMessages(locale);
 
   useEffect(() => {
     // Remove the server-side injected CSS.

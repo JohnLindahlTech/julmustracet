@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const options = {
   // @link https://next-auth.js.org/configuration/providers
   providers: [
@@ -110,16 +112,16 @@ const options = {
   // The routes shown here are the default URLs that will be used.
   // @link https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: LogIn.sv.href,
-    signOut: LogOut.sv.href,
+    signIn: isProd ? LogIn.sv.href : LogIn.href,
+    signOut: isProd ? LogOut.sv.href : LogOut.href,
     error: "/api/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: VerifyEmail.sv.href, // (used for check email message)
-    newUser: UserEdit.sv.href, // If set, new users will be directed here on first sign in
+    verifyRequest: isProd ? VerifyEmail.sv.href : VerifyEmail.href, // (used for check email message)
+    newUser: isProd ? UserEdit.sv.href : UserEdit.href, // If set, new users will be directed here on first sign in
   },
 
   // Additional options
   secret: process.env.NEXTAUTH_SECRET, // Recommended (but auto-generated if not specified)
-  debug: process.env.NODE_ENV !== "production", // Use this option to enable debug messages in the console
+  debug: !isProd, // Use this option to enable debug messages in the console
 };
 
 const Auth = (req, res) => NextAuth(req, res, options);

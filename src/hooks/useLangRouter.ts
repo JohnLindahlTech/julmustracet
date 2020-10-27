@@ -2,21 +2,28 @@ import { useRouter } from "next/router";
 import getLocalizedHref from "../lib/localized-href";
 import { Url } from "../types/url";
 
+type Options = {
+  locale?: string;
+};
+
 const useLangRouter = () => {
   const router = useRouter();
-  const { lang } = router.query;
+  const { locale: routerLocale } = router;
 
-  const push = (url: Url, as?: Url, options?: unknown) => {
-    const href = getLocalizedHref(lang as string, url);
+  const push = (url: Url, as?: Url, options: Options = {}) => {
+    const { locale = routerLocale } = options;
+    const href = getLocalizedHref(locale, url);
     router.push(href, as, options);
   };
 
-  const replace = (url: Url, as?: Url, options?: unknown) => {
-    router.replace(url, as, options);
+  const replace = (url: Url, as?: Url, options: Options = {}) => {
+    const { locale = routerLocale } = options;
+    const href = getLocalizedHref(locale, url);
+    router.replace(href, as, options);
   };
 
-  const localizeHref = (href: Url) => {
-    return getLocalizedHref(lang as string, href);
+  const localizeHref = (href: Url, locale = routerLocale) => {
+    return getLocalizedHref(locale, href);
   };
 
   return {

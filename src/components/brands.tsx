@@ -3,22 +3,11 @@ import { FormattedMessage } from "react-intl";
 import generateMockData from "../lib/generateMockData";
 import mapGraphData from "../lib/mapGraphData";
 import mapGridData from "../lib/mapGridData";
-import LangLink from "./langLink";
-import { Link } from "@material-ui/core";
-import { BrandDetails, UserDetails } from "../routes";
+import { BrandDetails } from "../routes";
 import Graph from "./graph/Graph";
 import TopList from "./table/TopList";
 
 export { getStaticProps, getStaticPaths } from "../translations/getStaticPath";
-
-const NameCell = ({ value }) => (
-  <LangLink
-    href={{ pathname: UserDetails.href, query: { user: value } }}
-    passHref
-  >
-    <Link>{value}</Link>
-  </LangLink>
-);
 
 const Brands = () => {
   const [graphData, setGraphData] = useState([]);

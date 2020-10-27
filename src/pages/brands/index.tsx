@@ -1,12 +1,7 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
-import Brands from "../../../components/brands";
-
-export {
-  getStaticProps,
-  getStaticPaths,
-} from "../../../translations/getStaticPath";
+import Brands from "../../components/brands";
 
 const BrandsPage = () => (
   <>

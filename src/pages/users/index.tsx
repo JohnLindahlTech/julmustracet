@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import Users from "../../../components/users";
+import Users from "../../components/users";
 
 const UsersPage = () => {
   return (
