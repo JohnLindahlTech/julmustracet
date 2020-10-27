@@ -31,6 +31,9 @@ const verifyEmail = "verify-email";
 const svVerifyEmail = "verifiera-epost";
 
 module.exports = {
+  Error: {
+    href: "/_error",
+  },
   Home: {
     href: `/`,
     sv: {

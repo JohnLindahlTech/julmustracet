@@ -7,8 +7,6 @@ import { BrandDetails } from "../routes";
 import Graph from "./graph/Graph";
 import TopList from "./table/TopList";
 
-export { getStaticProps, getStaticPaths } from "../translations/getStaticPath";
-
 const Brands = () => {
   const [graphData, setGraphData] = useState([]);
   const [gridData, setGridData] = useState([]);

@@ -7,8 +7,6 @@ import { UserDetails } from "../routes";
 import Graph from "./graph/Graph";
 import TopList from "./table/TopList";
 
-export { getStaticProps, getStaticPaths } from "../translations/getStaticPath";
-
 const Users = () => {
   const [graphData, setGraphData] = useState([]);
   const [gridData, setGridData] = useState([]);
