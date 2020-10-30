@@ -1,22 +1,35 @@
 import React from "react";
-import { Divider, Typography, useTheme } from "@material-ui/core";
+import {
+  Divider,
+  Typography,
+  useTheme,
+  Link as MuiLink,
+} from "@material-ui/core";
 import { Github as GithubIcon } from "@styled-icons/fa-brands/Github";
+import { FormattedMessage } from "react-intl";
 
 const Footer = () => {
   const theme = useTheme();
   return (
-    <div style={{ height: 1000 }}>
+    <>
       <Divider />
-      <Typography>© JohnPhoto ({new Date().getFullYear()})</Typography>
-      <a
+      <MuiLink
         href="https://github.com/JohnPhoto/julmustracet"
         target="_blank"
         rel="noreferrer noopener"
       >
-        <GithubIcon size={theme.spacing(4)} />
-      </a>
+        <Typography>
+          <FormattedMessage
+            defaultMessage="{icon} JohnPhoto ({date})"
+            values={{
+              icon: <GithubIcon size={theme.spacing(2)} />,
+              date: new Date().getFullYear(),
+            }}
+          />
+        </Typography>
+      </MuiLink>
       <Typography></Typography>
-    </div>
+    </>
   );
 };
 

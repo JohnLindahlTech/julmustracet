@@ -12,7 +12,7 @@ import Head from "next/head";
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   const { session } = pageProps;
-  const { locale, defaultLocale } = router;
+  const { defaultLocale, locale = defaultLocale } = router;
   const messages = getMessages(locale);
 
   useEffect(() => {
