@@ -8,6 +8,7 @@ import { getMessages } from "../translations/messages";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Head from "next/head";
+import DBProvider from "../db/provider";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -34,15 +35,20 @@ const App = ({ Component, pageProps }) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Provider session={session}>
-          <IntlProvider
-            locale={locale}
-            defaultLocale={defaultLocale}
-            messages={messages}
+          <DBProvider
+            local="julmustracet"
+            remote="http://localhost:3000/api/db/julmustracet"
           >
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </IntlProvider>
+            <IntlProvider
+              locale={locale}
+              defaultLocale={defaultLocale}
+              messages={messages}
+            >
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </IntlProvider>
+          </DBProvider>
         </Provider>
       </ThemeProvider>
     </>

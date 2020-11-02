@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const routes = require("./src/routes");
+const withPWA = require("next-pwa");
 
-module.exports = {
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+  },
   i18n: {
     locales: ["en", "sv"],
     defaultLocale: "sv",
@@ -36,4 +40,4 @@ module.exports = {
       routes.VerifyEmail.sv.rewrite,
     ];
   },
-};
+});

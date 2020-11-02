@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
 import { Card, CardContent, Grid } from "@material-ui/core";
 import TopList from "../../components/table/TopList";
-import { UserDetails } from "../../routes";
+import { BrandDetails } from "../../routes";
 import mapGridData from "../../lib/mapGridData";
 import mapGraphData from "../../lib/mapGraphData";
 import generateMockData from "../../lib/generateMockData";
@@ -159,15 +159,15 @@ const User = () => {
         <Graph data={graphData.slice(0, 1)} />
         <TopList
           getDetailsLink={(row) => ({
-            pathname: UserDetails.href,
-            query: { user: row.name },
+            pathname: BrandDetails.href,
+            query: { brand: row.name },
           })}
           title={<FormattedMessage defaultMessage="Märken" />}
           rows={gridData}
         />
         <TopList
           getDetailsLink={(row) => ({
-            pathname: UserDetails.href,
+            pathname: BrandDetails.href,
             query: { user: row.name },
           })}
           title={<FormattedMessage defaultMessage="Historik" />}

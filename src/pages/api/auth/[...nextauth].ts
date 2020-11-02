@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
+import JWT from "jsonwebtoken";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -56,11 +57,25 @@ const options = {
     // Defaults to NextAuth.js secret if not explicitly specified.
     secret: process.env.NEXTAUTH_JWT_SECRET,
     // Set to true to use encryption. Defaults to false (signing only).
-    encryption: process.env.NODE_ENV === "production",
+    // encryption: process.env.NODE_ENV === "production",
     // You can define your own encode/decode functions for signing and encryption
     // if you want to override the default behaviour.
-    // encode: async ({ secret, token, maxAge }) => {},
-    // decode: async ({ secret, token, maxAge }) => {},
+    encode: async ({ secret, token }) => {
+      const jwt = JWT.sign(token, secret, {
+        algorithm: "HS512",
+      });
+      return jwt;
+    },
+    decode: async ({ secret, token }) => {
+      if (!token) {
+        return null;
+      }
+
+      const data = JWT.verify(token, secret, {
+        algorithms: ["HS512"],
+      });
+      return data;
+    },
   },
 
   // @link https://next-auth.js.org/configuration/callbacks
@@ -100,10 +115,13 @@ const options = {
      * @param  {boolean} isNewUser True if new user (only available on sign in)
      * @return {object}            JSON Web Token that will be saved
      */
-    jwt: async (token /* , user, account, profile, isNewUser */) => {
+    jwt: async (token, user, account, profile, isNewUser) => {
       // const isSignIn = (user) ? true : false
       // Add auth_time to token on signin in
       // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
+      token.sub = token.email;
+      // token.name = token.email;
+      token["_couchdb.roles"] = ["users"];
       return Promise.resolve(token);
     },
   },

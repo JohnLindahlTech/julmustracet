@@ -10,3 +10,13 @@ This project is kickstarted from [with-next-auth](https://github.com/vercel/next
 4. `npm run dev`
 
 ## Prepare for production
+
+## CouchDB
+
+### Mac:
+
+[https://docs.couchdb.org/en/stable/install/mac.html](https://docs.couchdb.org/en/stable/install/mac.html)
+
+```
+brew install couchdb
+```
