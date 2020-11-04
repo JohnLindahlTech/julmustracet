@@ -11,6 +11,7 @@ import Head from "next/head";
 import DBProvider from "../db/provider";
 
 const App = ({ Component, pageProps }) => {
+  const isBrowser = typeof window !== "undefined";
   const router = useRouter();
   const { session } = pageProps;
   const { defaultLocale, locale = defaultLocale } = router;
@@ -36,7 +37,7 @@ const App = ({ Component, pageProps }) => {
         <CssBaseline />
         <Provider session={session}>
           <DBProvider
-            local="julmustracet"
+            local={isBrowser ? "julmustracet" : null}
             remote="http://localhost:3000/api/db/julmustracet"
           >
             <IntlProvider

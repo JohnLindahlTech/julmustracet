@@ -9,7 +9,7 @@ PouchDB.plugin(Validation);
 
 const DBProvider = ({ remote, local, children }) => {
   const remoteDb = useRef(new PouchDB(remote, { skip_setup: true }));
-  const localDb = useRef(new PouchDB(local));
+  const localDb = useRef(local ? new PouchDB(local) : null);
   const replication = useRef(null);
 
   useEffect(() => {
@@ -41,10 +41,9 @@ const DBProvider = ({ remote, local, children }) => {
         .on("paused", function (info) {
           console.log("paused", info);
           // replication was paused, usually because of a lost connection
-
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
         })
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         .on("active", function (info) {
           console.log("active", info);
           // replication was resumed
@@ -63,7 +62,11 @@ const DBProvider = ({ remote, local, children }) => {
   }, [remote, local]);
 
   return (
-    <DBContext.Provider value={localDb.current}>{children}</DBContext.Provider>
+    <DBContext.Provider
+      value={localDb.current ? localDb.current : remoteDb.current}
+    >
+      {children}
+    </DBContext.Provider>
   );
 };
 
