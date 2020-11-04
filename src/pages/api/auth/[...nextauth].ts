@@ -2,10 +2,14 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
 import JWT from "jsonwebtoken";
+import Adapter from "../../../serverDb/adapter";
 
 const isProd = process.env.NODE_ENV === "production";
+//              D   H     M   S
+const maxAge = 30 * 24 * 60 * 60; // 30 days
 
 const options = {
+  adapter: Adapter(),
   // @link https://next-auth.js.org/configuration/providers
   providers: [
     Providers.Email({
@@ -44,7 +48,7 @@ const options = {
     // Note: `jwt` is automatically set to `true` if no database is specified.
     jwt: true,
     // Seconds - How long until an idle session expires and is no longer valid.
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge,
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
     // Note: This option is ignored if using JSON Web Tokens
@@ -61,8 +65,10 @@ const options = {
     // You can define your own encode/decode functions for signing and encryption
     // if you want to override the default behaviour.
     encode: async ({ secret, token }) => {
-      const jwt = JWT.sign(token, secret, {
+      const { exp, ...rest } = token;
+      const jwt = JWT.sign(rest, secret, {
         algorithm: "HS512",
+        expiresIn: maxAge,
       });
       return jwt;
     },
@@ -119,9 +125,9 @@ const options = {
       // const isSignIn = (user) ? true : false
       // Add auth_time to token on signin in
       // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
-      token.sub = token.email;
-      // token.name = token.email;
-      token["_couchdb.roles"] = ["users"];
+      token.sub = token?.sub ?? token?.email ?? user?.email ?? profile?.email;
+      token["_couchdb.roles"] = token?.["_couchdb.roles"] ?? user?.roles;
+      token.username = token?.username ?? user?.username;
       return Promise.resolve(token);
     },
   },

@@ -13,7 +13,7 @@ const schema = object({
     .email("TRANSLATE email")
     .required("TRANSLATE Required")
     .label("TRANSLATE email"),
-  name: string("TRANSLATE string")
+  username: string("TRANSLATE string")
     .required("TRANSLATE Required")
     .nullable("TRANSLATE nullable")
     .max(32, "TRANSLATE max")
@@ -26,7 +26,7 @@ const UserForm = ({ user }) => {
     <Formik
       initialValues={{
         email: user.email || "",
-        name: user.name || "",
+        username: user.username || "",
         image: user.image || "",
       }}
       validationSchema={schema}
@@ -52,7 +52,7 @@ const UserForm = ({ user }) => {
           <div>
             <Field
               component={TextField}
-              name="name"
+              name="username"
               label="TRANSLATE Username"
               placeholder="Tomten"
             />
