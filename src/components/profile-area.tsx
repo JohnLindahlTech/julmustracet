@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoggedIn = ({ user }) => {
   const classes = useStyles();
+  console.log(user);
   return (
     <LangLink {...UserEdit} passHref>
       <Button
@@ -28,14 +29,14 @@ const LoggedIn = ({ user }) => {
           <Avatar
             className={classes.avatar}
             src={user.image}
-            alt={user.name || user.email}
+            alt={user.username || user.email}
           >
-            {(user.name || user.email).substring(0, 1)}
+            {(user.username || user.email).substring(0, 1)}
           </Avatar>
         }
       >
         <Typography noWrap className={classes.profileButtonSpan}>
-          {user.name || user.email}
+          {user.username || user.email}
         </Typography>
       </Button>
     </LangLink>

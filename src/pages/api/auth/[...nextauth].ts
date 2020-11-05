@@ -107,8 +107,9 @@ const options = {
      *                               JSON Web Token (if not using database sessions)
      * @return {object}              Session that will be returned to the client
      */
-    session: async (session /* , user */) => {
+    session: async (session, user) => {
       // session.customSessionProperty = 'bar'
+      session.username = user.username;
       return Promise.resolve(session);
     },
 
@@ -125,9 +126,21 @@ const options = {
       // const isSignIn = (user) ? true : false
       // Add auth_time to token on signin in
       // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
+
+      const username = token?.username ?? user?.username ?? profile?.username;
+      let roles = token?.["_couchdb.roles"] ?? user?.roles;
+
+      if (!roles) {
+        roles = [];
+      }
+
+      if (username && !roles.includes(username)) {
+        roles = [username, ...roles];
+      }
+
       token.sub = token?.sub ?? token?.email ?? user?.email ?? profile?.email;
-      token["_couchdb.roles"] = token?.["_couchdb.roles"] ?? user?.roles;
-      token.username = token?.username ?? user?.username;
+      token["_couchdb.roles"] = roles;
+      token.username = username;
       return Promise.resolve(token);
     },
   },

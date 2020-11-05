@@ -65,7 +65,6 @@ export class User implements Model {
     this.id = _id;
     this._rev = _rev;
     this._deleted = _deleted;
-    this.username = username;
     if (name) {
       this.name = name;
     }
@@ -82,6 +81,7 @@ export class User implements Model {
       this.emailVerified = new Date(emailVerified);
     }
     this.roles = roles;
+    this.changeUsername(username);
     this.password = password;
     this.createdAt = new Date(createdAt);
     this.updatedAt = new Date(updatedAt);
@@ -91,7 +91,15 @@ export class User implements Model {
     this._deleted = true;
   }
 
-  toDoc(): IUser {
+  changeUsername(username: string): void {
+    this.roles = [
+      username,
+      ...this.roles.filter((r) => r !== this.username),
+    ].filter(Boolean);
+    this.username = username;
+  }
+
+  toDoc(updated: boolean): IUser {
     const doc = {
       type: this.type,
       _id: this._id,
@@ -101,8 +109,8 @@ export class User implements Model {
       roles: this.roles,
       username: this.username,
       password: this.password,
-      updatedAt: this.updatedAt.toJSON(),
       createdAt: this.createdAt.toJSON(),
+      updatedAt: updated ? new Date().toJSON() : this.updatedAt.toJSON(),
     } as IUser;
     if (this.emailVerified) {
       doc.emailVerified = this.emailVerified.toJSON();

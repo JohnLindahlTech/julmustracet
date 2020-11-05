@@ -12,5 +12,5 @@ export interface Model {
   createdAt: string | Date;
 
   delete: () => void;
-  toDoc: () => unknown;
+  toDoc: (updated: boolean) => unknown;
 }

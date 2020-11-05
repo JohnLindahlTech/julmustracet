@@ -65,14 +65,14 @@ export class VerificationRequest implements Model {
     this._deleted = true;
   }
 
-  toDoc(): IVerificationRequest {
+  toDoc(updated: boolean): IVerificationRequest {
     const doc = {
       _id: this._id,
       identifier: this.identifier,
       token: this.token,
       uniqueMessage: this.uniqueMessage,
-      updatedAt: this.updatedAt.toJSON(),
       createdAt: this.createdAt.toJSON(),
+      updatedAt: updated ? new Date().toJSON() : this.updatedAt.toJSON(),
     } as IVerificationRequest;
     if (this.expires) {
       doc.expires = this.expires.toJSON();

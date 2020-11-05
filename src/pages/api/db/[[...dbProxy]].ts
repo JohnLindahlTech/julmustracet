@@ -20,7 +20,7 @@ const apiProxy = createProxyMiddleware({
   },
 });
 
-export default function DBProxy(req, res) {
+export default async function DBProxy(req, res) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   apiProxy(req, res, (result) => {
@@ -36,6 +36,7 @@ export default function DBProxy(req, res) {
 
 export const config = {
   api: {
+    externalResolver: true,
     // Disable bodyParser because it messes with http-proxy-middleware
     bodyParser: false,
   },

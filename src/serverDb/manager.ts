@@ -10,7 +10,7 @@ export default class Manager {
   }
 
   private async _save(document: Model, db: PouchDB.Database) {
-    let toSave = document.toDoc();
+    let toSave = document.toDoc(true);
     try {
       console.log({ document });
       const saved = await db.get(document._id);
@@ -19,7 +19,7 @@ export default class Manager {
       // @ts-ignore
       toSave = {
         ...saved,
-        ...(document.toDoc() as Record<string, unknown>),
+        ...(document.toDoc(true) as Record<string, unknown>),
       };
     } catch (error) {
       if (error.name !== "not_found") {
@@ -51,6 +51,7 @@ export default class Manager {
     const raw = (await db.get(id)) as Model;
     if (raw) {
       raw._deleted = true;
+      raw.updatedAt = new Date().toJSON();
       return db.put(raw);
     }
     return null;

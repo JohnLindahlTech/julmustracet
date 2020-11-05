@@ -60,7 +60,7 @@ export class Session implements Model {
     this._deleted = true;
   }
 
-  toDoc(): ISession {
+  toDoc(updated: boolean): ISession {
     const doc = {
       type: this.type,
       _id: this._id,
@@ -68,8 +68,8 @@ export class Session implements Model {
       expires: this.expires.toJSON(),
       sessionToken: this.sessionToken,
       accessToken: this.accessToken,
-      updatedAt: this.updatedAt.toJSON(),
       createdAt: this.createdAt.toJSON(),
+      updatedAt: updated ? new Date().toJSON() : this.updatedAt.toJSON(),
     } as ISession;
 
     if (this._rev) {

@@ -75,7 +75,7 @@ export class Account implements Model {
     this._deleted = true;
   }
 
-  toDoc(): IAccount {
+  toDoc(updated: boolean): IAccount {
     const doc = {
       type: this.type,
       _id: this._id,
@@ -86,8 +86,8 @@ export class Account implements Model {
       providerAccountId: this.providerAccountId,
       refreshToken: this.refreshToken,
       accessToken: this.accessToken,
-      updatedAt: this.updatedAt.toJSON(),
       createdAt: this.createdAt.toJSON(),
+      updatedAt: updated ? new Date().toJSON() : this.updatedAt.toJSON(),
     } as IAccount;
 
     if (this.accessTokenExpires) {

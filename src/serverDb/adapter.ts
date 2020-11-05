@@ -1,4 +1,3 @@
-import PouchDB from "pouchdb";
 import { createHash } from "crypto";
 import {
   uniqueNamesGenerator,
@@ -6,6 +5,7 @@ import {
   colors,
   animals,
 } from "unique-names-generator";
+import { userDb, authDb } from "./dbs";
 import Manager from "./manager";
 import {
   Account,
@@ -16,11 +16,10 @@ import {
   ISession,
 } from "./models";
 
+const NOT_FOUND_ERROR_NAME = "not_found";
+
 const Adapter = (/* config, options = {} */) => {
   async function getAdapter(appOptions) {
-    const couchdbUrl = process.env.COUCHDB_URL;
-    const userDb = new PouchDB(`${couchdbUrl}/_users`, { skip_setup: true });
-    const authDb = new PouchDB(`${couchdbUrl}/auth`, { skip_setup: true });
     const manager = new Manager(userDb, authDb);
 
     // Display debug output if debug option enabled
@@ -75,7 +74,7 @@ const Adapter = (/* config, options = {} */) => {
         const doc = await userDb.get(User.buildId(email));
         return new User(doc as IUser);
       } catch (err) {
-        if (err.name === "not_found") {
+        if (err.name === NOT_FOUND_ERROR_NAME) {
           return;
         }
         throw err;
@@ -90,7 +89,7 @@ const Adapter = (/* config, options = {} */) => {
           Account.buildId(providerId, providerAccountId)
         )) as Account;
       } catch (err) {
-        if (err.name === "not_found") {
+        if (err.name === NOT_FOUND_ERROR_NAME) {
           return;
         }
         throw err;
@@ -102,7 +101,7 @@ const Adapter = (/* config, options = {} */) => {
         const rawUser = await userDb.get(User.buildId(rawAccount.userId));
         return new User(rawUser as IUser);
       } catch (err) {
-        if (err.name == "not_found") {
+        if (err.name == NOT_FOUND_ERROR_NAME) {
           return;
         }
         throw err;
@@ -191,7 +190,7 @@ const Adapter = (/* config, options = {} */) => {
         }
         return session;
       } catch (err) {
-        if (err.name === "not_found") {
+        if (err.name === NOT_FOUND_ERROR_NAME) {
           return;
         }
         throw err;
@@ -318,7 +317,7 @@ const Adapter = (/* config, options = {} */) => {
         }
         return verificationRequest;
       } catch (err) {
-        if (err.name === "not_found") {
+        if (err.name === NOT_FOUND_ERROR_NAME) {
           return;
         }
       }
