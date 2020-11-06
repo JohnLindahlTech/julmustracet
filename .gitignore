@@ -1,6 +1,9 @@
 # Translations
 compiled-lang
 
+# bloat
+public/sw.js.map
+
 # Logs
 logs
 *.log

@@ -108,8 +108,7 @@ const options = {
      * @return {object}              Session that will be returned to the client
      */
     session: async (session, user) => {
-      // session.customSessionProperty = 'bar'
-      session.username = user.username;
+      session.user.username = user.username;
       return Promise.resolve(session);
     },
 
