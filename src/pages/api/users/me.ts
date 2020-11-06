@@ -3,6 +3,8 @@ import { julmustracetDb, userDb } from "../../../serverDb/dbs";
 import { User } from "../../../serverDb/models";
 import { getSession } from "next-auth/client";
 import { toDrinkId, toAchievementId, toId } from "../../../serverDb/toId";
+import cookies from "../../../lib/cookiesMiddleware";
+import { createAuthCookie } from "../../../lib/createAuthCookie";
 
 const firstYear = 2020;
 
@@ -154,7 +156,7 @@ async function updateAllYearsAchievements(
   );
 }
 
-async function editUser(req) {
+async function editUser(req, res) {
   try {
     const { body } = req;
     const session = await getSession({ req });
@@ -179,6 +181,7 @@ async function editUser(req) {
 
     const doc = currentUser.toDoc(true);
     await userDb.put(doc);
+    await createAuthCookie(req, res, currentUser);
     return filterWhitelistedFields(doc);
   } catch (error) {
     throw new RequestError("EditError", error.status ?? 400, "db", error);
@@ -195,28 +198,25 @@ async function getUser(req) {
   }
 }
 
-async function getResultFromMethod(req) {
+async function getResultFromMethod(req, res) {
   switch (req.method.toUpperCase()) {
     case "GET":
       return await getUser(req);
     case "PATCH":
-      return await editUser(req);
+      return await editUser(req, res);
     default:
       throw new RequestError("Method not allowed", 405, "method.not_allowed");
   }
 }
 
-export default async function UserEndpoint(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
   // TODO FIXME Check for CSRF-token in request.
   const session = await getSession({ req });
   if (!session) {
     return res.status(401).end();
   }
   try {
-    const result = await getResultFromMethod(req);
+    const result = await getResultFromMethod(req, res);
     res.send(result);
   } catch (error) {
     console.error(error);
@@ -224,3 +224,5 @@ export default async function UserEndpoint(
     res.send(error.format());
   }
 }
+
+export default cookies(UserEndpoint);

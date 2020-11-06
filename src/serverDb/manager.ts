@@ -12,9 +12,7 @@ export default class Manager {
   private async _save(document: Model, db: PouchDB.Database) {
     let toSave = document.toDoc(true);
     try {
-      console.log({ document });
       const saved = await db.get(document._id);
-      console.log({ saved });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       toSave = {

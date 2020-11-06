@@ -1,12 +1,15 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
-import JWT from "jsonwebtoken";
 import Adapter from "../../../serverDb/adapter";
+import {
+  jwtCallback,
+  jwtDecode,
+  jwtEncode,
+  maxAge,
+} from "../../../lib/createAuthCookie";
 
 const isProd = process.env.NODE_ENV === "production";
-//              D   H     M   S
-const maxAge = 30 * 24 * 60 * 60; // 30 days
 
 const options = {
   adapter: Adapter(),
@@ -64,24 +67,8 @@ const options = {
     // encryption: process.env.NODE_ENV === "production",
     // You can define your own encode/decode functions for signing and encryption
     // if you want to override the default behaviour.
-    encode: async ({ secret, token }) => {
-      const { exp, ...rest } = token;
-      const jwt = JWT.sign(rest, secret, {
-        algorithm: "HS512",
-        expiresIn: maxAge,
-      });
-      return jwt;
-    },
-    decode: async ({ secret, token }) => {
-      if (!token) {
-        return null;
-      }
-
-      const data = JWT.verify(token, secret, {
-        algorithms: ["HS512"],
-      });
-      return data;
-    },
+    encode: jwtEncode,
+    decode: jwtDecode,
   },
 
   // @link https://next-auth.js.org/configuration/callbacks
@@ -121,29 +108,8 @@ const options = {
      * @param  {boolean} isNewUser True if new user (only available on sign in)
      * @return {object}            JSON Web Token that will be saved
      */
-    jwt: async (token, user, account, profile, isNewUser) => {
-      // const isSignIn = (user) ? true : false
-      // Add auth_time to token on signin in
-      // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
-
-      const username = token?.username ?? user?.username ?? profile?.username;
-      let roles = token?.["_couchdb.roles"] ?? user?.roles;
-
-      if (!roles) {
-        roles = [];
-      }
-
-      if (username && !roles.includes(username)) {
-        roles = [username, ...roles];
-      }
-
-      token.sub = token?.sub ?? token?.email ?? user?.email ?? profile?.email;
-      token["_couchdb.roles"] = roles;
-      token.username = username;
-      return Promise.resolve(token);
-    },
+    jwt: jwtCallback,
   },
-
   // You can define custom pages to override the built-in pages
   // The routes shown here are the default URLs that will be used.
   // @link https://next-auth.js.org/configuration/pages

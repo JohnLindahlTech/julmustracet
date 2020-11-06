@@ -1,72 +1,97 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Formik, Field, Form } from "formik";
-import { Button } from "@material-ui/core";
+import { FormattedMessage, useIntl } from "react-intl";
+import {
+  Button,
+  TextField as MUITextField,
+  FormControl,
+  Typography,
+} from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
-import { useSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/client";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 
-// TODO TRANSLATE
-
-const schema = object({
-  email: string("TRANSLATE string")
-    .email("TRANSLATE email")
-    .required("TRANSLATE Required")
-    .label("TRANSLATE email"),
-  username: string("TRANSLATE string")
-    .required("TRANSLATE Required")
-    .nullable("TRANSLATE nullable")
-    .max(32, "TRANSLATE max")
-    .label("TRANSLATE Username"),
-  // image: string().url("Avatar link must be a valid url (start with https://)").nullable().notRequired().max(1000).matches(/^https/i, { message: "Must start with https://", excludeEmptyString: true }).label('Avatar link'),
-});
-
 const UserForm = ({ user }) => {
+  const intl = useIntl();
+
+  const schema = object({
+    username: string(intl.formatMessage({ defaultMessage: "Måste vara text" }))
+      .required(
+        intl.formatMessage({ defaultMessage: "Användarnamn är obligatoriskt" })
+      )
+      .max(
+        32,
+        intl.formatMessage({
+          defaultMessage: "Användarnamnet får vara max 32 tecken",
+        })
+      )
+      .label(intl.formatMessage({ defaultMessage: "Användarnamn" })),
+  });
+
+  const onSubmit = useCallback(async (values, { setSubmitting }) => {
+    try {
+      const res = await fetch("/api/users/me", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+      // TODO Errorhandling
+      const data = await res.json();
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  }, []);
+
   return (
     <Formik
       initialValues={{
-        email: user.email || "",
         username: user.username || "",
-        image: user.image || "",
       }}
       validationSchema={schema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
-        }, 500);
-      }}
+      onSubmit={onSubmit}
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <div>
-            <Field
-              component={TextField}
-              name="email"
-              type="email"
-              label="TRANSLATE Email"
-              disabled
-              placeholder="tomten@julmustracet.se"
-            />
-          </div>
-          <div>
+          <Typography>
+            <FormattedMessage defaultMessage="Du måste ha ett användarnamn för att kunna mata in dryck" />
+          </Typography>
+          <Typography>
+            <FormattedMessage defaultMessage="Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på." />
+          </Typography>
+          <Typography>
+            <FormattedMessage defaultMessage="Rekommendation: Undvik att byta användarnamn när du väl valt ett." />
+          </Typography>
+          <FormControl fullWidth margin="normal">
             <Field
               component={TextField}
               name="username"
-              label="TRANSLATE Username"
+              label={<FormattedMessage defaultMessage="Användarnamn" />}
               placeholder="Tomten"
             />
-          </div>
-          <div>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <MUITextField
+              label={<FormattedMessage defaultMessage="Epost" />}
+              value={user.email}
+              disabled
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal">
             <Button
               variant="contained"
               color="primary"
               disabled={isSubmitting}
               onClick={submitForm}
             >
-              TRANSLATE Submit
+              <FormattedMessage defaultMessage="Spara" />
             </Button>
-          </div>
+          </FormControl>
         </Form>
       )}
     </Formik>
@@ -78,7 +103,9 @@ const EditUser = () => {
   return (
     <>
       <main>
-        <h1>TRANSLATE Edit User</h1>
+        <Typography variant="h1">
+          <FormattedMessage defaultMessage="Redigera Användare" />
+        </Typography>
         {session && session.user && <UserForm user={session.user} />}
       </main>
     </>

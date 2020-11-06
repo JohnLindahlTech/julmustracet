@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LoggedIn = ({ user }) => {
   const classes = useStyles();
-  console.log(user);
   return (
     <LangLink {...UserEdit} passHref>
       <Button
