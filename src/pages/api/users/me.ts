@@ -14,7 +14,7 @@ class RequestError extends Error {
   errorCode: string;
   rootError: Error;
 
-  constructor(message, statusCode = 400, errorCode?, rootError?) {
+  constructor(message: string, statusCode = 400, errorCode?, rootError?) {
     super(message);
     this.name = "RequestError";
     this.statusCode = statusCode;
@@ -33,6 +33,14 @@ class RequestError extends Error {
       res.rootError = this.rootError;
     }
     return res;
+  }
+}
+
+class ValidationError extends RequestError {
+  name: string;
+  constructor(message: string, statusCode = 400, errorCode?, rootError?) {
+    super(message, statusCode, errorCode, rootError);
+    this.name = "ValidationError";
   }
 }
 
@@ -80,12 +88,12 @@ async function checkDBUsername(username) {
   if (res.docs.length === 0) {
     return username;
   }
-  throw new RequestError("Username is taken", 409, "username.conflict");
+  throw new ValidationError("Username is taken", 409, "username.conflict");
 }
 
 async function validateUsername(username, currentUsername) {
   if (!username) {
-    throw new RequestError("missing username", 422, "username.missing");
+    throw new ValidationError("missing username", 422, "username.missing");
   }
   if (username === currentUsername) {
     return username;
@@ -184,6 +192,9 @@ async function editUser(req, res) {
     await createAuthCookie(req, res, currentUser);
     return filterWhitelistedFields(doc);
   } catch (error) {
+    if (error.name === "ValidationError") {
+      throw error;
+    }
     throw new RequestError("EditError", error.status ?? 400, "db", error);
   }
 }

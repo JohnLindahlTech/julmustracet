@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Formik, Field, Form } from "formik";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage, useIntl, defineMessages } from "react-intl";
 import {
   Button,
   TextField as MUITextField,
@@ -9,44 +9,63 @@ import {
 } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
-import { useSession, getSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
+import { patchData } from "../../lib/fetch";
+
+const messages = defineMessages({
+  "username.string": {
+    defaultMessage: "Måste vara text",
+  },
+  "username.length": {
+    defaultMessage: "Användarnamnet får vara max 32 tecken",
+  },
+  "username.conflict": {
+    defaultMessage: "Användarnamnet är redan upptaget",
+  },
+  "username.missing": {
+    defaultMessage: "Användarnamn är obligatoriskt",
+  },
+  "username.unknown": {
+    defaultMessage: "Något är okänt fel med användarnamnet",
+  },
+});
+
+const getErrorMessage = (id: string): { defaultMessage: string } => {
+  return messages[id] ?? messages["username.unknown"];
+};
 
 const UserForm = ({ user }) => {
   const intl = useIntl();
 
   const schema = object({
-    username: string(intl.formatMessage({ defaultMessage: "Måste vara text" }))
-      .required(
-        intl.formatMessage({ defaultMessage: "Användarnamn är obligatoriskt" })
-      )
-      .max(
-        32,
-        intl.formatMessage({
-          defaultMessage: "Användarnamnet får vara max 32 tecken",
-        })
-      )
+    username: string(intl.formatMessage(messages["username.string"]))
+      .required(intl.formatMessage(messages["username.missing"]))
+      .max(32, intl.formatMessage(messages["username.length"]))
       .label(intl.formatMessage({ defaultMessage: "Användarnamn" })),
   });
 
-  const onSubmit = useCallback(async (values, { setSubmitting }) => {
-    try {
-      const res = await fetch("/api/users/me", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      // TODO Errorhandling
-      const data = await res.json();
-      window.location.reload();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
-  }, []);
+  const onSubmit = useCallback(
+    async (values, { setSubmitting, setErrors }) => {
+      try {
+        await patchData("/api/users/me", values);
+        window.location.reload();
+      } catch (error) {
+        if (error?.data?.errorCode) {
+          setErrors({
+            username: intl.formatMessage(
+              getErrorMessage(error?.data?.errorCode)
+            ),
+          });
+        } else {
+          throw error;
+        }
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [intl]
+  );
 
   return (
     <Formik
