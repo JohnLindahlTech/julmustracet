@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { format, lightFormat } from "date-fns";
+import { lightFormat } from "date-fns";
 import { useIntl } from "react-intl";
 import { red, blue, green, yellow, orange } from "@material-ui/core/colors";
 import {
@@ -14,10 +14,9 @@ import {
   Label,
   LabelList,
 } from "recharts";
-import { useRouter } from "next/router";
-import getDateFnsLocale from "../../translations/date-fns-locale";
 import ToolTip from "./ToolTip";
 import useCalculateActiveData from "../../hooks/useCalculateActiveData";
+import { useDateFormat } from "../../translations/DateFormatterProvider";
 
 const colors = [
   blue[500],
@@ -29,11 +28,9 @@ const colors = [
 
 const Graph = ({ data }) => {
   const intl = useIntl();
+  const format = useDateFormat();
   const [time, setTime] = useState(0);
   const calculateActiveData = useCalculateActiveData(data);
-  const router = useRouter();
-  const { lang } = router.query;
-  const locale = getDateFnsLocale(lang as string);
   return (
     <ResponsiveContainer width="95%" height={500}>
       <LineChart
@@ -75,7 +72,7 @@ const Graph = ({ data }) => {
           allowEscapeViewBox={{ x: false, y: false }}
           offset={20}
           content={<ToolTip data={calculateActiveData(time)} />}
-          labelFormatter={(label) => format(new Date(label), "Pp", { locale })}
+          labelFormatter={(label) => format(new Date(label))}
           formatter={(value) => {
             return intl.formatMessage(
               { defaultMessage: "{value} liter" },

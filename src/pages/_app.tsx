@@ -9,12 +9,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Head from "next/head";
 import DBProvider from "../db/provider";
+import { DateFormatProvider } from "../translations/DateFormatterProvider";
 
 const App = ({ Component, pageProps }) => {
   const isBrowser = typeof window !== "undefined";
   const router = useRouter();
-  const { session } = pageProps;
   const { defaultLocale, locale = defaultLocale } = router;
+  const { session } = pageProps;
   const messages = getMessages(locale);
 
   useEffect(() => {
@@ -36,20 +37,22 @@ const App = ({ Component, pageProps }) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Provider session={session}>
-          <DBProvider
-            local={isBrowser ? "julmustracet" : null}
-            remote="http://localhost:3000/api/db/julmustracet"
+          <IntlProvider
+            locale={locale}
+            defaultLocale={defaultLocale}
+            messages={messages}
           >
-            <IntlProvider
-              locale={locale}
-              defaultLocale={defaultLocale}
-              messages={messages}
-            >
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </IntlProvider>
-          </DBProvider>
+            <DateFormatProvider locale={locale}>
+              <DBProvider
+                local={isBrowser ? "julmustracet" : null}
+                remote="http://localhost:3000/api/db/julmustracet"
+              >
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </DBProvider>
+            </DateFormatProvider>
+          </IntlProvider>
         </Provider>
       </ThemeProvider>
     </>
