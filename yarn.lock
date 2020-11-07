@@ -5111,10 +5111,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formik-material-ui-lab@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/formik-material-ui-lab/-/formik-material-ui-lab-0.0.6.tgz#b56233be9051c13d726bd67fef6a7de1dd17f38e"
-  integrity sha512-5EELfeZnpeMmX7urmixlpgTrQrU47/doNnzYlCoM6TTwxU3QW4ArAAMu6i0gAOyXwozGudL3POVfQZwhEiZ7Gw==
+formik-material-ui-lab@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/formik-material-ui-lab/-/formik-material-ui-lab-0.0.7.tgz#24a3b27f62e8480954e9b6dcefc850c3b8685e84"
+  integrity sha512-ar0cR/JUkDpYn8ThpSvsSd+C3y9RJ/bDHioAxmiiUUpTi19ujNAHzq3l/bC4TNNRSX/ygtSk3O8h0Bn2d4z1Mw==
 
 formik-material-ui-pickers@^0.0.11:
   version "0.0.11"

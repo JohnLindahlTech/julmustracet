@@ -103,6 +103,7 @@ const UserForm = ({ user }) => {
           </FormControl>
           <FormControl fullWidth margin="normal">
             <Button
+              type="submit"
               variant="contained"
               color="primary"
               disabled={isSubmitting}

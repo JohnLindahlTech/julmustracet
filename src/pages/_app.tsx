@@ -10,6 +10,9 @@ import theme from "../theme";
 import Head from "next/head";
 import DBProvider from "../db/provider";
 import { DateFormatProvider } from "../translations/DateFormatterProvider";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import getDateFnsLocale from "../translations/date-fns-locale";
 
 const App = ({ Component, pageProps }) => {
   const isBrowser = typeof window !== "undefined";
@@ -17,7 +20,7 @@ const App = ({ Component, pageProps }) => {
   const { defaultLocale, locale = defaultLocale } = router;
   const { session } = pageProps;
   const messages = getMessages(locale);
-
+  const dateLocale = getDateFnsLocale(locale);
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -43,14 +46,16 @@ const App = ({ Component, pageProps }) => {
             messages={messages}
           >
             <DateFormatProvider locale={locale}>
-              <DBProvider
-                local={isBrowser ? "julmustracet" : null}
-                remote="http://localhost:3000/api/db/julmustracet"
-              >
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </DBProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={dateLocale}>
+                <DBProvider
+                  local={isBrowser ? "julmustracet" : null}
+                  remote="http://localhost:3000/api/db/julmustracet"
+                >
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </DBProvider>
+              </MuiPickersUtilsProvider>
             </DateFormatProvider>
           </IntlProvider>
         </Provider>
