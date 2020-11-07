@@ -188,7 +188,18 @@ async function editUser(req, res) {
     ]);
 
     const doc = currentUser.toDoc(true);
-    await userDb.put(doc);
+    try {
+      await userDb.put(doc);
+    } catch (error) {
+      if (error.error === "forbidden") {
+        throw new ValidationError(
+          error.error,
+          error.status,
+          error.reason,
+          error
+        );
+      }
+    }
     await createAuthCookie(req, res, currentUser);
     return filterWhitelistedFields(doc);
   } catch (error) {
