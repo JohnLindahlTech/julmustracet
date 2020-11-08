@@ -3,7 +3,7 @@ function(newDoc, oldDoc, userCtx){
   /*
 var schema = {
   type: 'drink',
-  user: 'email',
+  username: 'username',
   time: '1-20 dec',
   brand: '',
   amount: 0-2,
@@ -21,21 +21,19 @@ var schema = {
 
   // Anything goes for an admin.
   // TODO Maybe enable for prod
-  // if(userCtx.roles.indexOf("_admin") >= 0){
-  //   return;
-  // }
+  if(userCtx.roles.indexOf("_admin") >= 0){
+    return;
+  }
 
-  if(!newDoc.user){
+  if(!newDoc.username){
     reject('validate.user.required');
   }
-  log(newDoc.user)
-  log(userCtx)
   // Only add/edit your own
-  if(newDoc.user !== userCtx.name){
+  if(userCtx.roles.indexOf(newDoc.username) >= 0){
     reject('validate.user.new')
   }
   // Only edit what you own.
-  if(oldDoc && oldDoc.user !== userCtx.name){
+  if(oldDoc && oldDoc.username === newDoc.username){
     reject('validate.user.old')
   }
 
