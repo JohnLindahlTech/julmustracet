@@ -23,44 +23,15 @@ import withEnsuredSession from "../hocs/withEnsuredSession";
 import { isBefore } from "date-fns";
 import { maxLimitDate, minLimitDate } from "../lib/rules";
 import { useDateFormat } from "../translations/DateFormatterProvider";
+import { useBrands } from "../db/useBrands";
+import { toTitleCase } from "../db/toTitleCase";
 
 type Option = {
   id: number;
   name?: string;
 };
 
-function toTitleCase(str) {
-  return str.replace(/\S\S*/g, function (txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  });
-}
-
 const filter = createFilterOptions();
-
-const defaultBrands = [
-  "Apotekarnes Årsmust",
-  "Apotekarnes Bryggarmust",
-  "Apotekarnes Julmust Sockerfri",
-  "Apotekarnes Julmust",
-  "Apotekarnes Vintermust",
-  "Bjäre Julmust",
-  "Coop Julmust",
-  "Favorit God Julmust",
-  "Freeway Julmust",
-  "Hammars Julmust",
-  "Herrljunga Klassisk Julmust",
-  "ICA Julmust",
-  "Naturfrisk Julmust",
-  "Nyckelbryggerier Gammeldags Julmust",
-  "Nygårda Calvadosfat",
-  "Nygårda Ekfat",
-  "Nygårda Julmust",
-  "Nygårda Julmust Light",
-  "Nygårda Portvinsfat",
-  "Nygårda Romfat",
-  "Vasa Julmust",
-  "Zeunerts Julmust",
-]; // TODO Obviously fetch from server
 
 const messages = defineMessages({
   string: {
@@ -105,6 +76,8 @@ const getErrorMessage = (id) => {
 const Add = () => {
   const intl = useIntl();
   const format = useDateFormat();
+
+  const brands = useBrands();
 
   const schema = object({
     brand: string(intl.formatMessage(messages.string))
@@ -158,7 +131,7 @@ const Add = () => {
               <Field
                 name="brand"
                 component={Autocomplete}
-                options={defaultBrands}
+                options={brands}
                 filterOptions={(options, params) => {
                   const filtered = filter(options, params);
                   if (params.inputValue !== "") {
