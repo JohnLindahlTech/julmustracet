@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { julmustracetDb, userDb } from "../../../serverDb/dbs";
 import { User } from "../../../serverDb/models";
 import { getSession } from "next-auth/client";
-import { toDrinkId, toAchievementId, toId } from "../../../serverDb/toId";
+import { toDrinkId, toAchievementId, toId } from "../../../db/toId";
 import cookies from "../../../lib/cookiesMiddleware";
 import { createAuthCookie } from "../../../lib/createAuthCookie";
 

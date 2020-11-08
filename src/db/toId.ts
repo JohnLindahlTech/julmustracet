@@ -4,11 +4,6 @@ const dashesAtBeginningOrEnd = /(^-+|-+$)/g;
 // const drinkId = '[year]:drink:[username]:[time]:[createDate]';
 // const achievementId = '[year]:achievement:[username]:[id]';
 
-// 2020:drink:a
-// 2020:drink:b
-// 2021:drink:a
-// 2021:drink:b
-
 export function toId(str: string): string {
   return str
     .trim()
