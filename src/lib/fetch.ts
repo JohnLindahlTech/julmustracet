@@ -23,7 +23,12 @@ export async function http(
   opts?: RequestInit
 ): Promise<unknown> {
   const res = await fetch(url, opts);
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch (error) {
+    console.error(error);
+  }
   if (!res.ok) {
     throw new HttpError(res.statusText, res.status, data);
   }

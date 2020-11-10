@@ -4,12 +4,19 @@ import { Button } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
 import { Home } from "../routes";
 import withEnsuredSession from "../hocs/withEnsuredSession";
+import { useSessionDB } from "../db/sessionDB";
 
 const LogOut = (props) => {
-  const onSignoutClick = useCallback((e) => {
-    e.preventDefault();
-    signOut({ callbackUrl: Home.href });
-  }, []);
+  const sessionDB = useSessionDB();
+
+  const onSignoutClick = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await sessionDB.destroy();
+      signOut({ callbackUrl: Home.href });
+    },
+    [sessionDB]
+  );
 
   return (
     <div>

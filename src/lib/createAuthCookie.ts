@@ -1,20 +1,37 @@
 import JWT from "jsonwebtoken";
 import jwt from "next-auth/jwt";
+import { CookieSerializeOptions } from "cookie";
 import { getSession } from "next-auth/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../serverDb/models";
+import { Session } from "../db/sessionDB";
 
-const secret = process.env.NEXTAUTH_JWT_SECRET;
-const insecureCookieName = "next-auth.session-token";
-const secureCookieName = `__Secure-${insecureCookieName}`;
+const JWTSecret = process.env.NEXTAUTH_JWT_SECRET;
+const baseUrl = process.env.NEXTAUTH_URL;
 
-export const cookieName =
-  process.env.NODE_ENV === "production" ? secureCookieName : insecureCookieName;
+const useSecureCookies = baseUrl.startsWith("https://");
+const cookiePrefix = useSecureCookies ? "__Secure-" : "";
+
+export const cookies = {
+  // default cookie options
+  sessionToken: {
+    name: `${cookiePrefix}next-auth.session-token`,
+    options: {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      secure: useSecureCookies,
+    } as CookieSerializeOptions,
+  },
+};
 
 //                     D    H    M    S
 export const maxAge = 30 * 24 * 60 * 60; // 30 days
 
-export const jwtEncode = async ({ secret, token }) => {
+export const jwtEncode = async ({
+  secret = JWTSecret,
+  token,
+}): Promise<string> => {
   const { exp, ...rest } = token;
   return JWT.sign(rest, secret, {
     algorithm: "HS512",
@@ -22,7 +39,10 @@ export const jwtEncode = async ({ secret, token }) => {
   });
 };
 
-export const jwtDecode = async ({ secret, token }) => {
+export const jwtDecode = async ({
+  secret = JWTSecret,
+  token,
+}): Promise<Session["user"]> => {
   if (!token) {
     return null;
   }
@@ -30,7 +50,12 @@ export const jwtDecode = async ({ secret, token }) => {
   const data = JWT.verify(token, secret, {
     algorithms: ["HS512"],
   });
-  return data;
+  return data as Session["user"];
+};
+
+export const sessionCallback = async (session, user) => {
+  session.user.username = user.username;
+  return Promise.resolve(session);
 };
 
 export const jwtCallback = async (
@@ -68,15 +93,13 @@ export async function createAuthCookie(
 ): Promise<void> {
   const session = await getSession({ req });
   const currentRawToken = await jwt.getToken({ req, raw: true });
-  const currentToken = await jwtDecode({ token: currentRawToken, secret });
+  const currentToken = await jwtDecode({ token: currentRawToken });
   const updatedToken = await jwtCallback(currentToken, user);
-  const updatedRawToken = await jwtEncode({ token: updatedToken, secret });
+  const updatedRawToken = await jwtEncode({ token: updatedToken });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  res.cookie(cookieName, updatedRawToken, {
+  res.cookie(cookies.sessionToken.name, updatedRawToken, {
     expires: new Date(session.expires),
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
+    ...cookies.sessionToken.options,
   });
 }

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import PouchDB from "pouchdb";
 import Validation from "./validate";
 import DBContext from "./context";
+import useNetworkStatus from "./useNetworkStatus";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -12,22 +13,11 @@ const DBProvider = ({ remote, local, children }) => {
   const localDb = useRef(local ? new PouchDB(local) : null);
   const replication = useRef(null);
 
-  useEffect(() => {
-    if (replication?.current) {
-      replication.current.cancel();
-    }
-    if (remote) {
-      remoteDb.current = new PouchDB(remote, { skip_setup: true });
-    } else {
-      remoteDb.current = null;
-    }
-
-    if (local) {
-      localDb.current = new PouchDB(local, {});
-    } else {
-      localDb.current = null;
-    }
+  const onOnline = useCallback(() => {
     if (remoteDb.current && localDb.current) {
+      if (replication.current) {
+        return;
+      }
       console.warn("Sync!");
       replication.current = localDb.current
         .sync(remoteDb.current, {
@@ -53,13 +43,41 @@ const DBProvider = ({ remote, local, children }) => {
           // totally unhandled error (shouldn't happen)
         });
     }
+  }, []);
+
+  const onOffline = useCallback(() => {
+    if (replication?.current) {
+      replication.current.cancel();
+      replication.current = null;
+    }
+  }, []);
+
+  const { online } = useNetworkStatus({ onOnline, onOffline });
+
+  useEffect(() => {
+    if (replication?.current) {
+      replication.current.cancel();
+    }
+    if (remote) {
+      remoteDb.current = new PouchDB(remote, { skip_setup: true });
+    } else {
+      remoteDb.current = null;
+    }
+
+    if (local) {
+      localDb.current = new PouchDB(local, {});
+    } else {
+      localDb.current = null;
+    }
+    if (online) {
+      onOnline();
+    }
     return () => {
       console.log("Canceling");
-      if (replication?.current) {
-        replication.current.cancel();
-      }
+      onOffline();
     };
-  }, [remote, local]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remote, local, onOnline, onOffline]);
 
   return (
     <DBContext.Provider

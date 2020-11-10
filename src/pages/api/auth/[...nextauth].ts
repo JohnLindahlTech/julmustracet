@@ -3,6 +3,7 @@ import Providers from "next-auth/providers";
 import { LogIn, LogOut, UserEdit, VerifyEmail } from "../../../routes";
 import Adapter from "../../../serverDb/adapter";
 import {
+  sessionCallback,
   jwtCallback,
   jwtDecode,
   jwtEncode,
@@ -94,10 +95,7 @@ const options = {
      *                               JSON Web Token (if not using database sessions)
      * @return {object}              Session that will be returned to the client
      */
-    session: async (session, user) => {
-      session.user.username = user.username;
-      return Promise.resolve(session);
-    },
+    session: sessionCallback,
 
     /**
      * @link https://next-auth.js.org/configuration/callbacks#jwt-callback

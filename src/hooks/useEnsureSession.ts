@@ -1,5 +1,5 @@
-import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
+import useOfflineSession from "../db/useOfflineSession";
 import { LogIn } from "../routes";
 import { Url } from "../types/url";
 import useLangRouter from "./useLangRouter";
@@ -13,7 +13,7 @@ const useEnsureSession = (
 ): [boolean, boolean] => {
   const [approved, setApproved] = useState(false);
   const router = useLangRouter();
-  const [session, loading] = useSession();
+  const [session, loading] = useOfflineSession();
 
   useEffect(() => {
     if (!session === sessionState && !loading) {

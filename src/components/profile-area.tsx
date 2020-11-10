@@ -3,10 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import { LogIn, UserEdit } from "../routes";
 import LangLink from "./langLink";
-import { signin, useSession } from "next-auth/client";
+import { signin } from "next-auth/client";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import useOfflineSession from "../db/useOfflineSession";
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -62,6 +63,6 @@ const Loading = () => {
 };
 
 export default function ProfileArea() {
-  const [session, loading] = useSession();
+  const [session, loading] = useOfflineSession();
   return <>{session ? <LoggedIn user={session.user} /> : <LoggedOut />}</>;
 }

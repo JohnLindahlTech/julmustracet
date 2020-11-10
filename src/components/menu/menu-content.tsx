@@ -21,14 +21,14 @@ import {
   AddDrink,
   Rules,
 } from "../../routes";
-import { useSession } from "next-auth/client";
+import useOfflineSession from "../../db/useOfflineSession";
 import { Hidden, Toolbar, Typography } from "@material-ui/core";
 
 import MenuItem, { MenuItemProps } from "./MenuItem";
 import MenuLangPicker from "./MenuLangPicker";
 
 const MenuContent: FC = () => {
-  const [session, loading] = useSession();
+  const [session, loading] = useOfflineSession();
   const intl = useIntl();
   const menuItems: Array<MenuItemProps["item"] | JSX.Element> = [
     {

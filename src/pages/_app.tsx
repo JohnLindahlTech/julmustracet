@@ -9,10 +9,32 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Head from "next/head";
 import DBProvider from "../db/provider";
+import { SessionDBProvider } from "../db/sessionDB";
+import { OfflineSessionProvider } from "../db/useOfflineSession";
 import { DateFormatProvider } from "../translations/DateFormatterProvider";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import getDateFnsLocale from "../translations/date-fns-locale";
+import fetchIntercept from "fetch-intercept";
+import { LogIn } from "../routes";
+import PouchDB from "pouchdb";
+
+if (typeof window !== "undefined") {
+  const unregister = fetchIntercept.register({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    response: async (response): Promise<Response> => {
+      // TODO Handle every !response.ok here? Probably not...
+      // CouchDB only answers with 403, and /api/auth/session responds with 200 {}.
+      if (response.status === 401) {
+        await new PouchDB("session").destroy();
+        // TODO Hard Navigate to login
+        window.location.href = LogIn.href;
+      }
+      return response;
+    },
+  });
+}
 
 const App = ({ Component, pageProps }) => {
   const isBrowser = typeof window !== "undefined";
@@ -47,14 +69,21 @@ const App = ({ Component, pageProps }) => {
           >
             <DateFormatProvider locale={locale}>
               <MuiPickersUtilsProvider utils={DateFnsUtils} locale={dateLocale}>
-                <DBProvider
-                  local={isBrowser ? "julmustracet" : null}
-                  remote="http://localhost:3000/api/db/julmustracet"
+                <SessionDBProvider
+                  name={isBrowser ? "session" : null}
+                  session={session}
                 >
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </DBProvider>
+                  <OfflineSessionProvider>
+                    <DBProvider
+                      local={isBrowser ? "julmustracet" : null}
+                      remote="http://localhost:3000/api/db/julmustracet"
+                    >
+                      <Layout>
+                        <Component {...pageProps} />
+                      </Layout>
+                    </DBProvider>
+                  </OfflineSessionProvider>
+                </SessionDBProvider>
               </MuiPickersUtilsProvider>
             </DateFormatProvider>
           </IntlProvider>

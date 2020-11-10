@@ -1,5 +1,5 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
-import { cookieName } from "../../../lib/createAuthCookie";
+import { cookies } from "../../../lib/createAuthCookie";
 
 // Create proxy instance outside of request handler function to avoid unnecessary re-creation
 const apiProxy = createProxyMiddleware({
@@ -10,12 +10,12 @@ const apiProxy = createProxyMiddleware({
   onProxyReq: (proxyReq, req, res) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (req?.cookies?.[cookieName]) {
+    if (req?.cookies?.[cookies.sessionToken.name]) {
       proxyReq.setHeader(
         "Authorization",
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        `Bearer ${req.cookies[cookieName]}`
+        `Bearer ${req.cookies[cookies.sessionToken.name]}`
       );
     }
   },

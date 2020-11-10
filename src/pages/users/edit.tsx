@@ -9,7 +9,8 @@ import {
 } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
-import { useSession } from "next-auth/client";
+// Since we are needing network for the edit, lets require the latest session from server
+import useSession from "next-auth/client";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { patchData } from "../../lib/fetch";
 
