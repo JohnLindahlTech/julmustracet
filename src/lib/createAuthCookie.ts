@@ -55,6 +55,7 @@ export const jwtDecode = async ({
 
 export const sessionCallback = async (session, user) => {
   session.user.username = user.username;
+  session.user.roles = user?.["_couchdb.roles"];
   return Promise.resolve(session);
 };
 

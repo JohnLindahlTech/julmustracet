@@ -46,6 +46,9 @@ const Graph = ({ data }) => {
           allowDecimals={false}
           tickCount={20}
           tickFormatter={(unixTime) => {
+            if (!isFinite(unixTime)) {
+              return "Infinity";
+            }
             return lightFormat(new Date(unixTime), "d");
           }}
           type="number"

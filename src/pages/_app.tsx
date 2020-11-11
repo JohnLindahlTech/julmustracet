@@ -61,7 +61,7 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Provider session={session}>
+        <Provider options={{ clientMaxAge: 5 }} session={session}>
           <IntlProvider
             locale={locale}
             defaultLocale={defaultLocale}

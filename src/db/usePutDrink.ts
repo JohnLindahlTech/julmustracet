@@ -1,15 +1,49 @@
 import { useCallback, useState } from "react";
+import { toDrinkId } from "./toId";
 import useDB from "./useDB";
+import useOfflineSession from "./useOfflineSession";
 
-export default function usePutDrink() {
+export default function usePutDrink(): [
+  (data: unknown) => Promise<any>,
+  { loading: boolean }
+] {
   const db = useDB();
-  const loading = useState(false);
+  const [session] = useOfflineSession();
+  const [loading, setLoading] = useState(false);
 
   const put = useCallback(
-    (data) => {
-      db.validatePut();
+    async (data) => {
+      setLoading(true);
+      const _id = toDrinkId(
+        new Date().getFullYear(),
+        session.user.username,
+        data.time,
+        new Date()
+      );
+
+      try {
+        return await db.validatingPut(
+          {
+            ...data,
+            _id,
+            username: session.user.username,
+            type: "drink",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+          {
+            userCtx: {
+              db: "julmustracet",
+              name: session.user.name,
+              roles: session.user.roles,
+            },
+          }
+        );
+      } finally {
+        setLoading(false);
+      }
     },
-    [db]
+    [db, session]
   );
   return [put, { loading }];
 }

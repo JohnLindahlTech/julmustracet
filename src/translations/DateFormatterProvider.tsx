@@ -5,7 +5,12 @@ import { format } from "date-fns";
 function setUpFormat(localeId?: string, formatStr = "Pp") {
   const locale = getDateFnsLocale(localeId);
   return (date: Date, formatString: string = formatStr) => {
-    return format(date, formatString, { locale });
+    try {
+      return format(date, formatString, { locale });
+    } catch (error) {
+      console.error(error);
+      return "-";
+    }
   };
 }
 

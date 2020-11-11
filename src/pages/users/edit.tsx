@@ -10,7 +10,7 @@ import {
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 // Since we are needing network for the edit, lets require the latest session from server
-import useSession from "next-auth/client";
+import { useSession } from "next-auth/client";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { patchData } from "../../lib/fetch";
 

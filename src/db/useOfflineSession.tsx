@@ -29,7 +29,10 @@ export default function useOfflineSession(): [Session, boolean] {
 const clientId =
   Math.random().toString(36).substring(2) + Date.now().toString(36);
 
-const _sendMessage = (message) => {
+export const sendSessionMessage = (message: {
+  event: "session";
+  data: { trigger: string };
+}) => {
   if (typeof localStorage !== "undefined") {
     const timestamp = Math.floor(new Date().getTime() / 1000);
     localStorage.setItem(
@@ -45,7 +48,7 @@ function _useOfflineSession(): [Session, boolean] {
   const [session, setSession] = useState(null);
 
   const onOnline = useCallback(() => {
-    _sendMessage({ event: "session", data: { trigger: "isOnline" } });
+    sendSessionMessage({ event: "session", data: { trigger: "isOnline" } });
   }, []);
 
   const { cancel } = useNetworkStatus({ onOnline });

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
-import generateMockData from "../lib/generateMockData";
+import useGetDrinks from "../db/useGetDrinks";
 import mapGraphData from "../lib/mapGraphData";
 import mapGridData from "../lib/mapGridData";
 import { UserDetails } from "../routes";
@@ -10,11 +10,12 @@ import TopList from "./table/TopList";
 const Users = () => {
   const [graphData, setGraphData] = useState([]);
   const [gridData, setGridData] = useState([]);
+  const [drinks] = useGetDrinks();
   useEffect(() => {
-    const res = mapGraphData(generateMockData());
+    const res = mapGraphData(drinks);
     setGraphData(res);
     setGridData(mapGridData(res));
-  }, []);
+  }, [drinks]);
 
   return (
     <>

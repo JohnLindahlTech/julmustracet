@@ -25,6 +25,8 @@ import { maxLimitDate, minLimitDate } from "../lib/rules";
 import { useDateFormat } from "../translations/DateFormatterProvider";
 import { useBrands } from "../db/useBrands";
 import { toTitleCase } from "../db/toTitleCase";
+import useOfflineSession from "../db/useOfflineSession";
+import usePutDrink from "../db/usePutDrink";
 
 type Option = {
   id: number;
@@ -48,12 +50,15 @@ const messages = defineMessages({
   },
   "max.string": {
     defaultMessage: "Maxlängd är {max}",
+    values: { max: 32 },
   },
   "min.number": {
     defaultMessage: "Lägsta tillåtna värde är {min}",
+    values: { min: 0 },
   },
   "max.number": {
     defaultMessage: "Högsta tillåtna värde är {max}",
+    values: { max: 2 },
   },
   "min.date": {
     defaultMessage: "Lägsta tillåtna datum är {date}",
@@ -64,13 +69,44 @@ const messages = defineMessages({
   "future.date": {
     defaultMessage: "Du får ej ange en tid i framtiden",
   },
+  "user.new": {
+    defaultMessage: "Du måste vara inloggad",
+  },
+  "user.old": {
+    defaultMessage: "Du får inte byta användare",
+  },
   unknownError: {
     defaultMessage: "Något är fel med fältet",
   },
 });
 
-const getErrorMessage = (id) => {
-  return messages[id] ?? messages.unknownError;
+const parse = (data: string, dateFormat, intl): string => {
+  if (
+    /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/.test(
+      data
+    )
+  ) {
+    return dateFormat(new Date(data));
+  } else if (/^\d{1,2}$/.test(data)) {
+    return intl.formatNumber(parseInt(data, 10));
+  }
+  return data;
+};
+
+const getErrorMessage = (id, rawValues, dateFormat, intl) => {
+  const message = messages[id] ?? messages.unknownError;
+  let values = {};
+  if (rawValues) {
+    values = rawValues
+      .split(",")
+      .map((r) => r.split("!"))
+      .reduce((a, [key, val]) => {
+        a[key] = parse(val, dateFormat, intl);
+        return a;
+      }, {});
+  }
+  console.log([message, values, rawValues]);
+  return [message, values];
 };
 
 const Add = () => {
@@ -78,6 +114,7 @@ const Add = () => {
   const format = useDateFormat();
 
   const brands = useBrands();
+  const [saveDrink] = usePutDrink();
 
   const schema = object({
     brand: string(intl.formatMessage(messages.string))
@@ -120,13 +157,29 @@ const Add = () => {
           time: new Date(),
         }}
         validationSchema={schema}
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
+        onSubmit={async (values, { setSubmitting, setFieldError }) => {
+          try {
+            await saveDrink(values);
+          } catch (error) {
+            if (error.status === 403) {
+              const [field, errorCode, values] = error.message.split("/");
+              setFieldError(
+                field,
+                intl.formatMessage.apply(
+                  null,
+                  getErrorMessage(errorCode, values, format, intl)
+                )
+              );
+              return;
+            }
+            console.error(error);
+          } finally {
+            setSubmitting(false);
+          }
         }}
       >
-        {({ submitForm, isSubmitting, errors, touched, setFieldValue }) => (
-          <Form>
+        {({ isSubmitting, errors, touched, setFieldValue }) => (
+          <Form noValidate>
             <FormControl fullWidth margin="normal">
               <Field
                 name="brand"
@@ -179,7 +232,7 @@ const Add = () => {
                 placeholder="0.33"
               />
             </FormControl>
-            <ButtonGroup variant="text" size="small" color="primary">
+            <ButtonGroup variant="text" size="small" color="secondary">
               {[0.25, 0.33, 0.5, 1, 1.4, 1.5].map((amount) => (
                 <Button
                   key={amount}
@@ -226,7 +279,6 @@ const Add = () => {
               variant="contained"
               color="primary"
               disabled={isSubmitting}
-              onClick={submitForm}
             >
               <FormattedMessage defaultMessage="Spara" />
             </Button>

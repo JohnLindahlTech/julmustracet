@@ -22,6 +22,7 @@ export type Session = {
     image: string;
     picture?: string; // Something from next-auth might have this.
     username: string;
+    roles: string[];
   };
   expires: string | Date;
 };

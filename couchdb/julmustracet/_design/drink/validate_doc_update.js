@@ -26,30 +26,43 @@ var schema = {
   }
 
   if(!newDoc.username){
-    reject('validate.user.required');
+    reject('user/required');
   }
   // Only add/edit your own
-  if(userCtx.roles.indexOf(newDoc.username) >= 0){
-    reject('validate.user.new')
+  if(userCtx.roles.indexOf(newDoc.username) < 0){
+    reject('user/new')
   }
   // Only edit what you own.
   if(oldDoc && oldDoc.username === newDoc.username){
-    reject('validate.user.old')
+    reject('user/old')
   }
 
-
-  if(!newDoc.time){
-    reject('validate.time.required');
-  }
 
   if(!newDoc.brand){
-    reject('validate.brand.required');
+    reject('brand/required');
+  }
+
+  if(newDoc.brand.length > 32){
+    reject('brand/max.string/max!32');
   }
 
   if(!newDoc.amount){
-    reject('validate.amount.required');
+    reject('amount/required');
+  }
+  // Ensure more than 0
+  if(newDoc.amount <= 0){
+    reject('amount/min.number/min!0');
   }
 
+
+  // Ensure less than 2
+  if(newDoc.amount > 2){
+    reject('amount/max.number/max!2');
+  }
+
+  if(!newDoc.time){
+    reject('time/required');
+  }
   var time = new Date(newDoc.time);
   var now = new Date();
   var first = new Date();
@@ -59,32 +72,21 @@ var schema = {
   last.setMonth(11,21);
   last.setHours(0,0,0,0);
 
+  // TODO Enable time-checking in prod
   // Ensure after 1 dec
-  if(time.getTime() < first.getTime()){
-    reject('validate.time.after1');
-  }
-
-  // ensure before 20 dec
-  if(time.getTime() >= last.getTime()){
-    reject('validate.time.before20');
-  }
-
-  // ensure before right now
-  // TODO ENABLE THIS IN PROD
-  // if(time.getTime() >= now.getTime()){ 
-  //   reject('validate.time.before_now');
+  // if(time.getTime() < first.getTime()){
+  //   reject('time/min.date/date!'+ first.toJSON());
   // }
 
-  // Ensure more than 0
-  if(newDoc.amount <= 0){
-    reject('validate.amount.too_low');
-  }
+  // // ensure before 20 dec
+  // if(time.getTime() >= last.getTime()){
+  //   reject('time/max.date/date!' + last.toJSON());
+  // }
 
-
-  // Ensure less than 2
-  if(newDoc.amount > 2){
-    reject('validate.amount.too_much');
-  }
+  // // ensure before right now
+  // if(time.getTime() >= now.getTime()){ 
+  //   reject('time/future.date');
+  // }
 }
 
 

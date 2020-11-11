@@ -2,9 +2,9 @@ import { GraphDataSeries } from "../types/GraphData";
 import { Point } from "../types/point";
 import { maxLimitDate, minLimitDate } from "./rules";
 
-export const USER = "user";
+export const USER = "username";
 export const BRAND = "brand";
-type Mappable = "user" | "brand";
+type Mappable = "username" | "brand";
 
 export default function mapGraphData(
   data: Point[],
@@ -25,7 +25,7 @@ export default function mapGraphData(
     }
     const { data } = acc[key];
     data.push({
-      time: cur.time,
+      time: new Date(cur.time).getTime(),
       value: (data?.[data.length - 1]?.value ?? 0) + cur.amount,
     });
     return acc;
