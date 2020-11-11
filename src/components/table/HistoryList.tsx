@@ -4,8 +4,10 @@ import {
   lighten,
   makeStyles,
   Theme,
+  useTheme,
 } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
+import Button from "@material-ui/core/Button";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -18,6 +20,8 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
 import { FormattedMessage, FormattedNumber } from "react-intl";
+import { Trash as DeleteIcon } from "@styled-icons/fa-solid/Trash";
+import { Pen as EditIcon } from "@styled-icons/fa-solid/Pen";
 import NextLink from "../langLink";
 import { UrlObject } from "../../types/url";
 import { Mappable, USER } from "../../lib/mapGraphData";
@@ -78,12 +82,15 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof Data | Mappable;
   label: JSX.Element;
   numeric: boolean;
   width?: number | string;
+  disabledSort?: boolean;
 }
-function getHeadCells(type: Mappable) {
+function getHeadCells(type: Mappable, hasModifications: number) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const headCells: HeadCell[] = [
     {
       id: "time",
@@ -103,7 +110,17 @@ function getHeadCells(type: Mappable) {
       disablePadding: false,
       label: <FormattedMessage defaultMessage="Mängd (Liter)" />,
     },
-  ];
+    hasModifications
+      ? {
+          id: "_id",
+          numeric: true,
+          disabledPadding: false,
+          disabledSort: true,
+          label: <></>,
+          width: 64 * hasModifications + 16 * 2,
+        }
+      : undefined,
+  ].filter(Boolean);
   return headCells;
 }
 
@@ -116,10 +133,18 @@ interface EnhancedTableHeadProps {
   order: Order;
   orderBy: string;
   type: Mappable;
+  hasModifications: number;
 }
 
 function EnhancedTableHead(props: EnhancedTableHeadProps) {
-  const { classes, order, orderBy, onRequestSort, type = USER } = props;
+  const {
+    classes,
+    order,
+    orderBy,
+    onRequestSort,
+    type = USER,
+    hasModifications,
+  } = props;
   const createSortHandler = (property: keyof Data) => (
     event: React.MouseEvent<unknown>
   ) => {
@@ -129,7 +154,7 @@ function EnhancedTableHead(props: EnhancedTableHeadProps) {
   return (
     <TableHead>
       <TableRow>
-        {getHeadCells(type).map((headCell) => (
+        {getHeadCells(type, hasModifications).map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -137,22 +162,26 @@ function EnhancedTableHead(props: EnhancedTableHeadProps) {
             sortDirection={orderBy === headCell.id ? order : false}
             width={headCell.width}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === "desc" ? (
-                    <FormattedMessage defaultMessage="Fallande sortering" />
-                  ) : (
-                    <FormattedMessage defaultMessage="Stigande sortering" />
-                  )}
-                </span>
-              ) : null}
-            </TableSortLabel>
+            {headCell.disabledSort ? (
+              <Typography>{headCell.label}</Typography>
+            ) : (
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === "desc" ? (
+                      <FormattedMessage defaultMessage="Fallande sortering" />
+                    ) : (
+                      <FormattedMessage defaultMessage="Stigande sortering" />
+                    )}
+                  </span>
+                ) : null}
+              </TableSortLabel>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -234,17 +263,31 @@ interface TopListProps {
   title: JSX.Element;
   rows: Data[];
   type: Mappable;
-  getDetailsLink: (item: Data) => UrlObject;
+  getDetailsLink?: (item: Data) => UrlObject;
+  onDelete?: (item: Data) => void;
+  onEdit?: (item: Data) => void;
 }
 
 export default function TopList(props: TopListProps) {
-  const { title, type = USER, rows = [], getDetailsLink } = props;
+  const {
+    title,
+    type = USER,
+    rows = [],
+    getDetailsLink,
+    onDelete,
+    onEdit,
+  } = props;
   const classes = useStyles();
+  const theme = useTheme();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("time");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const format = useDateFormat();
+
+  let hasModifications = 0;
+  hasModifications += onDelete ? 1 : 0;
+  hasModifications += onEdit ? 1 : 0;
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -284,6 +327,7 @@ export default function TopList(props: TopListProps) {
               classes={classes}
               order={order}
               orderBy={orderBy}
+              hasModifications={hasModifications}
               onRequestSort={handleRequestSort}
               type={type}
             />
@@ -299,9 +343,15 @@ export default function TopList(props: TopListProps) {
                         <Typography>{format(row.time)}</Typography>
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row">
-                        <NextLink href={getDetailsLink(row)} passHref>
-                          <MuiLink>{row[type]}</MuiLink>
-                        </NextLink>
+                        <Typography>
+                          {getDetailsLink ? (
+                            <NextLink href={getDetailsLink(row)} passHref>
+                              <MuiLink>{row[type]}</MuiLink>
+                            </NextLink>
+                          ) : (
+                            row[type]
+                          )}
+                        </Typography>
                       </TableCell>
                       <TableCell align="right">
                         <FormattedNumber
@@ -310,6 +360,28 @@ export default function TopList(props: TopListProps) {
                           minimumFractionDigits={2}
                         />
                       </TableCell>
+                      {hasModifications ? (
+                        <TableCell>
+                          {onDelete ? (
+                            <Button
+                              color="primary"
+                              variant="outlined"
+                              onClick={() => onDelete(row)}
+                            >
+                              <DeleteIcon size={theme.spacing(2)} />
+                            </Button>
+                          ) : null}
+                          {onEdit ? (
+                            <Button
+                              color="primary"
+                              variant="outlined"
+                              onClick={() => onEdit(row)}
+                            >
+                              <EditIcon size={theme.spacing(2)} />
+                            </Button>
+                          ) : null}
+                        </TableCell>
+                      ) : null}
                     </TableRow>
                   );
                 })}

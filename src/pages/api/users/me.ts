@@ -232,7 +232,7 @@ async function getResultFromMethod(req, res) {
 }
 
 async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
-  // TODO FIXME Check for CSRF-token in request.
+  // TODO Check for CSRF-token in request.
   const session = await getSession({ req });
   if (!session) {
     return res.status(401).end();

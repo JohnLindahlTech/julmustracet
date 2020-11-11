@@ -33,7 +33,7 @@ var schema = {
     reject('user/new')
   }
   // Only edit what you own.
-  if(oldDoc && oldDoc.username === newDoc.username){
+  if(oldDoc && oldDoc.username !== newDoc.username){
     reject('user/old')
   }
 

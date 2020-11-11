@@ -20,15 +20,16 @@ export default function usePutDrink(): [
         data.time,
         new Date()
       );
-
+      // TODO Handle edits of timestamps, eff's up the graph otherwise.
+      // An alternative is to sort the graphdata in the mapper. (But the problem might resurface if using pagination)
       try {
         return await db.validatingPut(
           {
-            ...data,
             _id,
-            username: session.user.username,
             type: "drink",
             createdAt: new Date(),
+            ...data,
+            username: session.user.username,
             updatedAt: new Date(),
           },
           {

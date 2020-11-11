@@ -160,7 +160,7 @@ const User = () => {
         <HistoryList
           getDetailsLink={(row) => ({
             pathname: BrandDetails.href,
-            query: { user: row.brand },
+            query: { brand: row.brand },
           })}
           type={BRAND}
           title={<FormattedMessage defaultMessage="Historik" />}

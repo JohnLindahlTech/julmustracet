@@ -71,7 +71,7 @@ const MenuContent: FC = () => {
       Icon: AddIcon,
     },
     {
-      label: intl.formatMessage({ defaultMessage: "Redigera profil" }),
+      label: intl.formatMessage({ defaultMessage: "Redigera användare" }),
       key: UserEdit.href,
       href: UserEdit.href,
       requireLoggedIn: true,

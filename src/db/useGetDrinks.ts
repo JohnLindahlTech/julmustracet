@@ -48,3 +48,22 @@ export function useGetDrinksFrom(type: Mappable, identity: string) {
 
   return data;
 }
+
+export function useGetDrink(id) {
+  const { drinks, loading: drinksLoading } = useGetDrinks(USER);
+  const [loading, setLoading] = useState(true);
+  const [drink, setDrink] = useState(undefined);
+
+  useEffect(() => {
+    if (!id) {
+      setDrink(undefined);
+    } else {
+      setDrink(drinks.find((drink) => drink._id === id));
+    }
+    setLoading(drinksLoading);
+  }, [id, drinks, drinksLoading]);
+
+  return [drink, loading];
+
+  return;
+}

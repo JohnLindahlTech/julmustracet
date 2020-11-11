@@ -26,6 +26,8 @@ import { useDateFormat } from "../translations/DateFormatterProvider";
 import { useBrands } from "../db/useBrands";
 import { toTitleCase } from "../db/toTitleCase";
 import usePutDrink from "../db/usePutDrink";
+import { useRouter } from "next/router";
+import { useGetDrink } from "../db/useGetDrinks";
 
 type Option = {
   id: number;
@@ -46,6 +48,9 @@ const messages = defineMessages({
   },
   required: {
     defaultMessage: "Obligatoriskt fält",
+  },
+  type: {
+    defaultMessage: "Måste välja ett märke",
   },
   "max.string": {
     defaultMessage: "Maxlängd är {max}",
@@ -109,6 +114,9 @@ const getErrorMessage = (id, rawValues, dateFormat, intl) => {
 // TODO Properly preemptively validate so that username is available.
 const Add = () => {
   const intl = useIntl();
+  const { query } = useRouter();
+  const { drink } = query;
+  const [drinkItem, loading] = useGetDrink(drink);
   const format = useDateFormat();
 
   const brands = useBrands();
@@ -116,6 +124,7 @@ const Add = () => {
 
   const schema = object({
     brand: string(intl.formatMessage(messages.string))
+      .typeError(intl.formatMessage(messages.type))
       .required(intl.formatMessage(messages.required))
       .max(32, intl.formatMessage(messages["max.string"], { max: 32 })),
     amount: number()
@@ -142,22 +151,36 @@ const Add = () => {
         message: intl.formatMessage(messages["future.date"]),
       }),
   });
+  console.log({ loading, drinkItem });
+  if (loading) {
+    return <></>;
+  }
 
   return (
     <>
       <Typography variant="h1">
-        <FormattedMessage defaultMessage="Lägg till dryck" />
+        {drinkItem ? (
+          <FormattedMessage defaultMessage="Redigera dryck" />
+        ) : (
+          <FormattedMessage defaultMessage="Lägg till dryck" />
+        )}
       </Typography>
       <Formik
         initialValues={{
-          brand: undefined,
-          amount: "",
-          time: new Date(),
+          brand: drinkItem?.brand ?? null,
+          amount: drinkItem?.amount ?? "",
+          time: drinkItem?.time ?? new Date(),
         }}
         validationSchema={schema}
-        onSubmit={async (values, { setSubmitting, setFieldError }) => {
+        onSubmit={async (
+          values,
+          { setSubmitting, setFieldError, resetForm }
+        ) => {
+          const item = { ...drinkItem, ...values };
           try {
-            await saveDrink(values);
+            await saveDrink(item);
+            resetForm();
+            // TODO Navigate away
           } catch (error) {
             if (error.status === 403) {
               const [field, errorCode, values] = error.message.split("/");

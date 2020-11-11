@@ -33,7 +33,7 @@ const _useData = () => {
     mappedAchievements,
     loading: achievementsLoading,
   } = useLoadAchievements();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const db = useDB();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const _useData = () => {
         live: true,
         since: "now",
       })
-      .on("pause", () => {
+      .on("change", () => {
         loadDrinks();
         loadAchievements();
       });

@@ -6,13 +6,23 @@ import {
   TextField as MUITextField,
   FormControl,
   Typography,
+  Box,
+  useTheme,
 } from "@material-ui/core";
+import { Plus as AddIcon } from "@styled-icons/fa-solid/Plus";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 // Since we are needing network for the edit, lets require the latest session from server
 import { useSession } from "next-auth/client";
+import Link from "../../components/langLink";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { patchData } from "../../lib/fetch";
+import HistoryList from "../../components/table/HistoryList";
+import { USER, BRAND } from "../../lib/mapGraphData";
+import { useGetDrinksFrom } from "../../db/useGetDrinks";
+import { AddDrink } from "../../routes";
+import usePutDrink from "../../db/usePutDrink";
+import useLangRouter from "../../hooks/useLangRouter";
 
 const messages = defineMessages({
   "username.string": {
@@ -102,7 +112,7 @@ const UserForm = ({ user }) => {
               disabled
             />
           </FormControl>
-          <FormControl fullWidth margin="normal">
+          <FormControl margin="normal">
             <Button
               type="submit"
               variant="contained"
@@ -120,14 +130,45 @@ const UserForm = ({ user }) => {
 };
 
 const EditUser = () => {
+  const theme = useTheme();
+  const [put] = usePutDrink();
   const [session, loading] = useSession();
+  const { drinks } = useGetDrinksFrom(USER, session.user.username);
+  const router = useLangRouter();
   return (
     <>
       <main>
         <Typography variant="h1">
           <FormattedMessage defaultMessage="Redigera Användare" />
         </Typography>
-        {session && session.user && <UserForm user={session.user} />}
+        {session && session.user && (
+          <>
+            <UserForm user={session.user} />
+            <HistoryList
+              type={BRAND}
+              title={
+                <Box display="flex">
+                  <Box flexGrow={1}>
+                    <FormattedMessage defaultMessage="Historik" />
+                  </Box>
+                  <Link {...AddDrink} passHref>
+                    <Button color="primary" variant="contained">
+                      <AddIcon size={theme.spacing(2)} />
+                    </Button>
+                  </Link>
+                </Box>
+              }
+              rows={drinks}
+              onDelete={(row) => put({ ...row, _deleted: true })}
+              onEdit={(row) => {
+                router.push({
+                  pathname: AddDrink.href,
+                  query: { drink: row._id },
+                });
+              }}
+            />
+          </>
+        )}
       </main>
     </>
   );
