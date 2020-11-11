@@ -4,7 +4,7 @@ import { maxLimitDate, minLimitDate } from "./rules";
 
 export const USER = "username";
 export const BRAND = "brand";
-type Mappable = "username" | "brand";
+export type Mappable = "username" | "brand";
 
 export default function mapGraphData(
   data: Point[],

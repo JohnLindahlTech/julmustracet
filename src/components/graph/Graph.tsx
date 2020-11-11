@@ -26,7 +26,7 @@ const colors = [
   red[500],
 ].reverse();
 
-const Graph = ({ data }) => {
+const Graph = ({ data = [] }) => {
   const intl = useIntl();
   const format = useDateFormat();
   const [time, setTime] = useState(0);

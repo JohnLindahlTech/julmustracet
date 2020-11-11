@@ -20,19 +20,34 @@ import MuiLink from "@material-ui/core/Link";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import NextLink from "../langLink";
 import { UrlObject } from "../../types/url";
+import { Mappable, USER } from "../../lib/mapGraphData";
+import { useDateFormat } from "../../translations/DateFormatterProvider";
 
 interface Data {
-  position: number;
+  _id: string;
+  time: Date;
   amount: number;
-  name: string;
+  brand: string;
+  username: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
+  const aVal = a[orderBy];
+  const bVal = b[orderBy];
+  if (aVal instanceof Date && bVal instanceof Date) {
+    if (bVal.getTime() < aVal.getTime()) {
+      return -1;
+    }
+    if (bVal.getTime() > aVal.getTime()) {
+      return 1;
+    }
+  } else {
+    if (bVal < aVal) {
+      return -1;
+    }
+    if (bVal > aVal) {
+      return 1;
+    }
   }
   return 0;
 }
@@ -43,8 +58,8 @@ function getComparator<Key extends keyof any>(
   order: Order,
   orderBy: Key
 ): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string }
+  a: { [key in Key]: number | string | Date },
+  b: { [key in Key]: number | string | Date }
 ) => number {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
@@ -68,28 +83,29 @@ interface HeadCell {
   numeric: boolean;
   width?: number | string;
 }
-
-const headCells: HeadCell[] = [
-  {
-    id: "position",
-    numeric: true,
-    disablePadding: true,
-    label: <FormattedMessage defaultMessage="Pos." />,
-    width: 70,
-  },
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: false,
-    label: <FormattedMessage defaultMessage="Namn" />,
-  },
-  {
-    id: "amount",
-    numeric: true,
-    disablePadding: false,
-    label: <FormattedMessage defaultMessage="Mängd (Liter)" />,
-  },
-];
+function getHeadCells(type: Mappable) {
+  const headCells: HeadCell[] = [
+    {
+      id: "time",
+      numeric: false,
+      disablePadding: false,
+      label: <FormattedMessage defaultMessage="Tid" />,
+    },
+    {
+      id: type,
+      numeric: false,
+      disablePadding: false,
+      label: <FormattedMessage defaultMessage="Namn" />,
+    },
+    {
+      id: "amount",
+      numeric: true,
+      disablePadding: false,
+      label: <FormattedMessage defaultMessage="Mängd (Liter)" />,
+    },
+  ];
+  return headCells;
+}
 
 interface EnhancedTableHeadProps {
   classes: ReturnType<typeof useStyles>;
@@ -99,10 +115,11 @@ interface EnhancedTableHeadProps {
   ) => void;
   order: Order;
   orderBy: string;
+  type: Mappable;
 }
 
 function EnhancedTableHead(props: EnhancedTableHeadProps) {
-  const { classes, order, orderBy, onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort, type = USER } = props;
   const createSortHandler = (property: keyof Data) => (
     event: React.MouseEvent<unknown>
   ) => {
@@ -112,7 +129,7 @@ function EnhancedTableHead(props: EnhancedTableHeadProps) {
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((headCell) => (
+        {getHeadCells(type).map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -216,16 +233,18 @@ const useStyles = makeStyles((theme: Theme) =>
 interface TopListProps {
   title: JSX.Element;
   rows: Data[];
+  type: Mappable;
   getDetailsLink: (item: Data) => UrlObject;
 }
 
 export default function TopList(props: TopListProps) {
-  const { title, rows = [], getDetailsLink } = props;
+  const { title, type = USER, rows = [], getDetailsLink } = props;
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("position");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("time");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const format = useDateFormat();
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -266,6 +285,7 @@ export default function TopList(props: TopListProps) {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
+              type={type}
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
@@ -274,17 +294,13 @@ export default function TopList(props: TopListProps) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
-                      <TableCell align="right">
-                        <FormattedNumber
-                          value={row.position}
-                          maximumFractionDigits={0}
-                          minimumFractionDigits={0}
-                        />
+                    <TableRow hover tabIndex={-1} key={row._id}>
+                      <TableCell>
+                        <Typography>{format(row.time)}</Typography>
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row">
                         <NextLink href={getDetailsLink(row)} passHref>
-                          <MuiLink>{row.name}</MuiLink>
+                          <MuiLink>{row[type]}</MuiLink>
                         </NextLink>
                       </TableCell>
                       <TableCell align="right">

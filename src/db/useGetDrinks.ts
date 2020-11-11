@@ -1,53 +1,50 @@
-import { useCallback, useEffect, useState } from "react";
-import { toDrinkId } from "./toId";
-import useDB from "./useDB";
+import { useEffect, useState } from "react";
+import mapGraphData, { BRAND, Mappable, USER } from "../lib/mapGraphData";
+import mapGridData from "../lib/mapGridData";
+import { useData } from "./data";
 
-export default function useGetDrinks() {
-  const db = useDB();
-  const [drinks, setDrinks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const getDocs = useCallback(async () => {
-    setLoading(true);
-    try {
-      const startkey = toDrinkId(new Date().getFullYear());
-      const res = await db.allDocs({
-        include_docs: true,
-        startkey,
-        endkey: `${startkey}\ufff0`,
-      });
-      const docs = res.rows
-        .map((i) => i.doc)
-        .map((d) => {
-          return {
-            ...d,
-            createdAt: new Date(d.createdAt),
-            updatedAt: new Date(d.updatedAt),
-            time: new Date(d.time),
-          };
-        });
-      console.log(docs);
-      setDrinks(docs);
-    } finally {
-      setLoading(false);
-    }
-  }, [db]);
+export function useGetDrinks(type: Mappable) {
+  const { drinks, loading } = useData();
+  const [graph, setGraph] = useState(mapGraphData(drinks));
+  const [grid, setGrid] = useState(mapGridData(graph));
 
   useEffect(() => {
-    const changes = db
-      .changes({
-        live: true,
-        since: "now",
-      })
-      .on("change", getDocs);
-    return () => {
-      changes.cancel();
-    };
-  }, [db, getDocs]);
+    const graphData = mapGraphData(drinks, type);
+    const gridData = mapGridData(graphData);
+    setGraph(graphData);
+    setGrid(gridData);
+  }, [drinks, type]);
+
+  return {
+    drinks,
+    graph,
+    grid,
+    loading,
+  };
+}
+
+function transformData(type, identity, raw, fullGraph, loading) {
+  const otherType = type === USER ? BRAND : USER;
+  const drinks = raw.filter((doc) => doc[type] === identity);
+  const graph = fullGraph.filter((doc) => doc.name === identity);
+  const top = mapGridData(mapGraphData(drinks, otherType));
+  return {
+    drinks,
+    graph,
+    top,
+    loading,
+  };
+}
+
+export function useGetDrinksFrom(type: Mappable, identity: string) {
+  const { drinks, graph, grid, loading } = useGetDrinks(type);
+  const [data, setData] = useState(
+    transformData(type, identity, drinks, graph, loading)
+  );
 
   useEffect(() => {
-    getDocs();
-  }, [getDocs]);
+    setData(transformData(type, identity, drinks, graph, loading));
+  }, [type, drinks, graph, grid, loading, identity]);
 
-  return [drinks];
+  return data;
 }

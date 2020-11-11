@@ -9,6 +9,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
 import Head from "next/head";
 import DBProvider from "../db/provider";
+import { DataProvider } from "../db/data";
 import { SessionDBProvider } from "../db/sessionDB";
 import { OfflineSessionProvider } from "../db/useOfflineSession";
 import { DateFormatProvider } from "../translations/DateFormatterProvider";
@@ -78,9 +79,11 @@ const App = ({ Component, pageProps }) => {
                       local={isBrowser ? "julmustracet" : null}
                       remote="http://localhost:3000/api/db/julmustracet"
                     >
-                      <Layout>
-                        <Component {...pageProps} />
-                      </Layout>
+                      <DataProvider>
+                        <Layout>
+                          <Component {...pageProps} />
+                        </Layout>
+                      </DataProvider>
                     </DBProvider>
                   </OfflineSessionProvider>
                 </SessionDBProvider>

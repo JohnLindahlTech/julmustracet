@@ -25,7 +25,6 @@ import { maxLimitDate, minLimitDate } from "../lib/rules";
 import { useDateFormat } from "../translations/DateFormatterProvider";
 import { useBrands } from "../db/useBrands";
 import { toTitleCase } from "../db/toTitleCase";
-import useOfflineSession from "../db/useOfflineSession";
 import usePutDrink from "../db/usePutDrink";
 
 type Option = {
@@ -105,10 +104,9 @@ const getErrorMessage = (id, rawValues, dateFormat, intl) => {
         return a;
       }, {});
   }
-  console.log([message, values, rawValues]);
   return [message, values];
 };
-
+// TODO Properly preemptively validate so that username is available.
 const Add = () => {
   const intl = useIntl();
   const format = useDateFormat();
