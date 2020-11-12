@@ -1,5 +1,5 @@
 import { Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormattedMessage,
   useIntl,
@@ -26,8 +26,10 @@ import { useDateFormat } from "../translations/DateFormatterProvider";
 import { useBrands } from "../db/useBrands";
 import { toTitleCase } from "../db/toTitleCase";
 import usePutDrink from "../db/usePutDrink";
-import { useRouter } from "next/router";
 import { useGetDrink } from "../db/useGetDrinks";
+import useLangRouter from "../hooks/useLangRouter";
+import { Home, UserEdit } from "../routes";
+import { useDbSession } from "../db/sessionDB";
 
 type Option = {
   id: number;
@@ -113,14 +115,21 @@ const getErrorMessage = (id, rawValues, dateFormat, intl) => {
 };
 // TODO Properly preemptively validate so that username is available.
 const Add = () => {
+  const [session] = useDbSession();
   const intl = useIntl();
-  const { query } = useRouter();
-  const { drink } = query;
+  const router = useLangRouter();
+  const { drink } = router.query;
   const [drinkItem, loading] = useGetDrink(drink);
   const format = useDateFormat();
 
   const brands = useBrands();
   const [saveDrink] = usePutDrink();
+
+  useEffect(() => {
+    if (!session?.user?.username) {
+      router.push(UserEdit.href);
+    }
+  }, [session, router]);
 
   const schema = object({
     brand: string(intl.formatMessage(messages.string))
@@ -151,8 +160,8 @@ const Add = () => {
         message: intl.formatMessage(messages["future.date"]),
       }),
   });
-  console.log({ loading, drinkItem });
-  if (loading) {
+
+  if (loading || !session?.user?.username) {
     return <></>;
   }
 
@@ -179,7 +188,12 @@ const Add = () => {
           const item = { ...drinkItem, ...values };
           try {
             await saveDrink(item);
-            resetForm();
+            // resetForm();
+            if (drinkItem) {
+              router.push(UserEdit.href);
+            } else {
+              router.push(Home.href);
+            }
             // TODO Navigate away
           } catch (error) {
             if (error.status === 403) {

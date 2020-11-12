@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { signOut } from "next-auth/client";
-import { Button } from "@material-ui/core";
+import { Button, Box, Typography } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
 import { Home } from "../routes";
 import withEnsuredSession from "../hocs/withEnsuredSession";
@@ -19,11 +19,21 @@ const LogOut = (props) => {
   );
 
   return (
-    <div>
-      <Button onClick={onSignoutClick}>
-        <FormattedMessage defaultMessage="Logga ut" />
-      </Button>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Typography>
+        <FormattedMessage defaultMessage="Är du säker på att du vill logga ut?" />
+      </Typography>
+      <Box padding={2}>
+        <Button color="primary" variant="contained" onClick={onSignoutClick}>
+          <FormattedMessage defaultMessage="Logga ut" />
+        </Button>
+      </Box>
+    </Box>
   );
 };
 

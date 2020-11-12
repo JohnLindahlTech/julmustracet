@@ -4,6 +4,7 @@ import {
   Typography,
   useTheme,
   Link as MuiLink,
+  Box,
 } from "@material-ui/core";
 import { Github as GithubIcon } from "@styled-icons/fa-brands/Github";
 import { FormattedMessage } from "react-intl";
@@ -12,7 +13,9 @@ const Footer = () => {
   const theme = useTheme();
   return (
     <>
-      <Divider />
+      <Box py={2}>
+        <Divider variant="fullWidth" />
+      </Box>
       <MuiLink
         href="https://github.com/JohnPhoto/julmustracet"
         target="_blank"
