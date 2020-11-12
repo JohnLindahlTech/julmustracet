@@ -33,7 +33,7 @@ export default function useLoadDrinks(): DrinkReturn {
           };
         });
 
-      setDrinks(docs);
+      setDrinks(docs.sort((a, b) => a.time.getTime() - b.time.getTime()));
     } finally {
       setLoading(false);
     }
