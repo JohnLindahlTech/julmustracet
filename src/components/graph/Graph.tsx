@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { lightFormat } from "date-fns";
 import { useIntl } from "react-intl";
 import { red, blue, green, yellow, orange } from "@material-ui/core/colors";
@@ -31,6 +31,9 @@ const Graph = ({ data = [] }) => {
   const format = useDateFormat();
   const [time, setTime] = useState(0);
   const calculateActiveData = useCalculateActiveData(data);
+  if (data.length <= 0) {
+    return null; // TODO What to show with no data?
+  }
   return (
     <ResponsiveContainer width="95%" height={500}>
       <LineChart

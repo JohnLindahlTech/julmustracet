@@ -18,7 +18,6 @@ const DBProvider = ({ remote, local, children }) => {
       if (replication.current) {
         return;
       }
-      console.warn("Sync!");
       replication.current = localDb.current
         .sync(remoteDb.current, {
           live: true,

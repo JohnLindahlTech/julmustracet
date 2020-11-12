@@ -8,19 +8,21 @@ import {
   Typography,
   Box,
   useTheme,
+  Divider,
 } from "@material-ui/core";
 import { Plus as AddIcon } from "@styled-icons/fa-solid/Plus";
 import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 // Since we are needing network for the edit, lets require the latest session from server
 import { useSession } from "next-auth/client";
-import Link from "../../components/langLink";
+import LangLink from "../../components/langLink";
+import Link from "../../components/link";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { patchData } from "../../lib/fetch";
 import HistoryList from "../../components/table/HistoryList";
 import { USER, BRAND } from "../../lib/mapGraphData";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
-import { AddDrink } from "../../routes";
+import { AddDrink, UserDetails } from "../../routes";
 import usePutDrink from "../../db/usePutDrink";
 import useLangRouter from "../../hooks/useLangRouter";
 
@@ -88,7 +90,11 @@ const UserForm = ({ user }) => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Typography>
+          <Typography
+            color={user?.username ? "initial" : "primary"}
+            variant={user?.username ? "body1" : "h4"}
+            component="p"
+          >
             <FormattedMessage defaultMessage="Du måste ha ett användarnamn för att kunna mata in dryck" />
           </Typography>
           <Typography>
@@ -144,6 +150,19 @@ const EditUser = () => {
         {session && session.user && (
           <>
             <UserForm user={session.user} />
+            <Divider variant="middle" />
+            {session?.user?.username ? (
+              <Typography variant="body1">
+                <Link
+                  href={{
+                    pathname: UserDetails.href,
+                    query: { user: session.user.username },
+                  }}
+                >
+                  <FormattedMessage defaultMessage="Gå till din publika profil här" />
+                </Link>
+              </Typography>
+            ) : null}
             <HistoryList
               type={BRAND}
               title={
@@ -151,11 +170,11 @@ const EditUser = () => {
                   <Box flexGrow={1}>
                     <FormattedMessage defaultMessage="Historik" />
                   </Box>
-                  <Link {...AddDrink} passHref>
+                  <LangLink {...AddDrink} passHref>
                     <Button color="primary" variant="contained">
                       <AddIcon size={theme.spacing(2)} />
                     </Button>
-                  </Link>
+                  </LangLink>
                 </Box>
               }
               rows={drinks}
