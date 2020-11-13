@@ -10,7 +10,10 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-export const PageContent: FC<{ noPadding?: boolean }> = (props) => {
-  const classes = useStyles(props);
+export const PageContent: FC<{ noPadding?: boolean }> = ({
+  noPadding,
+  ...props
+}) => {
+  const classes = useStyles({ noPadding });
   return <Paper className={classes.paper} {...props} />;
 };
