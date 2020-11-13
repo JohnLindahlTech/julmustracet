@@ -8,6 +8,7 @@ import { object, string } from "yup";
 import withEnsuredSession from "../hocs/withEnsuredSession";
 import { LOGGED_OUT } from "../hooks/useEnsureSession";
 import { Home } from "../routes";
+import { PageContent } from "../components/PageContent";
 
 const LogIn = (props) => {
   const intl = useIntl();
@@ -35,7 +36,7 @@ const LogIn = (props) => {
   }, []);
 
   return (
-    <main>
+    <PageContent>
       <Typography variant="h1" align="center">
         <FormattedMessage defaultMessage="Logga in" />
       </Typography>
@@ -112,7 +113,7 @@ const LogIn = (props) => {
           </Grid>
         </Grid>
       </Grid>
-    </main>
+    </PageContent>
   );
 };
 

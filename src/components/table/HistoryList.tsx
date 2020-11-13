@@ -236,15 +236,10 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
+      display: "flex",
+      flexDirection: "column",
     },
-    paper: {
-      width: "100%",
-      marginBottom: theme.spacing(2),
-    },
-    table: {
-      minWidth: 750,
-    },
+    table: {},
     visuallyHidden: {
       border: 0,
       clip: "rect(0 0 0 0)",
@@ -314,95 +309,93 @@ export default function TopList(props: TopListProps) {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar title={title} />
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size="medium"
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              hasModifications={hasModifications}
-              onRequestSort={handleRequestSort}
-              type={type}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row: Data, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
+      <EnhancedTableToolbar title={title} />
+      <TableContainer>
+        <Table
+          className={classes.table}
+          aria-labelledby="tableTitle"
+          size="medium"
+          aria-label="enhanced table"
+        >
+          <EnhancedTableHead
+            classes={classes}
+            order={order}
+            orderBy={orderBy}
+            hasModifications={hasModifications}
+            onRequestSort={handleRequestSort}
+            type={type}
+          />
+          <TableBody>
+            {stableSort(rows, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row: Data, index) => {
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow hover tabIndex={-1} key={row._id}>
+                return (
+                  <TableRow hover tabIndex={-1} key={row._id}>
+                    <TableCell>
+                      <Typography>{format(row.time)}</Typography>
+                    </TableCell>
+                    <TableCell component="th" id={labelId} scope="row">
+                      <Typography>
+                        {getDetailsLink ? (
+                          <NextLink href={getDetailsLink(row)} passHref>
+                            <MuiLink>{row[type]}</MuiLink>
+                          </NextLink>
+                        ) : (
+                          row[type]
+                        )}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <FormattedNumber
+                        value={row.amount}
+                        maximumFractionDigits={2}
+                        minimumFractionDigits={2}
+                      />
+                    </TableCell>
+                    {hasModifications ? (
                       <TableCell>
-                        <Typography>{format(row.time)}</Typography>
+                        {onDelete ? (
+                          <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={() => onDelete(row)}
+                          >
+                            <DeleteIcon size={theme.spacing(2)} />
+                          </Button>
+                        ) : null}
+                        {onEdit ? (
+                          <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={() => onEdit(row)}
+                          >
+                            <EditIcon size={theme.spacing(2)} />
+                          </Button>
+                        ) : null}
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row">
-                        <Typography>
-                          {getDetailsLink ? (
-                            <NextLink href={getDetailsLink(row)} passHref>
-                              <MuiLink>{row[type]}</MuiLink>
-                            </NextLink>
-                          ) : (
-                            row[type]
-                          )}
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">
-                        <FormattedNumber
-                          value={row.amount}
-                          maximumFractionDigits={2}
-                          minimumFractionDigits={2}
-                        />
-                      </TableCell>
-                      {hasModifications ? (
-                        <TableCell>
-                          {onDelete ? (
-                            <Button
-                              color="primary"
-                              variant="outlined"
-                              onClick={() => onDelete(row)}
-                            >
-                              <DeleteIcon size={theme.spacing(2)} />
-                            </Button>
-                          ) : null}
-                          {onEdit ? (
-                            <Button
-                              color="primary"
-                              variant="outlined"
-                              onClick={() => onEdit(row)}
-                            >
-                              <EditIcon size={theme.spacing(2)} />
-                            </Button>
-                          ) : null}
-                        </TableCell>
-                      ) : null}
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={3} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
+                    ) : null}
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={3} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
     </div>
   );
 }

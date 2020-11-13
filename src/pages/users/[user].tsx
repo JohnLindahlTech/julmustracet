@@ -1,14 +1,31 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
-import { Card, CardContent, Grid } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  makeStyles,
+  createStyles,
+  Theme,
+} from "@material-ui/core";
 import TopList from "../../components/table/TopList";
 import HistoryList from "../../components/table/HistoryList";
 import { BrandDetails } from "../../routes";
 import { USER, BRAND } from "../../lib/mapGraphData";
 import Graph from "../../components/graph/Graph";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
+import { PageContent } from "../../components/PageContent";
+
+const useStyles = makeStyles(({ spacing }: Theme) =>
+  createStyles({
+    paper: {
+      marginBottom: spacing(2),
+    },
+  })
+);
 
 type AchievementProps = {
   title: string;
@@ -130,25 +147,32 @@ const AchievementsMock = [
 ];
 
 const User = () => {
+  const classes = useStyles();
   const router = useRouter();
   const { user } = router.query;
   const { graph, drinks, top } = useGetDrinksFrom(USER, user as string);
   return (
     <>
-      <main>
+      <PageContent>
         <Typography variant="h1">{user}</Typography>
         <Typography variant="h2">
-          <FormattedMessage defaultMessage="Bedrifter" />
+          <FormattedMessage defaultMessage="Utmärkelser" />
         </Typography>
         <Grid container spacing={2} justify="center">
           {AchievementsMock.map((a) => (
             <Achievement key={a.title} {...a} />
           ))}
         </Grid>
-        <Typography variant="h2">
-          <FormattedMessage defaultMessage="Graf" />
-        </Typography>
+      </PageContent>
+      <PageContent noPadding>
+        <Box p={2}>
+          <Typography variant="h2">
+            <FormattedMessage defaultMessage="Graf" />
+          </Typography>
+        </Box>
         <Graph data={graph} />
+      </PageContent>
+      <PageContent noPadding>
         <TopList
           getDetailsLink={(row) => ({
             pathname: BrandDetails.href,
@@ -157,6 +181,8 @@ const User = () => {
           title={<FormattedMessage defaultMessage="Märken" />}
           rows={top}
         />
+      </PageContent>
+      <PageContent noPadding>
         <HistoryList
           getDetailsLink={(row) => ({
             pathname: BrandDetails.href,
@@ -166,7 +192,7 @@ const User = () => {
           title={<FormattedMessage defaultMessage="Historik" />}
           rows={drinks}
         />
-      </main>
+      </PageContent>
     </>
   );
 };

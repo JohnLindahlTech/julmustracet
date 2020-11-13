@@ -13,7 +13,7 @@ const Footer = () => {
   const theme = useTheme();
   return (
     <>
-      <Box py={2}>
+      <Box my={2}>
         <Divider variant="fullWidth" />
       </Box>
       <MuiLink

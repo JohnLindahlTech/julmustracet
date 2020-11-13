@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 import { useDbSession } from "../db/sessionDB";
 import useLangRouter from "../hooks/useLangRouter";
 import { UserEdit } from "../routes";
+import { PageContent } from "../components/PageContent";
 
 const VerifyRequest = () => {
   const [session] = useDbSession();
@@ -15,7 +16,7 @@ const VerifyRequest = () => {
     }
   }, [session, router]);
   return (
-    <main>
+    <PageContent>
       <Typography variant="h1" align="center">
         <FormattedMessage defaultMessage="Notera!" />
       </Typography>
@@ -25,7 +26,7 @@ const VerifyRequest = () => {
       <Typography align="center">
         <FormattedMessage defaultMessage="När du loggat in kommer du automatiskt navigeras vidare." />
       </Typography>
-    </main>
+    </PageContent>
   );
 };
 

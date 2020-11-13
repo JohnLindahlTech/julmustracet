@@ -8,7 +8,6 @@ import {
   Typography,
   Box,
   useTheme,
-  Divider,
 } from "@material-ui/core";
 import { Plus as AddIcon } from "@styled-icons/fa-solid/Plus";
 import { TextField } from "formik-material-ui";
@@ -25,6 +24,7 @@ import { useGetDrinksFrom } from "../../db/useGetDrinks";
 import { AddDrink, UserDetails } from "../../routes";
 import usePutDrink from "../../db/usePutDrink";
 import useLangRouter from "../../hooks/useLangRouter";
+import { PageContent } from "../../components/PageContent";
 
 const messages = defineMessages({
   "username.string": {
@@ -103,6 +103,18 @@ const UserForm = ({ user }) => {
           <Typography>
             <FormattedMessage defaultMessage="Rekommendation: Undvik att byta användarnamn när du väl valt ett." />
           </Typography>
+          {user?.username ? (
+            <Typography variant="body1">
+              <Link
+                href={{
+                  pathname: UserDetails.href,
+                  query: { user: user.username },
+                }}
+              >
+                <FormattedMessage defaultMessage="Gå till din publika profil här" />
+              </Link>
+            </Typography>
+          ) : null}
           <FormControl fullWidth margin="normal">
             <Field
               component={TextField}
@@ -143,52 +155,41 @@ const EditUser = () => {
   const router = useLangRouter();
   return (
     <>
-      <main>
-        <Typography variant="h1">
-          <FormattedMessage defaultMessage="Redigera Användare" />
-        </Typography>
-        {session && session.user && (
-          <>
-            <UserForm user={session.user} />
-            <Divider variant="middle" />
-            {session?.user?.username ? (
-              <Typography variant="body1">
-                <Link
-                  href={{
-                    pathname: UserDetails.href,
-                    query: { user: session.user.username },
-                  }}
-                >
-                  <FormattedMessage defaultMessage="Gå till din publika profil här" />
-                </Link>
-              </Typography>
-            ) : null}
-            <HistoryList
-              type={BRAND}
-              title={
-                <Box display="flex">
-                  <Box flexGrow={1}>
-                    <FormattedMessage defaultMessage="Historik" />
-                  </Box>
-                  <LangLink {...AddDrink} passHref>
-                    <Button color="primary" variant="contained">
-                      <AddIcon size={theme.spacing(2)} />
-                    </Button>
-                  </LangLink>
+      <Box mb={2}>
+        <PageContent>
+          <Typography variant="h1">
+            <FormattedMessage defaultMessage="Redigera Användare" />
+          </Typography>
+          {session && session.user && <UserForm user={session.user} />}
+        </PageContent>
+      </Box>
+      {session && session.user && (
+        <PageContent noPadding>
+          <HistoryList
+            type={BRAND}
+            title={
+              <Box display="flex">
+                <Box flexGrow={1}>
+                  <FormattedMessage defaultMessage="Historik" />
                 </Box>
-              }
-              rows={drinks}
-              onDelete={(row) => put({ ...row, _deleted: true })}
-              onEdit={(row) => {
-                router.push({
-                  pathname: AddDrink.href,
-                  query: { drink: row._id },
-                });
-              }}
-            />
-          </>
-        )}
-      </main>
+                <LangLink {...AddDrink} passHref>
+                  <Button color="primary" variant="contained">
+                    <AddIcon size={theme.spacing(2)} />
+                  </Button>
+                </LangLink>
+              </Box>
+            }
+            rows={drinks}
+            onDelete={(row) => put({ ...row, _deleted: true })}
+            onEdit={(row) => {
+              router.push({
+                pathname: AddDrink.href,
+                query: { drink: row._id },
+              });
+            }}
+          />
+        </PageContent>
+      )}
     </>
   );
 };

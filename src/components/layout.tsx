@@ -51,10 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-    contentPaper: {
-      padding: theme.spacing(2),
+      [theme.breakpoints.up("sm")]: {
+        padding: theme.spacing(3),
+      },
     },
   })
 );
@@ -120,13 +119,7 @@ const Layout: FC = (props) => {
       </nav>
       <main className={classes.content}>
         <Toolbar />
-        <Paper
-          classes={{
-            root: classes.contentPaper,
-          }}
-        >
-          {children}
-        </Paper>
+        {children}
         <Footer />
       </main>
     </div>

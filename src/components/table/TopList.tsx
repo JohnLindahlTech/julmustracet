@@ -15,7 +15,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import NextLink from "../langLink";
@@ -190,15 +189,10 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
+      display: "flex",
+      flexDirection: "column",
     },
-    paper: {
-      width: "100%",
-      marginBottom: theme.spacing(2),
-    },
-    table: {
-      minWidth: 750,
-    },
+    table: {},
     visuallyHidden: {
       border: 0,
       clip: "rect(0 0 0 0)",
@@ -252,69 +246,67 @@ export default function TopList(props: TopListProps) {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <EnhancedTableToolbar title={title} />
-        <TableContainer>
-          <Table
-            className={classes.table}
-            aria-labelledby="tableTitle"
-            size="medium"
-            aria-label="enhanced table"
-          >
-            <EnhancedTableHead
-              classes={classes}
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-            />
-            <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row: Data, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
+      <EnhancedTableToolbar title={title} />
+      <TableContainer>
+        <Table
+          className={classes.table}
+          aria-labelledby="tableTitle"
+          size="medium"
+          aria-label="enhanced table"
+        >
+          <EnhancedTableHead
+            classes={classes}
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+          />
+          <TableBody>
+            {stableSort(rows, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row: Data, index) => {
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
-                      <TableCell align="right">
-                        <FormattedNumber
-                          value={row.position}
-                          maximumFractionDigits={0}
-                          minimumFractionDigits={0}
-                        />
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row">
-                        <NextLink href={getDetailsLink(row)} passHref>
-                          <MuiLink>{row.name}</MuiLink>
-                        </NextLink>
-                      </TableCell>
-                      <TableCell align="right">
-                        <FormattedNumber
-                          value={row.amount}
-                          maximumFractionDigits={2}
-                          minimumFractionDigits={2}
-                        />
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={3} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
-      </Paper>
+                return (
+                  <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableCell align="right">
+                      <FormattedNumber
+                        value={row.position}
+                        maximumFractionDigits={0}
+                        minimumFractionDigits={0}
+                      />
+                    </TableCell>
+                    <TableCell component="th" id={labelId} scope="row">
+                      <NextLink href={getDetailsLink(row)} passHref>
+                        <MuiLink>{row.name}</MuiLink>
+                      </NextLink>
+                    </TableCell>
+                    <TableCell align="right">
+                      <FormattedNumber
+                        value={row.amount}
+                        maximumFractionDigits={2}
+                        minimumFractionDigits={2}
+                      />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={3} />
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
     </div>
   );
 }

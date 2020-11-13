@@ -30,6 +30,7 @@ import { useGetDrink } from "../db/useGetDrinks";
 import useLangRouter from "../hooks/useLangRouter";
 import { Home, UserEdit } from "../routes";
 import { useDbSession } from "../db/sessionDB";
+import { PageContent } from "../components/PageContent";
 
 type Option = {
   id: number;
@@ -166,7 +167,7 @@ const Add = () => {
   }
 
   return (
-    <>
+    <PageContent>
       <Typography variant="h1">
         {drinkItem ? (
           <FormattedMessage defaultMessage="Redigera dryck" />
@@ -320,7 +321,7 @@ const Add = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </PageContent>
   );
 };
 

@@ -17,10 +17,12 @@ import {
 import ToolTip from "./ToolTip";
 import useCalculateActiveData from "../../hooks/useCalculateActiveData";
 import { useDateFormat } from "../../translations/DateFormatterProvider";
+import { useTheme } from "@material-ui/core";
 
 const colors = [red[900], green[900], blue[900], brown[500], orange[800]];
 
 const Graph = ({ data = [] }) => {
+  const theme = useTheme();
   const intl = useIntl();
   const format = useDateFormat();
   const [time, setTime] = useState(0);
@@ -31,10 +33,16 @@ const Graph = ({ data = [] }) => {
     return null; // TODO What to show with no lines?
   }
   return (
-    <ResponsiveContainer width="95%" height={500}>
+    <ResponsiveContainer aspect={16 / 9}>
       <LineChart
         onMouseMove={(props) => {
           setTime(props.activeLabel);
+        }}
+        margin={{
+          top: theme.spacing(2),
+          right: theme.spacing(3),
+          bottom: theme.spacing(2),
+          left: theme.spacing(0),
         }}
       >
         <XAxis

@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+import { Box, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
 import TopList from "../../components/table/TopList";
@@ -8,6 +8,7 @@ import { UserDetails } from "../../routes";
 import { BRAND, USER } from "../../lib/mapGraphData";
 import Graph from "../../components/graph/Graph";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
+import { PageContent } from "../../components/PageContent";
 
 const Brand = () => {
   const router = useRouter();
@@ -16,12 +17,16 @@ const Brand = () => {
 
   return (
     <>
-      <main>
-        <Typography variant="h1">{brand}</Typography>
-        <Typography variant="h2">
-          <FormattedMessage defaultMessage="Graf" />
-        </Typography>
+      <PageContent noPadding>
+        <Box p={2}>
+          <Typography variant="h1">{brand}</Typography>
+          <Typography variant="h2">
+            <FormattedMessage defaultMessage="Graf" />
+          </Typography>
+        </Box>
         <Graph data={graph} />
+      </PageContent>
+      <PageContent noPadding>
         <TopList
           getDetailsLink={(row) => ({
             pathname: UserDetails.href,
@@ -30,6 +35,8 @@ const Brand = () => {
           title={<FormattedMessage defaultMessage="Användare" />}
           rows={top}
         />
+      </PageContent>
+      <PageContent noPadding>
         <HistoryList
           getDetailsLink={(row) => ({
             pathname: UserDetails.href,
@@ -39,7 +46,7 @@ const Brand = () => {
           title={<FormattedMessage defaultMessage="Historik" />}
           rows={drinks}
         />
-      </main>
+      </PageContent>
     </>
   );
 };
