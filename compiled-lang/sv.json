@@ -1,0 +1,396 @@
+{
+  "+MIbE1": [
+    {
+      "type": 0,
+      "value": "Märkesligan"
+    }
+  ],
+  "/xP+8y": [
+    {
+      "type": 0,
+      "value": "Rekommendation: Undvik att byta användarnamn när du väl valt ett."
+    }
+  ],
+  "17ffRf": [
+    {
+      "type": 0,
+      "value": "Nu"
+    }
+  ],
+  "3Jmkih": [
+    {
+      "type": 0,
+      "value": "Change to english"
+    }
+  ],
+  "3qcD8Q": [
+    {
+      "type": 0,
+      "value": "Regler"
+    }
+  ],
+  "4L4PqZ": [
+    {
+      "type": 0,
+      "value": "Dag"
+    }
+  ],
+  "5c7jHv": [
+    {
+      "type": 0,
+      "value": "Pos."
+    }
+  ],
+  "6Ngt4g": [
+    {
+      "type": 0,
+      "value": "Mängd"
+    }
+  ],
+  "6wJ81A": [
+    {
+      "type": 0,
+      "value": "Användarnamnet är redan upptaget"
+    }
+  ],
+  "7W7Msi": [
+    {
+      "type": 0,
+      "value": "Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på."
+    }
+  ],
+  "8QeM8A": [
+    {
+      "type": 0,
+      "value": "Lägsta tillåtna värde är "
+    },
+    {
+      "type": 1,
+      "value": "min"
+    }
+  ],
+  "8iRvwS": [
+    {
+      "type": 0,
+      "value": "JulmustRacet"
+    }
+  ],
+  "AdBqXu": [
+    {
+      "type": 0,
+      "value": "Lägsta tillåtna datum är "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    }
+  ],
+  "CHrETt": [
+    {
+      "type": 0,
+      "value": "Välkommen till JulmustRacet"
+    }
+  ],
+  "Cr0JiH": [
+    {
+      "type": 0,
+      "value": "Spara"
+    }
+  ],
+  "DXulP5": [
+    {
+      "type": 0,
+      "value": "Namn"
+    }
+  ],
+  "E9HhI2": [
+    {
+      "type": 0,
+      "value": "Måste vara en textsträng"
+    }
+  ],
+  "FTp79N": [
+    {
+      "type": 0,
+      "value": "Måste vara text"
+    }
+  ],
+  "H/zrb8": [
+    {
+      "type": 0,
+      "value": "Märke"
+    }
+  ],
+  "HAUJds": [
+    {
+      "type": 0,
+      "value": "Ogiltigt datum"
+    }
+  ],
+  "HC56Z7": [
+    {
+      "type": 1,
+      "value": "icon"
+    },
+    {
+      "type": 0,
+      "value": " JohnPhoto ("
+    },
+    {
+      "type": 1,
+      "value": "date"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "HEQzSa": [
+    {
+      "type": 0,
+      "value": "Du får ej ange en tid i framtiden"
+    }
+  ],
+  "HFI/5/": [
+    {
+      "type": 0,
+      "value": "Epost"
+    }
+  ],
+  "JC3MvR": [
+    {
+      "type": 0,
+      "value": "L"
+    }
+  ],
+  "LSnLNY": [
+    {
+      "type": 0,
+      "value": "Användarnamn är obligatoriskt"
+    }
+  ],
+  "LeTcKf": [
+    {
+      "type": 0,
+      "value": "Graf"
+    }
+  ],
+  "OK+McJ": [
+    {
+      "type": 0,
+      "value": "Användarligan"
+    }
+  ],
+  "Pf7MV/": [
+    {
+      "type": 0,
+      "value": "Något är okänt fel med användarnamnet"
+    }
+  ],
+  "PszYZZ": [
+    {
+      "type": 0,
+      "value": "Rensa"
+    }
+  ],
+  "Q5PZU+": [
+    {
+      "type": 0,
+      "value": "Högsta tillåtna datum är "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    }
+  ],
+  "QBMTbA": [
+    {
+      "type": 0,
+      "value": "Maxlängd är "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    }
+  ],
+  "RlLmd0": [
+    {
+      "type": 0,
+      "value": "Tidpunkt"
+    }
+  ],
+  "Tcbx1p": [
+    {
+      "type": 0,
+      "value": "Användarnamn"
+    }
+  ],
+  "X1tUUu": [
+    {
+      "type": 0,
+      "value": "Lägg till dryck"
+    }
+  ],
+  "c4nNn5": [
+    {
+      "type": 1,
+      "value": "amount"
+    },
+    {
+      "type": 0,
+      "value": " L"
+    }
+  ],
+  "cGotG6": [
+    {
+      "type": 0,
+      "value": "Mängd (Liter)"
+    }
+  ],
+  "dsvntS": [
+    {
+      "type": 0,
+      "value": "Avbryt"
+    }
+  ],
+  "eLKei0": [
+    {
+      "type": 0,
+      "value": "Du måste ha ett användarnamn för att kunna mata in dryck"
+    }
+  ],
+  "eosocV": [
+    {
+      "type": 0,
+      "value": "Logga in"
+    }
+  ],
+  "gITiyo": [
+    {
+      "type": 0,
+      "value": "Högsta tillåtna värde är "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    }
+  ],
+  "jP8UQ6": [
+    {
+      "type": 0,
+      "value": "Märken"
+    }
+  ],
+  "jni7do": [
+    {
+      "type": 0,
+      "value": "Bedrifter"
+    }
+  ],
+  "kAEQyV": [
+    {
+      "type": 0,
+      "value": "OK"
+    }
+  ],
+  "mOFG3K": [
+    {
+      "type": 0,
+      "value": "Start"
+    }
+  ],
+  "omHIUV": [
+    {
+      "type": 0,
+      "value": "Redigera Användare"
+    }
+  ],
+  "onhmIw": [
+    {
+      "type": 0,
+      "value": "Historik"
+    }
+  ],
+  "p0wP1I": [
+    {
+      "type": 0,
+      "value": "Något är fel med fältet"
+    }
+  ],
+  "p70I/0": [
+    {
+      "type": 0,
+      "value": "Fallande sortering"
+    }
+  ],
+  "qeWjpq": [
+    {
+      "type": 0,
+      "value": "Redigera profil"
+    }
+  ],
+  "sLY0ma": [
+    {
+      "type": 0,
+      "value": "Kontrollera din epost för inloggningslänk"
+    }
+  ],
+  "tuu5lA": [
+    {
+      "type": 1,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": " liter"
+    }
+  ],
+  "v8JVRB": [
+    {
+      "type": 0,
+      "value": "Måste vara en siffra"
+    }
+  ],
+  "vY+ww2": [
+    {
+      "type": 0,
+      "value": "Användarnamnet får vara max 32 tecken"
+    }
+  ],
+  "vrAIMW": [
+    {
+      "type": 0,
+      "value": "Obligatoriskt fält"
+    }
+  ],
+  "wh8uro": [
+    {
+      "type": 0,
+      "value": "Logga in med epost"
+    }
+  ],
+  "xC27yX": [
+    {
+      "type": 0,
+      "value": "Stigande sortering"
+    }
+  ],
+  "xI/Jma": [
+    {
+      "type": 0,
+      "value": "Användare"
+    }
+  ],
+  "y+Bozn": [
+    {
+      "type": 0,
+      "value": "Måste vara ett giltigt datum"
+    }
+  ],
+  "zVob30": [
+    {
+      "type": 0,
+      "value": "Logga ut"
+    }
+  ]
+}
