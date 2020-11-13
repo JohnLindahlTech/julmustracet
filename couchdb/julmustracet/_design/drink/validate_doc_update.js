@@ -20,7 +20,6 @@ var schema = {
   }
 
   // Anything goes for an admin.
-  // TODO Maybe enable for prod
   if(userCtx.roles.indexOf("_admin") >= 0){
     return;
   }

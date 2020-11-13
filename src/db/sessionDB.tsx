@@ -11,7 +11,7 @@ import PouchDB from "pouchdb";
 import { isBefore } from "date-fns";
 import { errorMonitor } from "http-proxy";
 
-const sessionDocumentId = "_local/session"; // TODO REMEMBER TO DESTROY on logout
+const sessionDocumentId = "_local/session";
 
 export type Session = {
   _id?: string;

@@ -26,10 +26,9 @@ if (typeof window !== "undefined") {
     // @ts-ignore
     response: async (response): Promise<Response> => {
       // TODO Handle every !response.ok here? Probably not...
-      // CouchDB only answers with 403, and /api/auth/session responds with 200 {}.
+      // TODO CouchDB only answers with 403
       if (response.status === 401) {
-        await new PouchDB("session").destroy();
-        // TODO Hard Navigate to login
+        await new PouchDB("_local/session").destroy();
         window.location.href = LogIn.href;
       }
       return response;

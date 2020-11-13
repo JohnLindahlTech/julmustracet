@@ -241,9 +241,6 @@ export default function TopList(props: TopListProps) {
     setPage(0);
   };
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <div className={classes.root}>
       <EnhancedTableToolbar title={title} />
@@ -290,11 +287,6 @@ export default function TopList(props: TopListProps) {
                   </TableRow>
                 );
               })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={3} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>

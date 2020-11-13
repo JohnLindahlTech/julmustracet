@@ -114,7 +114,7 @@ const getErrorMessage = (id, rawValues, dateFormat, intl) => {
   }
   return [message, values];
 };
-// TODO Properly preemptively validate so that username is available.
+
 const Add = () => {
   const [session] = useDbSession();
   const intl = useIntl();
@@ -182,20 +182,15 @@ const Add = () => {
           time: drinkItem?.time ?? new Date(),
         }}
         validationSchema={schema}
-        onSubmit={async (
-          values,
-          { setSubmitting, setFieldError, resetForm }
-        ) => {
+        onSubmit={async (values, { setSubmitting, setFieldError }) => {
           const item = { ...drinkItem, ...values };
           try {
             await saveDrink(item);
-            // resetForm();
             if (drinkItem) {
               router.push(UserEdit.href);
             } else {
               router.push(Home.href);
             }
-            // TODO Navigate away
           } catch (error) {
             if (error.status === 403) {
               const [field, errorCode, values] = error.message.split("/");

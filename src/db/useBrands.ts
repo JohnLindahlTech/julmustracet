@@ -25,7 +25,7 @@ const defaultBrands = [
   "Nygårda Romfat",
   "Vasa Julmust",
   "Zeunerts Julmust",
-]; // TODO Obviously fetch from server
+];
 
 export function useBrands(): string[] {
   const db = useDB();
