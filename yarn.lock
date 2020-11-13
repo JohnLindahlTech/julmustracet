@@ -1356,6 +1356,15 @@
     tslib "^2.0.1"
     typescript "^4.0"
 
+"@formatjs/ts-transformer@2.12.7":
+  version "2.12.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/ts-transformer/-/ts-transformer-2.12.7.tgz#4ee81c23fb282e9c42894daf2dff9962a21105d3"
+  integrity sha512-KBG8wXspLd2P6Tx5mOvOXZqftUir/oOJIJR24rlItomANIJNzzLb47TPMTUH7ubB+1U4mHFavH04Iu39seTMWg==
+  dependencies:
+    intl-messageformat-parser "6.0.16"
+    tslib "^2.0.1"
+    typescript "^4.0"
+
 "@hapi/accept@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.1.tgz#068553e867f0f63225a506ed74e899441af53e10"
@@ -2872,18 +2881,18 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-react-intl@^8.2.7:
-  version "8.2.13"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-intl/-/babel-plugin-react-intl-8.2.13.tgz#9385080f53c992a17a76477d9650f4814962b475"
-  integrity sha512-VhJ8xLoGQaNSUCuPledKDTvLQdL+oSDICYsEXHOVJmsER+JTsFLpEmIfxvGNgSAeAjjTbWp+0oZXVFIkNc0jFQ==
+babel-plugin-react-intl@^8.2.17:
+  version "8.2.17"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-intl/-/babel-plugin-react-intl-8.2.17.tgz#1567503761bb3d43c74921c70adb7c958a524950"
+  integrity sha512-AYtQV3YwYSFXlpzAoCChr6maWQZDUPIW+qFU6XFZHhEGMoSy0uBzKO4LchA68MkrOftZSX6pdCKQn5nTd5Iffw==
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/types" "^7.9.5"
-    "@formatjs/ts-transformer" "2.12.3"
+    "@formatjs/ts-transformer" "2.12.7"
     "@types/babel__core" "^7.1.7"
     "@types/schema-utils" "^2.4.0"
-    intl-messageformat-parser "6.0.13"
+    intl-messageformat-parser "6.0.16"
     schema-utils "^3.0.0"
     tslib "^2.0.1"
 
