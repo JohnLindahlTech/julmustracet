@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   Divider,
   Typography,
@@ -9,7 +9,7 @@ import {
 import { Github as GithubIcon } from "@styled-icons/fa-brands/Github";
 import { FormattedMessage } from "react-intl";
 
-const Footer = () => {
+const Footer: FC = () => {
   const theme = useTheme();
   return (
     <>
@@ -24,10 +24,9 @@ const Footer = () => {
         >
           <Typography>
             <FormattedMessage
-              defaultMessage="{icon} JohnPhoto ({date})"
+              defaultMessage="{icon} JohnPhoto/JulmustRacet"
               values={{
                 icon: <GithubIcon size={theme.spacing(2)} />,
-                date: new Date().getFullYear(),
               }}
             />
           </Typography>
