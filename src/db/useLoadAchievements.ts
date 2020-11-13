@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import mapAchievementsToUsers from "../lib/mapAchievementsToUsers";
 import { toAchievementId } from "./toId";
 import useDB from "./useDB";
 
@@ -35,7 +36,7 @@ export default function useLoadAchievements(): AchievementsReturn {
         });
       // TODO transform to relevant data.
       setAchievements(docs);
-      // setMappedAchievements(mapAchievementsToUser(docs));
+      setMappedAchievements(mapAchievementsToUsers(docs));
     } finally {
       setLoading(false);
     }

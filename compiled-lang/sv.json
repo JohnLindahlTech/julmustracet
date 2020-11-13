@@ -5,10 +5,34 @@
       "value": "Märkesligan"
     }
   ],
+  "/VQFb1": [
+    {
+      "type": 0,
+      "value": "Utmärkelser"
+    }
+  ],
+  "/W2hrV": [
+    {
+      "type": 0,
+      "value": "Registrerat orimilgt mycket dryck"
+    }
+  ],
   "/xP+8y": [
     {
       "type": 0,
       "value": "Rekommendation: Undvik att byta användarnamn när du väl valt ett."
+    }
+  ],
+  "0Jc90u": [
+    {
+      "type": 0,
+      "value": "Notera!"
+    }
+  ],
+  "0hQb6G": [
+    {
+      "type": 0,
+      "value": "Gå till din publika profil här"
     }
   ],
   "17ffRf": [
@@ -35,6 +59,12 @@
       "value": "Dag"
     }
   ],
+  "4pn0ju": [
+    {
+      "type": 0,
+      "value": "Är du säker på att du vill logga ut?"
+    }
+  ],
   "5c7jHv": [
     {
       "type": 0,
@@ -51,6 +81,12 @@
     {
       "type": 0,
       "value": "Användarnamnet är redan upptaget"
+    }
+  ],
+  "7R04rK": [
+    {
+      "type": 0,
+      "value": "Du måste nu klicka på länken in eposten du bör ha fått."
     }
   ],
   "7W7Msi": [
@@ -73,6 +109,12 @@
     {
       "type": 0,
       "value": "JulmustRacet"
+    }
+  ],
+  "ADPaxD": [
+    {
+      "type": 0,
+      "value": "Slutmålet är alltså att dricka julmust."
     }
   ],
   "AdBqXu": [
@@ -115,6 +157,12 @@
       "value": "Måste vara text"
     }
   ],
+  "FiMHjD": [
+    {
+      "type": 0,
+      "value": "Måste välja ett märke"
+    }
+  ],
   "H/zrb8": [
     {
       "type": 0,
@@ -125,24 +173,6 @@
     {
       "type": 0,
       "value": "Ogiltigt datum"
-    }
-  ],
-  "HC56Z7": [
-    {
-      "type": 1,
-      "value": "icon"
-    },
-    {
-      "type": 0,
-      "value": " JohnPhoto ("
-    },
-    {
-      "type": 1,
-      "value": "date"
-    },
-    {
-      "type": 0,
-      "value": ")"
     }
   ],
   "HEQzSa": [
@@ -157,10 +187,22 @@
       "value": "Epost"
     }
   ],
+  "IZ5/Dz": [
+    {
+      "type": 0,
+      "value": "Rapportera enskilda gånger du dricker, dvs. varje flaska för sig."
+    }
+  ],
   "JC3MvR": [
     {
       "type": 0,
       "value": "L"
+    }
+  ],
+  "JGVuI3": [
+    {
+      "type": 0,
+      "value": "Socialt"
     }
   ],
   "LSnLNY": [
@@ -185,6 +227,12 @@
     {
       "type": 0,
       "value": "Något är okänt fel med användarnamnet"
+    }
+  ],
+  "PqaMrh": [
+    {
+      "type": 0,
+      "value": "Tid"
     }
   ],
   "PszYZZ": [
@@ -213,6 +261,18 @@
       "value": "max"
     }
   ],
+  "QptW68": [
+    {
+      "type": 0,
+      "value": "Topplistan"
+    }
+  ],
+  "R0XbHE": [
+    {
+      "type": 0,
+      "value": "Tävlingen pågår från 1 december till och med slutet av 20 dember."
+    }
+  ],
   "RlLmd0": [
     {
       "type": 0,
@@ -225,10 +285,34 @@
       "value": "Användarnamn"
     }
   ],
+  "TiXXxS": [
+    {
+      "type": 0,
+      "value": "Redan 2006 slogs det nuvarande officiella rekordet på 90 liter av NightHawk."
+    }
+  ],
+  "U7FELD": [
+    {
+      "type": 0,
+      "value": "Denna tävling har anor sedan 2005. Vi var ett gäng i en liten håla i nordligaste Norrland som förfinade denna konstform."
+    }
+  ],
+  "VyIApP": [
+    {
+      "type": 0,
+      "value": "Måste ange en giltig epost"
+    }
+  ],
   "X1tUUu": [
     {
       "type": 0,
       "value": "Lägg till dryck"
+    }
+  ],
+  "YxLXnd": [
+    {
+      "type": 0,
+      "value": "Redigera dryck"
     }
   ],
   "c4nNn5": [
@@ -245,6 +329,16 @@
     {
       "type": 0,
       "value": "Mängd (Liter)"
+    }
+  ],
+  "ceANBr": [
+    {
+      "type": 1,
+      "value": "icon"
+    },
+    {
+      "type": 0,
+      "value": " JohnPhoto/JulmustRacet"
     }
   ],
   "dsvntS": [
@@ -281,10 +375,10 @@
       "value": "Märken"
     }
   ],
-  "jni7do": [
+  "jenDvk": [
     {
       "type": 0,
-      "value": "Bedrifter"
+      "value": "Fuskare"
     }
   ],
   "kAEQyV": [
@@ -323,16 +417,16 @@
       "value": "Fallande sortering"
     }
   ],
-  "qeWjpq": [
+  "qwV6A9": [
     {
       "type": 0,
-      "value": "Redigera profil"
+      "value": "Du får inte byta användare"
     }
   ],
-  "sLY0ma": [
+  "s5BjWo": [
     {
       "type": 0,
-      "value": "Kontrollera din epost för inloggningslänk"
+      "value": "Du måste vara inloggad"
     }
   ],
   "tuu5lA": [
@@ -345,10 +439,22 @@
       "value": " liter"
     }
   ],
+  "ubH4NT": [
+    {
+      "type": 0,
+      "value": "Redigera användare"
+    }
+  ],
   "v8JVRB": [
     {
       "type": 0,
       "value": "Måste vara en siffra"
+    }
+  ],
+  "vXkiFm": [
+    {
+      "type": 0,
+      "value": "Det går att själv lägga till julmustmärken i formuläret genom att skriva in en sökning och välja sista raden."
     }
   ],
   "vY+ww2": [
@@ -363,10 +469,10 @@
       "value": "Obligatoriskt fält"
     }
   ],
-  "wh8uro": [
+  "w6tfeY": [
     {
       "type": 0,
-      "value": "Logga in med epost"
+      "value": "När du loggat in kommer du automatiskt navigeras vidare."
     }
   ],
   "xC27yX": [
@@ -385,6 +491,12 @@
     {
       "type": 0,
       "value": "Måste vara ett giltigt datum"
+    }
+  ],
+  "yl9iLw": [
+    {
+      "type": 0,
+      "value": "...nu med utmärkelser!"
     }
   ],
   "zVob30": [
