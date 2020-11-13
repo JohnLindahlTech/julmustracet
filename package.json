@@ -11,13 +11,19 @@
     "dev_i18n": "run-p dev:*",
     "start": "NODE_ICU_DATA=node_modules/full-icu next start",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint 'src/**'",
     "build": "run-s build:i18n build:next",
     "build:next": "NODE_ICU_DATA=node_modules/full-icu next build",
     "build:i18n": "run-s extract:i18n compile:i18n",
     "extract:i18n": "formatjs extract 'src/**/*.{js,ts,tsx}' --format simple --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/sv.json",
     "compile:i18n": "formatjs compile-folder --ast --format simple lang/ compiled-lang/",
-    "bootstrap:db": "couchdb-bootstrap http://localhost:5984 couchdb"
+    "bootstrap:db": "couchdb-bootstrap http://localhost:5984 couchdb",
+    "travis": "run-s travis:*",
+    "travis:prettier": "prettier --check .",
+    "travis:lint": "npm run lint",
+    "travis:test": "echo 'test is running'",
+    "travis:build": "npm run build:next"
   },
   "watch": {
     "extract:i18n": "src/**/*.{js,jsx,ts,tsx}",

@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - lts/*
+cache:
+  yarn: true
+git:
+  quiet: true
+jobs:
+  include:
+    - script: "yarn travis"
