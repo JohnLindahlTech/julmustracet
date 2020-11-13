@@ -17,7 +17,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import MuiLink from "@material-ui/core/Link";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import { Trash as DeleteIcon } from "@styled-icons/fa-solid/Trash";
@@ -277,7 +276,7 @@ export default function TopList(props: TopListProps) {
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("time");
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const format = useDateFormat();
 
   let hasModifications = 0;
@@ -380,7 +379,7 @@ export default function TopList(props: TopListProps) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[5, 10, 25, 50, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
