@@ -2,6 +2,10 @@ language: node_js
 node_js:
   - lts/*
 cache:
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - .next/cache
   yarn: true
 git:
   quiet: true
