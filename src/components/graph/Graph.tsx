@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { lightFormat } from "date-fns";
 import { useIntl } from "react-intl";
-import { red, blue, green, yellow, orange } from "@material-ui/core/colors";
+import { red, blue, green, brown, orange } from "@material-ui/core/colors";
 import {
   CartesianGrid,
   Legend,
@@ -18,21 +18,17 @@ import ToolTip from "./ToolTip";
 import useCalculateActiveData from "../../hooks/useCalculateActiveData";
 import { useDateFormat } from "../../translations/DateFormatterProvider";
 
-const colors = [
-  blue[500],
-  green[500],
-  yellow[500],
-  orange[500],
-  red[500],
-].reverse();
+const colors = [red[900], green[900], blue[900], brown[500], orange[800]];
 
 const Graph = ({ data = [] }) => {
   const intl = useIntl();
   const format = useDateFormat();
   const [time, setTime] = useState(0);
-  const calculateActiveData = useCalculateActiveData(data);
-  if (data.length <= 0) {
-    return null; // TODO What to show with no data?
+  const lines = [...data].reverse();
+  const myColors = colors.slice(0, lines.length).reverse();
+  const calculateActiveData = useCalculateActiveData(lines);
+  if (lines.length <= 0) {
+    return null; // TODO What to show with no lines?
   }
   return (
     <ResponsiveContainer width="95%" height={500}>
@@ -91,21 +87,27 @@ const Graph = ({ data = [] }) => {
             );
           }}
         />
-        {data.map((s, i) => (
-          <Line
-            type="stepAfter"
-            dataKey="value"
-            data={s.data}
-            name={s.name}
-            key={s.name}
-            dot={{ stroke: colors[i % colors.length], strokeWidth: 1 }}
-            stroke={colors[i % colors.length]}
-            strokeWidth={3}
-            fill={colors[i % colors.length]}
-          >
-            <LabelList dataKey="amount" position="insideTop" />
-          </Line>
-        ))}
+        {lines.map((s, i) => {
+          const color = myColors[i % myColors.length];
+          return (
+            <Line
+              animationBegin={i * 500}
+              animationDuration={1000}
+              type="stepAfter"
+              dataKey="value"
+              data={s.data}
+              name={s.name}
+              key={s.name}
+              legendType="circle"
+              dot={{ stroke: color, strokeWidth: 1 }}
+              stroke={color}
+              strokeWidth={3}
+              fill={color}
+            >
+              <LabelList dataKey="amount" position="insideTop" />
+            </Line>
+          );
+        })}
       </LineChart>
     </ResponsiveContainer>
   );

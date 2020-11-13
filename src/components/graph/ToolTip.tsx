@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@material-ui/core/styles";
-import { Card, Typography, CardContent } from "@material-ui/core";
+import { Box, Card, Typography, CardContent } from "@material-ui/core";
 
 const ToolTipHeader = styled(Typography)({
   fontWeight: "bold",
@@ -10,7 +10,6 @@ const ToolTip = (props) => {
   const {
     active,
     itemSorter,
-    separator,
     payload,
     labelFormatter,
     formatter,
@@ -23,16 +22,19 @@ const ToolTip = (props) => {
         <CardContent>
           <ToolTipHeader>{labelFormatter(label)}</ToolTipHeader>
           {[...data].sort(itemSorter).map((item) => (
-            <Typography
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              key={item.name}
               style={{
                 color: payload.find((i) => i.name === item.name)?.stroke,
               }}
-              key={item.name}
             >
-              {item.name}
-              {separator}
-              {formatter(item.value)}
-            </Typography>
+              <Box pr={1}>
+                <Typography>{item.name}</Typography>
+              </Box>
+              <Typography>{formatter(item.value)}</Typography>
+            </Box>
           ))}
         </CardContent>
       </Card>

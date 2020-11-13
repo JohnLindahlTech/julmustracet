@@ -9,7 +9,7 @@ import { useTheme } from "@material-ui/core/styles";
 export type Item = {
   key?: string;
   href: Url;
-  Icon: ComponentType<{ size: string | number }>;
+  Icon: ComponentType<{ size: string | number; style: any }>;
   requireLoggedOut?: boolean;
   requireLoggedIn?: boolean;
   label: unknown;
@@ -37,7 +37,10 @@ const MenuItem: FC<MenuItemProps> = ({ item, session }) => {
       <Link href={i.href} passHref>
         <ListItem button component="a">
           <ListItemIcon>
-            <i.Icon size={theme.spacing(4)} />
+            <i.Icon
+              style={{ color: theme.palette.primary.main }}
+              size={theme.spacing(4)}
+            />
           </ListItemIcon>
           <ListItemText primary={i.label} />
         </ListItem>

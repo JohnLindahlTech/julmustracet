@@ -6,9 +6,13 @@ import Brands from "../components/brands";
 
 const Home = () => {
   return (
-    <div>
+    <main>
       <Typography variant="h1">
         <FormattedMessage defaultMessage="Välkommen till JulmustRacet" />
+      </Typography>
+
+      <Typography variant="h6" component="p" color="primary">
+        <FormattedMessage defaultMessage="...nu med bedrifter!" />
       </Typography>
       <Typography variant="h2">
         <FormattedMessage defaultMessage="Användarligan" />
@@ -18,7 +22,7 @@ const Home = () => {
         <FormattedMessage defaultMessage="Märkesligan" />
       </Typography>
       <Brands />
-    </div>
+    </main>
   );
 };
 
