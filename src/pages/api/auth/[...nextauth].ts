@@ -114,7 +114,7 @@ const options = {
   pages: {
     signIn: isProd ? LogIn.sv.href : LogIn.href,
     signOut: isProd ? LogOut.sv.href : LogOut.href,
-    error: "/api/auth/error", // Error code passed in query string as ?error=
+    error: "/api/auth/error", // Error code passed in query string as ?error= // TODO Handle this case.
     verifyRequest: isProd ? VerifyEmail.sv.href : VerifyEmail.href, // (used for check email message)
     newUser: isProd ? UserEdit.sv.href : UserEdit.href, // If set, new users will be directed here on first sign in
   },

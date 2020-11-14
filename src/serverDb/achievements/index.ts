@@ -1,8 +1,12 @@
+import * as Sentry from "@sentry/node";
 import { julmustracetDb } from "../dbs";
 import onChangeHandler from "./onChangeHandler";
+import { init } from "../../lib/sentry";
 
-export default function crunch() {
-  console.log("Starting");
+init();
+
+export default async function crunch() {
+  console.info("Starting Achievement Cruncher");
   const changes = julmustracetDb
     .changes({
       live: true,
@@ -11,14 +15,21 @@ export default function crunch() {
       query_params: { type: "drink" },
     })
     .on("change", async (change) => {
-      await onChangeHandler(change);
+      try {
+        await onChangeHandler(change);
+      } catch (error) {
+        Sentry.captureException(error);
+        console.error(error);
+        await Sentry.flush(2000);
+      }
     })
-    .on("error", (error) => {
+    .on("error", async (error) => {
+      Sentry.captureException(error);
       console.error(error);
+      await Sentry.flush(2000);
     });
-  console.log("Started");
   return () => {
-    console.log("Closing");
+    console.info("Closing Down Achievement Cruncher");
     changes.cancel();
   };
 }

@@ -1,10 +1,9 @@
-import { constants } from "os";
 import PouchDB from "pouchdb";
 import PouchDBFind from "pouchdb-find";
 
 PouchDB.plugin(PouchDBFind);
 
-const couchdbUrl = process.env.COUCHDB_URL;
+const couchdbUrl = process.env.COUCHDB_ADMIN_URL;
 
 export const userDb = new PouchDB(`${couchdbUrl}/_users`, { skip_setup: true });
 export const authDb = new PouchDB(`${couchdbUrl}/auth`, { skip_setup: true });

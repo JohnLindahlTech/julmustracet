@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import PouchDB from "pouchdb";
+import * as Sentry from "@sentry/node";
 import Validation from "./validate";
 import DBContext from "./context";
 import useNetworkStatus from "./useNetworkStatus";
@@ -23,21 +24,8 @@ const DBProvider = ({ remote, local, children }) => {
           live: true,
           retry: true,
         })
-        .on("change", function (change) {
-          console.log("change", change);
-          // yo, something changed!
-        })
-        .on("paused", function (info) {
-          console.log("paused", info);
-          // replication was paused, usually because of a lost connection
-        })
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        .on("active", function (info) {
-          console.log("active", info);
-          // replication was resumed
-        })
         .on("error", function (err) {
+          Sentry.captureException(err);
           console.error("error", err);
           // totally unhandled error (shouldn't happen)
         });
@@ -72,7 +60,6 @@ const DBProvider = ({ remote, local, children }) => {
       onOnline();
     }
     return () => {
-      console.log("Canceling");
       onOffline();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

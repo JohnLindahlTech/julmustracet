@@ -1,9 +1,10 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
+import * as Sentry from "@sentry/node";
 import { cookies } from "../../../lib/createAuthCookie";
 
 // Create proxy instance outside of request handler function to avoid unnecessary re-creation
 const apiProxy = createProxyMiddleware({
-  target: "http://localhost:5984",
+  target: process.env.COUCHDB_PROXY_URL,
   changeOrigin: true,
   pathRewrite: { [`^/api/db`]: "" },
   secure: false,
@@ -24,8 +25,11 @@ const apiProxy = createProxyMiddleware({
 export default async function DBProxy(req, res) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  apiProxy(req, res, (result) => {
+  apiProxy(req, res, async (result) => {
     if (result instanceof Error) {
+      console.error(result);
+      Sentry.captureException(result);
+      await Sentry.flush(2000);
       throw result;
     }
 

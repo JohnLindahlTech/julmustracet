@@ -15,23 +15,28 @@ const Rules = () => {
       <Typography>
         <FormattedMessage defaultMessage="Redan 2006 slogs det nuvarande officiella rekordet på 90 liter av NightHawk." />
       </Typography>
-
-      <Typography>
-        <ol>
-          <li>
+      <ol>
+        <li>
+          <Typography>
             <FormattedMessage defaultMessage="Slutmålet är alltså att dricka julmust." />
-          </li>
-          <li>
+          </Typography>
+        </li>
+        <li>
+          <Typography>
             <FormattedMessage defaultMessage="Tävlingen pågår från 1 december till och med slutet av 20 dember." />
-          </li>
-          <li>
+          </Typography>
+        </li>
+        <li>
+          <Typography>
             <FormattedMessage defaultMessage="Rapportera enskilda gånger du dricker, dvs. varje flaska för sig." />
-          </li>
-          <li>
+          </Typography>
+        </li>
+        <li>
+          <Typography>
             <FormattedMessage defaultMessage="Det går att själv lägga till julmustmärken i formuläret genom att skriva in en sökning och välja sista raden." />
-          </li>
-        </ol>
-      </Typography>
+          </Typography>
+        </li>
+      </ol>
     </PageContent>
   );
 };

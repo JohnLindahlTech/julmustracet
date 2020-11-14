@@ -3,7 +3,9 @@ import { Integrations } from "@sentry/tracing";
 import { RewriteFrames } from "@sentry/integrations";
 
 export const init = () => {
+  console.log("Init Sentry");
   if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+    console.log("Got DSN");
     const integrations = [];
 
     if (process.env.NEXT_IS_SERVER !== "true") {
@@ -14,6 +16,7 @@ export const init = () => {
       process.env.NEXT_IS_SERVER === "true" &&
       process.env.NEXT_PUBLIC_SENTRY_SERVER_ROOT_DIR
     ) {
+      console.log("RewriteFrames");
       // For Node.js, rewrite Error.stack to use relative paths, so that source
       // maps starting with ~/_next map to files in Error.stack with path
       // app:///_next
@@ -30,7 +33,7 @@ export const init = () => {
         })
       );
     }
-
+    console.log("Sentry.Init", process.env.NODE_ENV);
     Sentry.init({
       enabled: process.env.NODE_ENV === "production",
       integrations,
