@@ -329,12 +329,6 @@
       "value": "Rensa"
     }
   ],
-  "Q/ZTMl": [
-    {
-      "type": 0,
-      "value": "Veckan runt"
-    }
-  ],
   "Q5PZU+": [
     {
       "type": 0,
@@ -471,6 +465,12 @@
       "value": " JohnPhoto/JulmustRacet"
     }
   ],
+  "dF1qpM": [
+    {
+      "type": 0,
+      "value": "Mustdag"
+    }
+  ],
   "dPEYFF": [
     {
       "type": 0,
@@ -493,6 +493,12 @@
     {
       "type": 0,
       "value": "Logga in"
+    }
+  ],
+  "fREWx7": [
+    {
+      "type": 0,
+      "value": "Hela veckan"
     }
   ],
   "faXeYB": [
@@ -705,6 +711,12 @@
     {
       "type": 0,
       "value": "När du loggat in kommer du automatiskt navigeras vidare."
+    }
+  ],
+  "x400Hl": [
+    {
+      "type": 0,
+      "value": "Druckit must på varje veckodag."
     }
   ],
   "xC27yX": [

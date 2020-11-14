@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Formik, Field, Form } from "formik";
 import { FormattedMessage, useIntl, defineMessages } from "react-intl";
+import * as Sentry from "@sentry/node";
 import {
   Button,
   TextField as MUITextField,
@@ -71,7 +72,7 @@ const UserForm = ({ user }) => {
             ),
           });
         } else {
-          throw error;
+          Sentry.captureException(error);
         }
       } finally {
         setSubmitting(false);
@@ -151,7 +152,7 @@ const EditUser = () => {
   const theme = useTheme();
   const [put] = usePutDrink();
   const [session, loading] = useSession();
-  const { drinks } = useGetDrinksFrom(USER, session.user.username);
+  const { drinks } = useGetDrinksFrom(USER, session?.user?.username);
   const router = useLangRouter();
   return (
     <>

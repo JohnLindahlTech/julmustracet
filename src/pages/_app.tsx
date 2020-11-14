@@ -1,3 +1,4 @@
+import { init } from "../lib/sentry";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Provider } from "next-auth/client";
@@ -19,6 +20,8 @@ import getDateFnsLocale from "../translations/date-fns-locale";
 import fetchIntercept from "fetch-intercept";
 import { LogIn } from "../routes";
 import PouchDB from "pouchdb";
+
+init();
 
 if (typeof window !== "undefined") {
   const unregister = fetchIntercept.register({

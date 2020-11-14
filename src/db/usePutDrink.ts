@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import * as Sentry from "@sentry/node";
 import { toDrinkId } from "./toId";
 import useDB from "./useDB";
 import useOfflineSession from "./useOfflineSession";
@@ -38,6 +39,9 @@ export default function usePutDrink(): [
             },
           }
         );
+      } catch (error) {
+        Sentry.captureException(error);
+        console.error(error);
       } finally {
         setLoading(false);
       }

@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import * as Sentry from "@sentry/node";
 import mapAchievementsToUsers from "../lib/mapAchievementsToUsers";
 import { toAchievementId } from "./toId";
 import useDB from "./useDB";
@@ -36,6 +37,9 @@ export default function useLoadAchievements(): AchievementsReturn {
       // TODO transform to relevant data.
       setAchievements(docs);
       setMappedAchievements(mapAchievementsToUsers(docs));
+    } catch (error) {
+      Sentry.captureException(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

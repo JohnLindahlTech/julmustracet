@@ -10,6 +10,8 @@ import saveAchievements from "./saveAchievements";
 export default async function onChangeHandler(change) {
   const { year, username: usernameish } = fromDrinkId(change.id);
   const { drinks, achievements } = await loadUserData(year, usernameish);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { username } = drinks[0] ?? {};
   if (!username) {
     // TODO Throw and log or something;

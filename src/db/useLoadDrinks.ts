@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import * as Sentry from "@sentry/node";
 import { toDrinkId } from "./toId";
 import useDB from "./useDB";
 
@@ -34,6 +35,9 @@ export default function useLoadDrinks(): DrinkReturn {
         });
 
       setDrinks(docs.sort((a, b) => a.time.getTime() - b.time.getTime()));
+    } catch (error) {
+      Sentry.captureException(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }

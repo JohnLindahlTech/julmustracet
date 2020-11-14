@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/node";
+
 export class HttpError extends Error {
   name: string;
   statusCode: number;
@@ -27,6 +29,7 @@ export async function http(
   try {
     data = await res.json();
   } catch (error) {
+    Sentry.captureException(error);
     console.error(error);
   }
   if (!res.ok) {

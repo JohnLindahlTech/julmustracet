@@ -22,7 +22,12 @@ export default async function loadUserData(year, username) {
   return {
     drinks: drinksRes.rows
       .map((row) => row.doc)
-      .map((doc) => ({ ...doc, time: new Date(doc.time) })),
+      .map((doc) => ({
+        ...doc,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        time: new Date(doc.time),
+      })),
     achievements: achievementsRes.rows.map((row) => row.doc),
   };
 }

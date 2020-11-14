@@ -1,5 +1,6 @@
 // Return a session object (without any private fields) for Single Page App clients
 import cookie from "cookie";
+import * as Sentry from "@sentry/node";
 import {
   maxAge,
   cookies,
@@ -8,6 +9,9 @@ import {
   sessionCallback,
   jwtCallback,
 } from "../../../lib/createAuthCookie";
+import { init } from "../../../lib/sentry";
+
+init();
 
 export default async (req, res) => {
   const sessionMaxAge = maxAge;
@@ -63,6 +67,8 @@ export default async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.json(sessionPayload);
   } catch (error) {
+    Sentry.captureException(error);
+    await Sentry.flush(2000);
     // If JWT not verifiable, make sure the cookie for it is removed and return 401
     console.error("JWT_SESSION_ERROR", error);
     res.setHeader(

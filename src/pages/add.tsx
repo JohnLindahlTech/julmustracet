@@ -19,6 +19,7 @@ import { object, string, number, date } from "yup";
 import { DateTimePicker } from "formik-material-ui-pickers";
 import { createFilterOptions } from "@material-ui/lab/Autocomplete";
 import { Autocomplete } from "formik-material-ui-lab";
+import * as Sentry from "@sentry/node";
 import withEnsuredSession from "../hocs/withEnsuredSession";
 import { isBefore } from "date-fns";
 import { maxLimitDate, minLimitDate } from "../lib/rules";
@@ -204,6 +205,7 @@ const Add = () => {
               );
               return;
             }
+            Sentry.captureException(error);
             console.error(error);
           } finally {
             setSubmitting(false);

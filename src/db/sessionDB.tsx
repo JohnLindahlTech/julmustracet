@@ -7,9 +7,9 @@ import React, {
   useCallback,
   useEffect,
 } from "react";
+import * as Sentry from "@sentry/node";
 import PouchDB from "pouchdb";
 import { isBefore } from "date-fns";
-import { errorMonitor } from "http-proxy";
 
 const sessionDocumentId = "_local/session";
 
@@ -103,29 +103,30 @@ const _useDbSession = (
 
   const saveSession = useCallback(
     async (sessionToSave: Session) => {
-      if (
-        sessionToSave.expires &&
-        isBefore(new Date(sessionToSave.expires), new Date())
-      ) {
-        setSession(null);
-        return;
-      }
-      setSession(sessionToSave);
-      let dbSesh = {} as PouchDB.Core.GetMeta & Session;
       try {
-        dbSesh = await db.get(sessionDocumentId);
-      } catch (error) {
-        if (error.name !== "not_found") {
-          throw error;
+        if (
+          sessionToSave.expires &&
+          isBefore(new Date(sessionToSave.expires), new Date())
+        ) {
+          setSession(null);
+          return;
         }
-      }
-      try {
+        setSession(sessionToSave);
+        let dbSesh = {} as PouchDB.Core.GetMeta & Session;
+        try {
+          dbSesh = await db.get(sessionDocumentId);
+        } catch (error) {
+          if (error.name !== "not_found") {
+            throw error;
+          }
+        }
         await db.put({
           _id: sessionDocumentId,
           _rev: dbSesh._rev,
           ...sessionToSave,
         });
       } catch (error) {
+        Sentry.captureException(error);
         console.error(error);
       }
     },

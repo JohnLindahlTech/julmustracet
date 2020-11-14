@@ -4,7 +4,11 @@ export default async function saveAchievements(achievements) {
   const result = await julmustracetDb.bulkDocs(achievements);
   // The only reason to get conflicts is because we are doing a delete of a now defunct achievement.
   const retries = result.reduce((ret, doc, index) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     if (doc.error) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       if (doc.status !== 409) {
         // TODO Log this badboi
         return ret;

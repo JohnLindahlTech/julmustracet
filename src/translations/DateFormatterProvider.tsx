@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo, FC } from "react";
 import getDateFnsLocale from "./date-fns-locale";
 import { format } from "date-fns";
+import * as Sentry from "@sentry/node";
 
 function setUpFormat(localeId?: string, formatStr = "Pp") {
   const locale = getDateFnsLocale(localeId);
@@ -8,6 +9,7 @@ function setUpFormat(localeId?: string, formatStr = "Pp") {
     try {
       return format(date, formatString, { locale });
     } catch (error) {
+      Sentry.captureException(error);
       console.error(error);
       return "-";
     }

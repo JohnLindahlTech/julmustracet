@@ -5,6 +5,7 @@ import { getSession } from "next-auth/client";
 import { toDrinkId, toAchievementId, toId } from "../../../db/toId";
 import cookies from "../../../lib/cookiesMiddleware";
 import { createAuthCookie } from "../../../lib/createAuthCookie";
+import * as Sentry from "@sentry/node";
 
 const firstYear = 2020;
 
@@ -241,6 +242,8 @@ async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
     const result = await getResultFromMethod(req, res);
     res.send(result);
   } catch (error) {
+    Sentry.captureException(error);
+    await Sentry.flush(2000);
     console.error(error);
     res.status(error.statusCode ?? 400);
     res.send(error.format());

@@ -1,4 +1,5 @@
 import PouchDB from "pouchdb";
+import * as Sentry from "@sentry/node";
 import { Model, ModelConstructor, User } from "./models";
 
 export default class Manager {
