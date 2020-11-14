@@ -6,11 +6,11 @@ import { useDateFormat } from "../translations/DateFormatterProvider";
 
 type AchievementProps = {
   name: string;
-  time: Date;
+  createdAt: Date;
 };
 
 export const Achievement = (props: AchievementProps) => {
-  const { name, time } = props;
+  const { name, createdAt } = props;
   const intl = useIntl();
   const format = useDateFormat();
   const { title, description } = getAchievementTexts(intl, name);
@@ -22,7 +22,7 @@ export const Achievement = (props: AchievementProps) => {
             {title}
           </Typography>
           <Typography variant="caption" color="secondary">
-            {format(time)}
+            {format(createdAt)}
           </Typography>
           <Typography variant="body2">{description}</Typography>
         </CardContent>
@@ -36,82 +36,82 @@ export default Achievement;
 export const AchievementsMock = [
   {
     name: "cheater",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "first",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "around_the_clock",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "double_tap",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "connoisseur",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "three",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "five",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "seven",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "fourteen",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "twenty",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "twentyfour_seven",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "beginner",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "sampler",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "half_empty",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "half_filled",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "chug",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "gulp",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "legend",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "maxed",
-    time: new Date(),
+    createdAt: new Date(),
   },
   {
     name: "unknown",
-    time: new Date(),
+    createdAt: new Date(),
   },
 ];

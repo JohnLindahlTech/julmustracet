@@ -19,6 +19,7 @@
     "extract:i18n": "formatjs extract 'src/**/*.{js,ts,tsx}' --format simple --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/sv.json",
     "compile:i18n": "formatjs compile-folder --ast --format simple lang/ compiled-lang/",
     "bootstrap:db": "couchdb-bootstrap http://localhost:5984 couchdb",
+    "crunch": "node -r dotenv/config .next/server/achievementsCrunch.js dotenv_config_path=.env.local",
     "travis": "run-s travis:*",
     "travis:prettier": "prettier --check .",
     "travis:lint": "npm run lint",

@@ -42,7 +42,7 @@ const achievements = (intl) => ({
     }),
   },
   seven: {
-    title: intl.formatMessage({ defaultMessage: "Veckan runt" }), // Week
+    title: intl.formatMessage({ defaultMessage: "Hela veckan" }), // Week
     description: intl.formatMessage({
       defaultMessage: "Druckit must 7 dagar i rad.",
     }),
@@ -112,6 +112,12 @@ const achievements = (intl) => ({
     title: intl.formatMessage({ defaultMessage: "Max-ad" }), // Max-ed
     description: intl.formatMessage({
       defaultMessage: "Druckit 90 liter must.",
+    }),
+  },
+  week: {
+    title: intl.formatMessage({ defaultMessage: "Mustdag" }),
+    description: intl.formatMessage({
+      defaultMessage: "Druckit must på varje veckodag.",
     }),
   },
   unknown: {

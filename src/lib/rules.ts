@@ -13,4 +13,5 @@ if (isProd) {
   maxLimitDate.setUTCMonth(11, 21);
   maxLimitDate.setUTCHours(-1, 0, 0, -1);
 } else {
+  maxLimitDate.setHours(maxLimitDate.getHours() + 1);
 }

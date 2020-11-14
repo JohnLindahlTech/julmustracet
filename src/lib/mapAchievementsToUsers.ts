@@ -3,7 +3,6 @@ export type Achievement = {
   _rev: string;
   _deleted?: boolean;
   type: "achievement";
-  time: Date;
   name: string;
   username: string;
   createdAt: Date;

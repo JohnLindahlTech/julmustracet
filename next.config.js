@@ -3,6 +3,21 @@ const routes = require("./src/routes");
 const withPWA = require("next-pwa");
 
 module.exports = withPWA({
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      return {
+        ...config,
+        entry() {
+          return config.entry().then((entry) => {
+            return Object.assign({}, entry, {
+              achievementsCrunch: "./src/serverDb/achievements/index.ts",
+            });
+          });
+        },
+      };
+    }
+    return config;
+  },
   pwa: {
     disable: process.env.NODE_ENV === "development",
     dest: "public",

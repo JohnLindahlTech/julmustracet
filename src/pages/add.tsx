@@ -157,7 +157,8 @@ const Add = () => {
       )
       .test({
         name: "isPast",
-        test: (value: Date): boolean => isBefore(value, new Date()),
+        test: (value: Date): boolean =>
+          isBefore(value, new Date(new Date().getTime() + 60 * 1000)),
         message: intl.formatMessage(messages["future.date"]),
       }),
   });

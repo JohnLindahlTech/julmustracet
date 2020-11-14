@@ -1,8 +1,12 @@
 const nonLetters = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~’]+/g;
 const dashesAtBeginningOrEnd = /(^-+|-+$)/g;
 
-// const drinkId = '[year]:drink:[username]:[time]:[createDate]';
-// const achievementId = '[year]:achievement:[username]:[id]';
+const separator = "_";
+const drink = "drink";
+const achievement = "achievement";
+
+// const drinkId = '[year]_drink_[username]_[time]_[createDate]';
+// const achievementId = '[year]_achievement_[username]_[id]';
 
 export function toId(str: string): string {
   return str
@@ -23,40 +27,73 @@ export function toDrinkId(
   time?: string | Date,
   createDate?: string | Date
 ): string {
-  let str = `${padYear(year)}:drink`;
+  let str = `${padYear(year)}${separator}${drink}`;
   if (!username) {
     return str;
   }
-  str = `${str}:${toId(username)}`;
+  str = `${str}${separator}${toId(username)}`;
   if (!time) {
     return str;
   }
   if ((time as Date).toJSON) {
-    str = `${str}:${(time as Date).toJSON()}`;
+    str = `${str}${separator}${(time as Date).toJSON()}`;
   } else {
-    str = `${str}:${time}`;
+    str = `${str}${separator}${time}`;
   }
   if ((createDate as Date).toJSON) {
-    str = `${str}:${(createDate as Date).toJSON()}`;
+    str = `${str}${separator}${(createDate as Date).toJSON()}`;
   } else {
-    str = `${str}:${createDate}`;
+    str = `${str}${separator}${createDate}`;
   }
 
   return str;
 }
 
+type Drink = {
+  year: number;
+  username: string;
+  time: Date;
+  createdAt: Date;
+};
+
+export function fromDrinkId(id: string): Drink {
+  const [yearString, , username, timeString, createdAtString] = id.split(
+    separator
+  );
+  return {
+    year: Number.parseInt(yearString, 10),
+    username,
+    time: new Date(timeString),
+    createdAt: new Date(createdAtString),
+  };
+}
+
 export function toAchievementId(
   year: string | number,
   username?: string,
-  achievement?: string
+  prio?: number | string
 ): string {
-  let str = `${padYear(year)}:achievement`;
+  let str = `${padYear(year)}${separator}${achievement}`;
   if (!username) {
     return str;
   }
-  str = `${str}:${toId(username)}`;
-  if (!achievement) {
+  str = `${str}${separator}${toId(username)}`;
+  if (!prio) {
     return str;
   }
-  return `${str}:${achievement}`;
+  return `${str}${separator}${padYear(prio)}`;
+}
+
+type Achievement = {
+  year: number;
+  username: string;
+  prio: string;
+};
+export function fromAchievementId(id: string): Achievement {
+  const [yearString, , username, prio] = id.split(separator);
+  return {
+    year: Number.parseInt(yearString, 10),
+    username,
+    prio,
+  };
 }

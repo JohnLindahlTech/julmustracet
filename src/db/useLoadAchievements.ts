@@ -31,7 +31,6 @@ export default function useLoadAchievements(): AchievementsReturn {
             ...d,
             createdAt: new Date(d.createdAt),
             updatedAt: new Date(d.updatedAt),
-            time: new Date(d.time),
           };
         });
       // TODO transform to relevant data.
