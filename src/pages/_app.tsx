@@ -20,8 +20,13 @@ import getDateFnsLocale from "../translations/date-fns-locale";
 import fetchIntercept from "fetch-intercept";
 import { LogIn } from "../routes";
 import PouchDB from "pouchdb";
+import getConfig from "next/config";
 
 init();
+
+const { publicRuntimeConfig } = getConfig();
+
+const { NEXTAUTH_URL, TWITTER_HANDLE } = publicRuntimeConfig;
 
 if (typeof window !== "undefined") {
   const unregister = fetchIntercept.register({
@@ -62,6 +67,17 @@ const App = ({ Component, pageProps }) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
+        <meta name="twitter:creator" content={TWITTER_HANDLE} />
+        <meta name="twitter:url" content={NEXTAUTH_URL} />
+        <meta
+          name="twitter:image"
+          content={`${NEXTAUTH_URL}/android-chrome-192x192.png`}
+        />
+        <meta property="og:url" content={NEXTAUTH_URL} />
+        <meta
+          property="og:image"
+          content={`${NEXTAUTH_URL}/apple-touch-icon.png`}
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -80,7 +96,7 @@ const App = ({ Component, pageProps }) => {
                   <OfflineSessionProvider>
                     <DBProvider
                       local={isBrowser ? "julmustracet" : null}
-                      remote="http://localhost:3000/api/db/julmustracet"
+                      remote={`${NEXTAUTH_URL}/api/db/julmustracet`}
                     >
                       <DataProvider>
                         <Layout>

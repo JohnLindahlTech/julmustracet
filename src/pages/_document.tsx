@@ -61,7 +61,6 @@ export default class MyDocument extends Document {
           />
 
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content="https://julmustracet.se" />
           <meta
             name="twitter:title"
             key="twitter:title"
@@ -71,11 +70,6 @@ export default class MyDocument extends Document {
             name="twitter:description"
             content="Den legendariska Decemberleken."
           />
-          <meta
-            name="twitter:image"
-            content="https://julmustracet.se/android-chrome-192x192.png"
-          />
-          <meta name="twitter:creator" content="@JohnPhotoSE" />
           <meta property="og:type" content="website" />
           <meta property="og:title" key="og:title" content="JulmustRacet" />
           <meta
@@ -83,11 +77,6 @@ export default class MyDocument extends Document {
             content="Den legendariska Decemberleken."
           />
           <meta property="og:site_name" content="JulmustRacet" />
-          <meta property="og:url" content="https://julmustracet.se" />
-          <meta
-            property="og:image"
-            content="https://julmustracet.se/apple-touch-icon.png"
-          />
         </Head>
         <body>
           <Main />

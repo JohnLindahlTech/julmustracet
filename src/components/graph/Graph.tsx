@@ -13,7 +13,6 @@ import {
   Line,
   Label,
   LabelList,
-  Text,
 } from "recharts";
 import ToolTip from "./ToolTip";
 import useCalculateActiveData from "../../hooks/useCalculateActiveData";

@@ -49,7 +49,7 @@ const options = {
   ],
 
   // @link https://next-auth.js.org/configuration/databases
-  database: process.env.NEXTAUTH_DATABASE_URL,
+  database: process.env.COUCHDB_ADMIN_URL,
 
   // @link https://next-auth.js.org/configuration/options#session
   session: {

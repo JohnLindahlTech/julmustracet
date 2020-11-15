@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const routes = require("./src/routes");
 const withPWA = require("next-pwa");
 const withSourceMaps = require("@zeit/next-source-maps")();
 const SentryWebpackPlugin = require("@sentry/webpack-plugin");
@@ -12,6 +11,9 @@ const {
   VERCEL_GITHUB_COMMIT_SHA,
   VERCEL_GITLAB_COMMIT_SHA,
   VERCEL_BITBUCKET_COMMIT_SHA,
+  NEXTAUTH_URL,
+  TWITTER_HANDLE,
+  GITHUB_REPO_URL,
 } = process.env;
 
 const COMMIT_SHA =
@@ -81,6 +83,12 @@ module.exports = withSourceMaps(
     i18n: {
       locales: ["en", "sv"],
       defaultLocale: "sv",
+    },
+    publicRuntimeConfig: {
+      // Will be available on both server and client
+      NEXTAUTH_URL: NEXTAUTH_URL,
+      TWITTER_HANDLE: TWITTER_HANDLE,
+      GITHUB_REPO_URL: GITHUB_REPO_URL,
     },
   })
 );

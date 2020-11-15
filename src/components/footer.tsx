@@ -8,6 +8,10 @@ import {
 } from "@material-ui/core";
 import { Github as GithubIcon } from "@styled-icons/fa-brands/Github";
 import { FormattedMessage } from "react-intl";
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
+
+const { GITHUB_REPO_URL } = publicRuntimeConfig;
 
 const Footer: FC = () => {
   const theme = useTheme();
@@ -18,7 +22,7 @@ const Footer: FC = () => {
       </Box>
       <Box m={2}>
         <MuiLink
-          href="https://github.com/JohnPhoto/julmustracet"
+          href={GITHUB_REPO_URL}
           target="_blank"
           rel="noreferrer noopener"
         >
