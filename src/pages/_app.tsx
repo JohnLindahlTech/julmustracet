@@ -5,6 +5,7 @@ import { Provider } from "next-auth/client";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { IntlProvider } from "react-intl";
 import Layout from "../components/layout";
+import ErrorBoundary from "../components/ErrorBoundary";
 import { getMessages } from "../translations/messages";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../theme";
@@ -81,35 +82,42 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Provider options={{ clientMaxAge: 5 }} session={session}>
-          <IntlProvider
-            locale={locale}
-            defaultLocale={defaultLocale}
-            messages={messages}
-          >
-            <DateFormatProvider locale={locale}>
-              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={dateLocale}>
-                <SessionDBProvider
-                  name={isBrowser ? "session" : null}
-                  session={session}
+        <IntlProvider
+          locale={locale}
+          defaultLocale={defaultLocale}
+          messages={messages}
+        >
+          <ErrorBoundary outsideOfLayout>
+            <Provider options={{ clientMaxAge: 5 }} session={session}>
+              <DateFormatProvider locale={locale}>
+                <MuiPickersUtilsProvider
+                  utils={DateFnsUtils}
+                  locale={dateLocale}
                 >
-                  <OfflineSessionProvider>
-                    <DBProvider
-                      local={isBrowser ? "julmustracet" : null}
-                      remote={`${NEXTAUTH_URL}/api/db/julmustracet`}
-                    >
-                      <DataProvider>
-                        <Layout>
-                          <Component {...pageProps} />
-                        </Layout>
-                      </DataProvider>
-                    </DBProvider>
-                  </OfflineSessionProvider>
-                </SessionDBProvider>
-              </MuiPickersUtilsProvider>
-            </DateFormatProvider>
-          </IntlProvider>
-        </Provider>
+                  <SessionDBProvider
+                    name={isBrowser ? "session" : null}
+                    session={session}
+                  >
+                    <OfflineSessionProvider>
+                      <DBProvider
+                        local={isBrowser ? "julmustracet" : null}
+                        remote={`${NEXTAUTH_URL}/api/db/julmustracet`}
+                      >
+                        <DataProvider>
+                          <Layout>
+                            <ErrorBoundary>
+                              <Component {...pageProps} />
+                            </ErrorBoundary>
+                          </Layout>
+                        </DataProvider>
+                      </DBProvider>
+                    </OfflineSessionProvider>
+                  </SessionDBProvider>
+                </MuiPickersUtilsProvider>
+              </DateFormatProvider>
+            </Provider>
+          </ErrorBoundary>
+        </IntlProvider>
       </ThemeProvider>
     </>
   );

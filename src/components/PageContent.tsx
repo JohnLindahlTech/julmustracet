@@ -4,6 +4,7 @@ import { Paper, makeStyles, createStyles, Theme } from "@material-ui/core";
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
     paper: ({
+      noMargin,
       noPadding,
       height,
       minHeight,
@@ -13,7 +14,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
       maxWidth,
     }: PageContentProps) => ({
       padding: spacing(noPadding ? 0 : 2),
-      marginBottom: spacing(2),
+      marginBottom: spacing(noMargin ? 0 : 2),
       height,
       minHeight,
       maxHeight,
@@ -26,6 +27,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 type PageContentProps = {
   noPadding?: boolean;
+  noMargin?: boolean;
   height?: number | string;
   minHeight?: number | string;
   maxHeight?: number | string;
@@ -36,6 +38,7 @@ type PageContentProps = {
 
 export const PageContent: FC<PageContentProps> = ({
   noPadding,
+  noMargin,
   height,
   minHeight,
   maxHeight,
@@ -46,6 +49,7 @@ export const PageContent: FC<PageContentProps> = ({
 }) => {
   const classes = useStyles({
     noPadding,
+    noMargin,
     height,
     minHeight,
     maxHeight,
