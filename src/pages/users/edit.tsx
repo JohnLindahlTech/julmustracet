@@ -29,6 +29,26 @@ import { PageContent } from "../../components/PageContent";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NextPage } from "next";
 
+function getAllCases(input = "") {
+  const res = [];
+  const letters = input.split("");
+  const permCount = 1 << input.length;
+  for (let perm = 0; perm < permCount; perm++) {
+    letters.reduce((p, letter, i) => {
+      letters[i] = p & 1 ? letter.toUpperCase() : letter.toLowerCase();
+      return p >> 1;
+    }, perm);
+    res.push(letters.join(""));
+  }
+  return res;
+}
+
+const invalidUsernames = [
+  ...getAllCases("edit"),
+  ...getAllCases("ändra"),
+  ...getAllCases("redigera"),
+];
+
 const messages = defineMessages({
   "username.string": {
     defaultMessage: "Måste vara text",
@@ -41,6 +61,9 @@ const messages = defineMessages({
   },
   "username.missing": {
     defaultMessage: "Användarnamn är obligatoriskt",
+  },
+  "username.not_edit": {
+    defaultMessage: "Ogiltigt namn, pröva ett annat.",
   },
   "username.unknown": {
     defaultMessage: "Något är okänt fel med användarnamnet",
@@ -58,6 +81,10 @@ const UserForm = ({ user }) => {
     username: string(intl.formatMessage(messages["username.string"]))
       .required(intl.formatMessage(messages["username.missing"]))
       .max(32, intl.formatMessage(messages["username.length"]))
+      .notOneOf(
+        invalidUsernames,
+        intl.formatMessage(messages["username.not_edit"])
+      )
       .label(intl.formatMessage({ defaultMessage: "Användarnamn" })),
   });
 
