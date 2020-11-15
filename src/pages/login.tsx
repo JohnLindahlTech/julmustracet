@@ -83,6 +83,7 @@ const LogIn: FC<{ providers: Provider[] }> = (props) => {
                     <Grid container direction="column" spacing={1}>
                       <Grid item>
                         <Field
+                          variant="outlined"
                           component={TextField}
                           fullWidth
                           name="email"

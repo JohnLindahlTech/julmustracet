@@ -241,6 +241,7 @@ const Add: FC = () => {
                     <Text
                       {...params}
                       {...params.inputProps}
+                      variant="outlined"
                       label={<FormattedMessage defaultMessage="Märke" />}
                       error={touched["brand"] && !!errors["brand"]}
                       helperText={touched["brand"] && errors["brand"]}
@@ -252,6 +253,7 @@ const Add: FC = () => {
             <FormControl fullWidth margin="normal">
               <Field
                 component={TextField}
+                variant="outlined"
                 name="amount"
                 type="number"
                 InputProps={{
@@ -285,6 +287,7 @@ const Add: FC = () => {
             </ButtonGroup>
             <FormControl fullWidth margin="normal">
               <Field
+                inputVariant="outlined"
                 ampm={false}
                 component={DateTimePicker}
                 disableFuture={true}

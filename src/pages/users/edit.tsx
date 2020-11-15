@@ -95,6 +95,7 @@ const UserForm = ({ user }) => {
         <Form>
           <FormControl fullWidth margin="normal">
             <Field
+              variant="outlined"
               component={TextField}
               name="username"
               label={<FormattedMessage defaultMessage="Användarnamn" />}
@@ -103,6 +104,7 @@ const UserForm = ({ user }) => {
           </FormControl>
           <FormControl fullWidth margin="normal">
             <MUITextField
+              variant="outlined"
               label={<FormattedMessage defaultMessage="Epost" />}
               value={user.email}
               disabled
