@@ -3,6 +3,7 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import Users from "../../components/users";
 import { PageContent } from "../../components/PageContent";
+import { NextPage } from "next";
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -12,7 +13,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-const UsersPage = () => {
+const UsersPage: NextPage = () => {
   const classes = useStyles();
   return (
     <PageContent noPadding>

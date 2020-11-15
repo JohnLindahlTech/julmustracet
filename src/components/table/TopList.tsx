@@ -16,8 +16,9 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MuiLink from "@material-ui/core/Link";
+import { Skeleton } from "@material-ui/lab";
 import { FormattedMessage, FormattedNumber } from "react-intl";
-import NextLink from "../langLink";
+import NextLink from "next/link";
 import { UrlObject } from "../../types/url";
 
 interface Data {
@@ -211,10 +212,11 @@ interface TopListProps {
   title: JSX.Element;
   rows: Data[];
   getDetailsLink: (item: Data) => UrlObject;
+  loading?: boolean;
 }
 
-export default function TopList(props: TopListProps) {
-  const { title, rows = [], getDetailsLink } = props;
+export default function TopList(props: TopListProps): JSX.Element {
+  const { title, rows = [], getDetailsLink, loading } = props;
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Data>("position");
@@ -258,35 +260,43 @@ export default function TopList(props: TopListProps) {
             onRequestSort={handleRequestSort}
           />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row: Data, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                return (
-                  <TableRow hover tabIndex={-1} key={row.name}>
-                    <TableCell align="right">
-                      <FormattedNumber
-                        value={row.position}
-                        maximumFractionDigits={0}
-                        minimumFractionDigits={0}
-                      />
-                    </TableCell>
-                    <TableCell component="th" id={labelId} scope="row">
-                      <NextLink href={getDetailsLink(row)} passHref>
-                        <MuiLink>{row.name}</MuiLink>
-                      </NextLink>
-                    </TableCell>
-                    <TableCell align="right">
-                      <FormattedNumber
-                        value={row.amount}
-                        maximumFractionDigits={2}
-                        minimumFractionDigits={2}
-                      />
-                    </TableCell>
+            {loading
+              ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
+                  <TableRow key={i}>
+                    <TableCell colSpan={3}>
+                      <Skeleton />
+                    </TableCell>{" "}
                   </TableRow>
-                );
-              })}
+                ))
+              : stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row: Data, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow hover tabIndex={-1} key={row.name}>
+                        <TableCell align="right">
+                          <FormattedNumber
+                            value={row.position}
+                            maximumFractionDigits={0}
+                            minimumFractionDigits={0}
+                          />
+                        </TableCell>
+                        <TableCell component="th" id={labelId} scope="row">
+                          <NextLink href={getDetailsLink(row)} passHref>
+                            <MuiLink>{row.name}</MuiLink>
+                          </NextLink>
+                        </TableCell>
+                        <TableCell align="right">
+                          <FormattedNumber
+                            value={row.amount}
+                            maximumFractionDigits={2}
+                            minimumFractionDigits={2}
+                          />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
           </TableBody>
         </Table>
       </TableContainer>

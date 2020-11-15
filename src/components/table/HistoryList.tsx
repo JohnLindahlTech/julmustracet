@@ -18,10 +18,11 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MuiLink from "@material-ui/core/Link";
+import { Skeleton } from "@material-ui/lab";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import { Trash as DeleteIcon } from "@styled-icons/fa-solid/Trash";
 import { Pen as EditIcon } from "@styled-icons/fa-solid/Pen";
-import NextLink from "../langLink";
+import NextLink from "next/link";
 import { UrlObject } from "../../types/url";
 import { Mappable, USER } from "../../lib/mapGraphData";
 import { useDateFormat } from "../../translations/DateFormatterProvider";
@@ -260,9 +261,10 @@ interface TopListProps {
   getDetailsLink?: (item: Data) => UrlObject;
   onDelete?: (item: Data) => void;
   onEdit?: (item: Data) => void;
+  loading?: boolean;
 }
 
-export default function TopList(props: TopListProps) {
+export default function HistoryList(props: TopListProps) {
   const {
     title,
     type = USER,
@@ -270,6 +272,7 @@ export default function TopList(props: TopListProps) {
     getDetailsLink,
     onDelete,
     onEdit,
+    loading,
   } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -322,59 +325,67 @@ export default function TopList(props: TopListProps) {
             type={type}
           />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row: Data, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                return (
-                  <TableRow hover tabIndex={-1} key={row._id}>
-                    <TableCell>
-                      <Typography>{format(row.time)}</Typography>
-                    </TableCell>
-                    <TableCell component="th" id={labelId} scope="row">
-                      <Typography>
-                        {getDetailsLink ? (
-                          <NextLink href={getDetailsLink(row)} passHref>
-                            <MuiLink>{row[type]}</MuiLink>
-                          </NextLink>
-                        ) : (
-                          row[type]
-                        )}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                      <FormattedNumber
-                        value={row.amount}
-                        maximumFractionDigits={2}
-                        minimumFractionDigits={2}
-                      />
-                    </TableCell>
-                    {hasModifications ? (
-                      <TableCell>
-                        {onDelete ? (
-                          <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={() => onDelete(row)}
-                          >
-                            <DeleteIcon size={theme.spacing(2)} />
-                          </Button>
-                        ) : null}
-                        {onEdit ? (
-                          <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={() => onEdit(row)}
-                          >
-                            <EditIcon size={theme.spacing(2)} />
-                          </Button>
-                        ) : null}
-                      </TableCell>
-                    ) : null}
+            {loading
+              ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
+                  <TableRow key={i}>
+                    <TableCell colSpan={3}>
+                      <Skeleton />
+                    </TableCell>{" "}
                   </TableRow>
-                );
-              })}
+                ))
+              : stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row: Data, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow hover tabIndex={-1} key={row._id}>
+                        <TableCell>
+                          <Typography>{format(row.time)}</Typography>
+                        </TableCell>
+                        <TableCell component="th" id={labelId} scope="row">
+                          <Typography>
+                            {getDetailsLink ? (
+                              <NextLink href={getDetailsLink(row)} passHref>
+                                <MuiLink>{row[type]}</MuiLink>
+                              </NextLink>
+                            ) : (
+                              row[type]
+                            )}
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          <FormattedNumber
+                            value={row.amount}
+                            maximumFractionDigits={2}
+                            minimumFractionDigits={2}
+                          />
+                        </TableCell>
+                        {hasModifications ? (
+                          <TableCell>
+                            {onDelete ? (
+                              <Button
+                                color="primary"
+                                variant="outlined"
+                                onClick={() => onDelete(row)}
+                              >
+                                <DeleteIcon size={theme.spacing(2)} />
+                              </Button>
+                            ) : null}
+                            {onEdit ? (
+                              <Button
+                                color="primary"
+                                variant="outlined"
+                                onClick={() => onEdit(row)}
+                              >
+                                <EditIcon size={theme.spacing(2)} />
+                              </Button>
+                            ) : null}
+                          </TableCell>
+                        ) : null}
+                      </TableRow>
+                    );
+                  })}
           </TableBody>
         </Table>
       </TableContainer>

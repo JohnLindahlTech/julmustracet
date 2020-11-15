@@ -15,7 +15,7 @@ import { TextField } from "formik-material-ui";
 import { object, string } from "yup";
 // Since we are needing network for the edit, lets require the latest session from server
 import { useSession } from "next-auth/client";
-import LangLink from "../../components/langLink";
+import NextLink from "next/link";
 import Link from "../../components/link";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
 import { patchData } from "../../lib/fetch";
@@ -24,8 +24,9 @@ import { USER, BRAND } from "../../lib/mapGraphData";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
 import { AddDrink, UserDetails } from "../../routes";
 import usePutDrink from "../../db/usePutDrink";
-import useLangRouter from "../../hooks/useLangRouter";
+import { useRouter } from "next/router";
 import { PageContent } from "../../components/PageContent";
+import { NextPage } from "next";
 
 const messages = defineMessages({
   "username.string": {
@@ -91,31 +92,6 @@ const UserForm = ({ user }) => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Typography
-            color={user?.username ? "initial" : "primary"}
-            variant={user?.username ? "body1" : "h4"}
-            component="p"
-          >
-            <FormattedMessage defaultMessage="Du måste ha ett användarnamn för att kunna mata in dryck" />
-          </Typography>
-          <Typography>
-            <FormattedMessage defaultMessage="Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på." />
-          </Typography>
-          <Typography>
-            <FormattedMessage defaultMessage="Rekommendation: Undvik att byta användarnamn när du väl valt ett." />
-          </Typography>
-          {user?.username ? (
-            <Typography variant="body1">
-              <Link
-                href={{
-                  pathname: UserDetails.href,
-                  query: { user: user.username },
-                }}
-              >
-                <FormattedMessage defaultMessage="Gå till din publika profil här" />
-              </Link>
-            </Typography>
-          ) : null}
           <FormControl fullWidth margin="normal">
             <Field
               component={TextField}
@@ -148,12 +124,12 @@ const UserForm = ({ user }) => {
   );
 };
 
-const EditUser = () => {
+const EditUser: NextPage = () => {
   const theme = useTheme();
   const [put] = usePutDrink();
-  const [session, loading] = useSession();
-  const { drinks } = useGetDrinksFrom(USER, session?.user?.username);
-  const router = useLangRouter();
+  const [session] = useSession();
+  const { drinks, loading } = useGetDrinksFrom(USER, session?.user?.username);
+  const router = useRouter();
   return (
     <>
       <Box mb={2}>
@@ -161,23 +137,49 @@ const EditUser = () => {
           <Typography variant="h1">
             <FormattedMessage defaultMessage="Redigera Användare" />
           </Typography>
-          {session && session.user && <UserForm user={session.user} />}
+          <Typography
+            color={session?.user?.username ? "initial" : "primary"}
+            variant={session?.user?.username ? "body1" : "h4"}
+            component="p"
+          >
+            <FormattedMessage defaultMessage="Du måste ha ett användarnamn för att kunna mata in dryck" />
+          </Typography>
+          <Typography>
+            <FormattedMessage defaultMessage="Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på." />
+          </Typography>
+          <Typography>
+            <FormattedMessage defaultMessage="Rekommendation: Undvik att byta användarnamn när du väl valt ett." />
+          </Typography>
+          {session?.user?.username ? (
+            <Typography variant="body1">
+              <Link
+                href={{
+                  pathname: UserDetails.href,
+                  query: { user: session?.user?.username },
+                }}
+              >
+                <FormattedMessage defaultMessage="Gå till din publika profil här" />
+              </Link>
+            </Typography>
+          ) : null}
+          {session?.user ? <UserForm user={session.user} /> : null}
         </PageContent>
       </Box>
       {session && session.user && (
         <PageContent noPadding>
           <HistoryList
+            loading={loading}
             type={BRAND}
             title={
               <Box display="flex">
                 <Box flexGrow={1}>
                   <FormattedMessage defaultMessage="Historik" />
                 </Box>
-                <LangLink {...AddDrink} passHref>
+                <NextLink {...AddDrink} passHref>
                   <Button color="primary" variant="contained">
                     <AddIcon size={theme.spacing(2)} />
                   </Button>
-                </LangLink>
+                </NextLink>
               </Box>
             }
             rows={drinks}

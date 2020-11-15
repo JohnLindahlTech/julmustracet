@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
 import Users from "../components/users";
@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
   })
 );
 
-const Home = () => {
+const Home: FC = () => {
   const classes = useStyles();
   return (
     <>

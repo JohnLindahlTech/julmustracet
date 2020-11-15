@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useOfflineSession from "../db/useOfflineSession";
 import { LogIn } from "../routes";
 import { Url } from "../types/url";
-import useLangRouter from "./useLangRouter";
+import { useRouter } from "next/router";
 
 export const LOGGED_IN = true;
 export const LOGGED_OUT = false;
@@ -12,7 +12,7 @@ const useEnsureSession = (
   sessionState = LOGGED_IN
 ): [boolean, boolean] => {
   const [approved, setApproved] = useState(false);
-  const router = useLangRouter();
+  const router = useRouter();
   const [session, loading] = useOfflineSession();
 
   useEffect(() => {

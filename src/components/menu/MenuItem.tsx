@@ -2,7 +2,8 @@ import React, { ComponentType, FC, Fragment, isValidElement } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Link from "../langLink";
+import { Skeleton } from "@material-ui/lab";
+import Link from "next/link";
 import { Url } from "../../types/url";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -18,18 +19,32 @@ export type Item = {
 export type MenuItemProps = {
   item: JSX.Element | Item;
   session: unknown;
+  loading?: boolean;
 };
 
-const MenuItem: FC<MenuItemProps> = ({ item, session }) => {
+const MenuItem: FC<MenuItemProps> = ({ item, session, loading }) => {
   const theme = useTheme();
   if (isValidElement(item)) {
     return item;
   }
   const i = item as Item;
-  if (i.requireLoggedOut && session) {
+  console.log(i, session);
+  if (loading && i.requireLoggedOut) {
+    return (
+      <li>
+        <ListItem button component="a">
+          <ListItemIcon>
+            <Skeleton variant="circle" height={32} width={32} />
+          </ListItemIcon>
+          <ListItemText primary={<Skeleton />} />
+        </ListItem>
+      </li>
+    );
+  }
+  if (i.requireLoggedOut && (session || loading)) {
     return <Fragment />;
   }
-  if (i.requireLoggedIn && !session) {
+  if (i.requireLoggedIn && (!session || loading)) {
     return <Fragment />;
   }
   return (

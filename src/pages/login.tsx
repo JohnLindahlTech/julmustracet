@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { getProviders, signIn } from "next-auth/client";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button, Box, Divider, Grid, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import { TextField } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import { object, string } from "yup";
@@ -10,14 +11,22 @@ import { LOGGED_OUT } from "../hooks/useEnsureSession";
 import { Home } from "../routes";
 import { PageContent } from "../components/PageContent";
 
-const LogIn = (props) => {
+type Provider = {
+  name: string;
+  id: string;
+  type: string;
+};
+
+const LogIn: FC<{ providers: Provider[] }> = (props) => {
   const intl = useIntl();
-  const [providers, setProviders] = useState(props.providers || []);
+  const [providers, setProviders] = useState<Provider[]>(props.providers ?? []);
+  const [loading, setLoading] = useState(props?.providers?.length === 0);
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const providers = Object.values(await getProviders());
+      const providers = Object.values(await getProviders()) as Provider[];
       setProviders(providers);
+      setLoading(false);
     };
     if (!Array.isArray(providers) || !providers.length) {
       fetchProviders();
@@ -96,20 +105,26 @@ const LogIn = (props) => {
       <Grid container justify="center" alignItems="center">
         <Grid item lg={3} xs={12} sm={6} md={4}>
           <Grid container direction="column" spacing={1}>
-            {providers
-              .filter((p) => p.type !== "email")
-              .map((provider) => (
-                <Grid item key={provider.id}>
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    color="primary"
-                    onClick={onSignInOauth(provider)}
-                  >
-                    {provider.name}
-                  </Button>
-                </Grid>
-              ))}
+            {loading
+              ? Array.from({ length: 5 }, (k, i) => i).map((i) => (
+                  <Grid item key={i}>
+                    <Skeleton variant="rect" height="36px" />
+                  </Grid>
+                ))
+              : providers
+                  .filter((p) => p.type !== "email")
+                  .map((provider) => (
+                    <Grid item key={provider.id}>
+                      <Button
+                        variant="outlined"
+                        fullWidth
+                        color="primary"
+                        onClick={onSignInOauth(provider)}
+                      >
+                        {provider.name}
+                      </Button>
+                    </Grid>
+                  ))}
           </Grid>
         </Grid>
       </Grid>

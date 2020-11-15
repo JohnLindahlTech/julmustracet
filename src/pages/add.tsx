@@ -1,5 +1,5 @@
+import React, { FC, useEffect } from "react";
 import { Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
 import {
   FormattedMessage,
   useIntl,
@@ -28,10 +28,10 @@ import { useBrands } from "../db/useBrands";
 import { toTitleCase } from "../db/toTitleCase";
 import usePutDrink from "../db/usePutDrink";
 import { useGetDrink } from "../db/useGetDrinks";
-import useLangRouter from "../hooks/useLangRouter";
+import { useRouter } from "next/router";
 import { Home, UserEdit } from "../routes";
-import { useDbSession } from "../db/sessionDB";
 import { PageContent } from "../components/PageContent";
+import useOfflineSession from "../db/useOfflineSession";
 
 type Option = {
   id: number;
@@ -116,10 +116,10 @@ const getErrorMessage = (id, rawValues, dateFormat, intl) => {
   return [message, values];
 };
 
-const Add = () => {
-  const [session] = useDbSession();
+const Add: FC = () => {
+  const [session] = useOfflineSession();
   const intl = useIntl();
-  const router = useLangRouter();
+  const router = useRouter();
   const { drink } = router.query;
   const [drinkItem, loading] = useGetDrink(drink);
   const format = useDateFormat();

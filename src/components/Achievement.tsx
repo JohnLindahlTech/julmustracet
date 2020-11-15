@@ -1,16 +1,18 @@
 import React from "react";
 import { useIntl } from "react-intl";
 import { Typography, Card, CardContent, Grid } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import { getAchievementTexts } from "./Achievement.messages";
 import { useDateFormat } from "../translations/DateFormatterProvider";
 
 type AchievementProps = {
-  name: string;
-  createdAt: Date;
+  name?: string;
+  createdAt?: Date;
+  loading?: boolean;
 };
 
 export const Achievement = (props: AchievementProps) => {
-  const { name, createdAt } = props;
+  const { name, createdAt, loading } = props;
   const intl = useIntl();
   const format = useDateFormat();
   const { title, description } = getAchievementTexts(intl, name);
@@ -19,12 +21,14 @@ export const Achievement = (props: AchievementProps) => {
       <Card style={{ minHeight: 120 }}>
         <CardContent>
           <Typography variant="h5" component="p">
-            {title}
+            {loading ? <Skeleton /> : title}
           </Typography>
           <Typography variant="caption" color="secondary">
-            {format(createdAt)}
+            {loading ? <Skeleton /> : format(createdAt)}
           </Typography>
-          <Typography variant="body2">{description}</Typography>
+          <Typography variant="body2">
+            {loading ? <Skeleton /> : description}
+          </Typography>
         </CardContent>
       </Card>
     </Grid>

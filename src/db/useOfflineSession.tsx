@@ -10,7 +10,7 @@ import { useSession } from "next-auth/client";
 import { Session, useDbSession } from "./sessionDB";
 import useNetworkStatus from "./useNetworkStatus";
 
-const OfflineSessionContext = createContext(null);
+const OfflineSessionContext = createContext(undefined);
 
 export const OfflineSessionProvider: FC = (props) => {
   return (
@@ -20,7 +20,7 @@ export const OfflineSessionProvider: FC = (props) => {
 
 export default function useOfflineSession(): [Session, boolean] {
   const sessionData = useContext(OfflineSessionContext);
-  if (sessionData == null) {
+  if (sessionData === undefined) {
     return _useOfflineSession();
   }
   return sessionData;

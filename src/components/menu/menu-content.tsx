@@ -102,7 +102,8 @@ const MenuContent: FC = () => {
           <MenuItem
             key={`${item.key}-${index}`}
             item={item}
-            session={!loading && session}
+            loading={loading}
+            session={session}
           />
         ))}
       </List>

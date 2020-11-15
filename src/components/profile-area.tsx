@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormattedMessage } from "react-intl";
 import { LogIn, UserEdit } from "../routes";
-import LangLink from "./langLink";
+import Link from "next/link";
 import { signin } from "next-auth/client";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const LoggedIn = ({ user }) => {
   const classes = useStyles();
   return (
-    <LangLink {...UserEdit} passHref>
+    <Link {...UserEdit} passHref>
       <Button
         color="inherit"
         endIcon={
@@ -39,7 +39,7 @@ const LoggedIn = ({ user }) => {
           {user.username || user.email}
         </Typography>
       </Button>
-    </LangLink>
+    </Link>
   );
 };
 
@@ -50,11 +50,11 @@ const LoggedOut = () => {
   };
 
   return (
-    <LangLink {...LogIn} passHref>
+    <Link {...LogIn} passHref>
       <Button color="inherit">
         <FormattedMessage defaultMessage="Logga in" />
       </Button>
-    </LangLink>
+    </Link>
   );
 };
 
@@ -64,5 +64,8 @@ const Loading = () => {
 
 export default function ProfileArea() {
   const [session, loading] = useOfflineSession();
+  if (loading) {
+    return <></>;
+  }
   return <>{session ? <LoggedIn user={session.user} /> : <LoggedOut />}</>;
 }

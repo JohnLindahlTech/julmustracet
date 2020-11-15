@@ -1,14 +1,14 @@
+import React, { FC, useEffect } from "react";
 import { Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import { useDbSession } from "../db/sessionDB";
-import useLangRouter from "../hooks/useLangRouter";
+import { useRouter } from "next/router";
 import { UserEdit } from "../routes";
 import { PageContent } from "../components/PageContent";
+import useOfflineSession from "../db/useOfflineSession";
 
-const VerifyRequest = () => {
-  const [session] = useDbSession();
-  const router = useLangRouter();
+const VerifyRequest: FC = () => {
+  const [session] = useOfflineSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (session?.user) {

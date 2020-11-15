@@ -1,9 +1,9 @@
+import React, { FC } from "react";
 import { Typography } from "@material-ui/core";
-import React from "react";
 import { FormattedMessage } from "react-intl";
 import { PageContent } from "../components/PageContent";
 
-const Rules = () => {
+const Rules: FC = () => {
   return (
     <PageContent>
       <Typography variant="h1">

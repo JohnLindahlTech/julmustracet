@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useRouter } from "next/router";
 import { FormattedMessage } from "react-intl";
 import { Box, Typography, Grid } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import TopList from "../../components/table/TopList";
 import HistoryList from "../../components/table/HistoryList";
 import { BrandDetails } from "../../routes";
@@ -11,12 +12,48 @@ import { useGetDrinksFrom } from "../../db/useGetDrinks";
 import { PageContent } from "../../components/PageContent";
 import { Achievement } from "../../components/Achievement";
 import { useGetAchievementsFor } from "../../db/useGetAchievements";
+import Error404 from "../404";
+
+const LoadingUser: FC = () => {
+  const cards = Array.from({ length: 20 }, (x, i) => i);
+  return (
+    <PageContent>
+      <Typography variant="h1">
+        <Skeleton />
+      </Typography>
+      <Typography variant="h2">
+        <Skeleton />
+      </Typography>
+      <Grid container spacing={2} justify="center">
+        {cards.map((a) => (
+          <Achievement key={a} loading />
+        ))}
+      </Grid>
+    </PageContent>
+  );
+};
 
 const User: FC = () => {
   const router = useRouter();
   const { user } = router.query;
-  const { achievements } = useGetAchievementsFor(user as string);
-  const { graph, drinks, top } = useGetDrinksFrom(USER, user as string);
+  const { achievements, loading: achievementsLoading } = useGetAchievementsFor(
+    user as string
+  );
+  const { graph, drinks, top, loading: drinksLoading } = useGetDrinksFrom(
+    USER,
+    user as string
+  );
+
+  if (achievementsLoading || drinksLoading) {
+    return <LoadingUser />;
+  }
+
+  if (
+    (!achievementsLoading && (achievements?.length ?? 0) === 0) ||
+    (!drinksLoading && (drinks?.length ?? 0) === 0)
+  ) {
+    return <Error404 />;
+  }
   return (
     <>
       <PageContent>

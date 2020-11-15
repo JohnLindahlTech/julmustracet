@@ -1,13 +1,12 @@
-import React, { FC, MouseEvent } from "react";
-import { LinkProps } from "next/link";
-import LangLink from "./langLink";
+import React, { FC } from "react";
+import NextLink, { LinkProps } from "next/link";
 import { Link as MuiLink } from "@material-ui/core";
 
 export const Link: FC<LinkProps> = ({ children, ...rest }) => {
   return (
-    <LangLink {...rest} passHref>
+    <NextLink {...rest} passHref>
       <MuiLink>{children}</MuiLink>
-    </LangLink>
+    </NextLink>
   );
 };
 

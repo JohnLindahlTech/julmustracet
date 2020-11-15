@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import { signOut } from "next-auth/client";
 import { Button, Box, Typography } from "@material-ui/core";
 import { FormattedMessage } from "react-intl";
@@ -7,7 +7,7 @@ import withEnsuredSession from "../hocs/withEnsuredSession";
 import { useSessionDB } from "../db/sessionDB";
 import { PageContent } from "../components/PageContent";
 
-const LogOut = (props) => {
+const LogOut: FC = () => {
   const sessionDB = useSessionDB();
 
   const onSignoutClick = useCallback(
