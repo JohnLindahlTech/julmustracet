@@ -264,7 +264,7 @@ export default function TopList(props: TopListProps): JSX.Element {
               ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
                   <TableRow key={i}>
                     <TableCell colSpan={3}>
-                      <Skeleton />
+                      <Skeleton animation="wave" />
                     </TableCell>
                   </TableRow>
                 ))

@@ -20,10 +20,10 @@ const LoadingUser: FC = () => {
   return (
     <PageContent>
       <Typography variant="h1">
-        <Skeleton />
+        <Skeleton animation="wave" />
       </Typography>
       <Typography variant="h2">
-        <Skeleton />
+        <Skeleton animation="wave" />
       </Typography>
       <Grid container spacing={2} justify="center">
         {cards.map((a) => (

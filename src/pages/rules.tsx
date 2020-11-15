@@ -7,7 +7,7 @@ import { HeadTitle } from "../components/HeadTitle";
 const Rules: FC = () => {
   const intl = useIntl();
   return (
-    <PageContent>
+    <PageContent minHeight="70vh">
       <HeadTitle title={intl.formatMessage({ defaultMessage: "Regler" })} />
       <Typography variant="h1">
         <FormattedMessage defaultMessage="Regler" />

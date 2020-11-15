@@ -21,13 +21,13 @@ export const Achievement = (props: AchievementProps) => {
       <Card style={{ minHeight: 120 }}>
         <CardContent>
           <Typography variant="h5" component="p">
-            {loading ? <Skeleton /> : title}
+            {loading ? <Skeleton animation="wave" /> : title}
           </Typography>
           <Typography variant="caption" color="secondary">
-            {loading ? <Skeleton /> : format(createdAt)}
+            {loading ? <Skeleton animation="wave" /> : format(createdAt)}
           </Typography>
           <Typography variant="body2">
-            {loading ? <Skeleton /> : description}
+            {loading ? <Skeleton animation="wave" /> : description}
           </Typography>
         </CardContent>
       </Card>

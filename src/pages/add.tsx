@@ -170,7 +170,7 @@ const Add: FC = () => {
   }
 
   return (
-    <PageContent>
+    <PageContent minHeight="70vh">
       <HeadTitle
         title={intl.formatMessage({ defaultMessage: "Lägg till dryck" })}
       />

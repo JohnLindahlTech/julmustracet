@@ -47,89 +47,103 @@ const LogIn: FC<{ providers: Provider[] }> = (props) => {
 
   return (
     <PageContent>
-      <HeadTitle title={intl.formatMessage({ defaultMessage: "Logga in" })} />
-      <Typography variant="h1" align="center">
-        <FormattedMessage defaultMessage="Logga in" />
-      </Typography>
-      <Formik
-        initialValues={{ email: "" }}
-        onSubmit={onEmailLogin}
-        validationSchema={object({
-          email: string()
-            .email(
-              intl.formatMessage({
-                defaultMessage: "Måste ange en giltig epost",
-              })
-            )
-            .required(
-              intl.formatMessage({ defaultMessage: "Obligatoriskt fält" })
-            ),
-        })}
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="80vh"
       >
-        {({ submitForm, isSubmitting }) => (
-          <Form noValidate>
-            <Grid container justify="center" alignItems="center">
-              <Grid item lg={3} xs={12} sm={6} md={4}>
-                <Grid container direction="column" spacing={1}>
-                  <Grid item>
-                    <Field
-                      component={TextField}
-                      fullWidth
-                      name="email"
-                      type="email"
-                      label={intl.formatMessage({ defaultMessage: "Epost" })}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      type="submit"
-                      color="primary"
-                      variant="contained"
-                      fullWidth
-                      disabled={isSubmitting}
-                      onClick={submitForm}
-                    >
-                      <FormattedMessage defaultMessage="Logga in" />
-                    </Button>
+        <Box width="100%">
+          <HeadTitle
+            title={intl.formatMessage({ defaultMessage: "Logga in" })}
+          />
+          <Typography variant="h1" align="center">
+            <FormattedMessage defaultMessage="Logga in" />
+          </Typography>
+          <Formik
+            initialValues={{ email: "" }}
+            onSubmit={onEmailLogin}
+            validationSchema={object({
+              email: string()
+                .email(
+                  intl.formatMessage({
+                    defaultMessage: "Måste ange en giltig epost",
+                  })
+                )
+                .required(
+                  intl.formatMessage({ defaultMessage: "Obligatoriskt fält" })
+                ),
+            })}
+          >
+            {({ submitForm, isSubmitting }) => (
+              <Form noValidate>
+                <Grid container justify="center" alignItems="center">
+                  <Grid item lg={3} xs={12} sm={6} md={4}>
+                    <Grid container direction="column" spacing={1}>
+                      <Grid item>
+                        <Field
+                          component={TextField}
+                          fullWidth
+                          name="email"
+                          type="email"
+                          label={intl.formatMessage({
+                            defaultMessage: "Epost",
+                          })}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Button
+                          type="submit"
+                          color="primary"
+                          variant="contained"
+                          fullWidth
+                          disabled={isSubmitting}
+                          onClick={submitForm}
+                        >
+                          <FormattedMessage defaultMessage="Logga in" />
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </Form>
-        )}
-      </Formik>
-      <Box py={2}>
-        <Divider />
-      </Box>
-      <Typography variant="h2" align="center">
-        <FormattedMessage defaultMessage="Socialt" />
-      </Typography>
-      <Grid container justify="center" alignItems="center">
-        <Grid item lg={3} xs={12} sm={6} md={4}>
-          <Grid container direction="column" spacing={1}>
-            {loading
-              ? Array.from({ length: 5 }, (k, i) => i).map((i) => (
-                  <Grid item key={i}>
-                    <Skeleton variant="rect" height="36px" />
-                  </Grid>
-                ))
-              : providers
-                  .filter((p) => p.type !== "email")
-                  .map((provider) => (
-                    <Grid item key={provider.id}>
-                      <Button
-                        variant="outlined"
-                        fullWidth
-                        color="primary"
-                        onClick={onSignInOauth(provider)}
-                      >
-                        {provider.name}
-                      </Button>
+              </Form>
+            )}
+          </Formik>
+        </Box>
+        <Box py={2} width="100%">
+          <Divider />
+        </Box>
+        <Typography variant="h2" align="center">
+          <FormattedMessage defaultMessage="Socialt" />
+        </Typography>
+        <Grid container justify="center" alignItems="center">
+          <Grid item lg={3} xs={12} sm={6} md={4}>
+            <Grid container direction="column" spacing={1}>
+              {loading
+                ? Array.from({ length: 5 }, (k, i) => i).map((i) => (
+                    <Grid item key={i}>
+                      <Skeleton variant="rect" height="36px" animation="wave" />
                     </Grid>
-                  ))}
+                  ))
+                : providers
+                    .filter((p) => p.type !== "email")
+                    .map((provider) => (
+                      <Grid item key={provider.id}>
+                        <Button
+                          variant="outlined"
+                          fullWidth
+                          color="primary"
+                          onClick={onSignInOauth(provider)}
+                        >
+                          {provider.name}
+                        </Button>
+                      </Grid>
+                    ))}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </PageContent>
   );
 };

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Typography } from "@material-ui/core";
+import { Typography, Box } from "@material-ui/core";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import { UserEdit } from "../routes";
@@ -19,18 +19,26 @@ const VerifyRequest: FC = () => {
   }, [session, router]);
   return (
     <PageContent>
-      <HeadTitle
-        title={intl.formatMessage({ defaultMessage: "Verifiera epost" })}
-      />
-      <Typography variant="h1" align="center">
-        <FormattedMessage defaultMessage="Notera!" />
-      </Typography>
-      <Typography align="center">
-        <FormattedMessage defaultMessage="Du måste nu klicka på länken in eposten du bör ha fått." />
-      </Typography>
-      <Typography align="center">
-        <FormattedMessage defaultMessage="När du loggat in kommer du automatiskt navigeras vidare." />
-      </Typography>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="60vh"
+      >
+        <HeadTitle
+          title={intl.formatMessage({ defaultMessage: "Verifiera epost" })}
+        />
+        <Typography variant="h1" align="center">
+          <FormattedMessage defaultMessage="Notera!" />
+        </Typography>
+        <Typography align="center">
+          <FormattedMessage defaultMessage="Du måste nu klicka på länken in eposten du bör ha fått." />
+        </Typography>
+        <Typography align="center">
+          <FormattedMessage defaultMessage="När du loggat in kommer du automatiskt navigeras vidare." />
+        </Typography>
+      </Box>
     </PageContent>
   );
 };

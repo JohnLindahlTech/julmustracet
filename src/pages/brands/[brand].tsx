@@ -37,7 +37,9 @@ const Brand = () => {
       />
       <PageContent noPadding>
         <Box p={2}>
-          <Typography variant="h1">{loading ? <Skeleton /> : brand}</Typography>
+          <Typography variant="h1">
+            {loading ? <Skeleton animation="wave" /> : brand}
+          </Typography>
           <Typography variant="h2">
             <FormattedMessage defaultMessage="Graf" />
           </Typography>

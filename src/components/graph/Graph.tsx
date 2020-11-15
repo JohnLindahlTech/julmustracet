@@ -39,7 +39,7 @@ const Graph: FC<{
   return (
     <ResponsiveContainer aspect={16 / 9} minHeight={(320 * 9) / 16}>
       {loading ? (
-        <Skeleton variant="rect" />
+        <Skeleton variant="rect" animation="wave" />
       ) : (
         <LineChart
           onMouseMove={(props) => {

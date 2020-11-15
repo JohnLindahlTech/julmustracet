@@ -329,7 +329,7 @@ export default function HistoryList(props: TopListProps) {
               ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
                   <TableRow key={i}>
                     <TableCell colSpan={3}>
-                      <Skeleton />
+                      <Skeleton animation="wave" />
                     </TableCell>
                   </TableRow>
                 ))

@@ -29,6 +29,7 @@ const LogOut: FC = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
+        minHeight="65vh"
       >
         <Typography>
           <FormattedMessage defaultMessage="Är du säker på att du vill logga ut?" />

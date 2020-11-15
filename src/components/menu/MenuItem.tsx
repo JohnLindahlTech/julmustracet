@@ -33,9 +33,14 @@ const MenuItem: FC<MenuItemProps> = ({ item, session, loading }) => {
       <li>
         <ListItem button component="a">
           <ListItemIcon>
-            <Skeleton variant="circle" height={32} width={32} />
+            <Skeleton
+              variant="circle"
+              height={32}
+              width={32}
+              animation="wave"
+            />
           </ListItemIcon>
-          <ListItemText primary={<Skeleton />} />
+          <ListItemText primary={<Skeleton animation="wave" />} />
         </ListItem>
       </li>
     );
