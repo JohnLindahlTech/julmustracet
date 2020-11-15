@@ -91,7 +91,10 @@ const _useDbSession = (
           throw err;
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        Sentry.captureException(err);
+        console.error(err);
+      });
   }, [db]);
 
   useEffect(() => {

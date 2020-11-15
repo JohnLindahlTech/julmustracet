@@ -9,6 +9,7 @@ import React, {
 import { useSession } from "next-auth/client";
 import { Session, useDbSession } from "./sessionDB";
 import useNetworkStatus from "./useNetworkStatus";
+import * as Sentry from "@sentry/node";
 
 const OfflineSessionContext = createContext(undefined);
 
@@ -52,6 +53,14 @@ function _useOfflineSession(): [Session, boolean] {
   }, []);
 
   const { cancel } = useNetworkStatus({ onOnline });
+
+  useEffect(() => {
+    if (session?.user?.username) {
+      Sentry.setUser({ username: session?.user?.username });
+    } else {
+      Sentry.configureScope((scope) => scope.setUser(null));
+    }
+  }, [session]);
 
   useEffect(() => {
     if (nextSession) {
