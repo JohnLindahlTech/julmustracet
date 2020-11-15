@@ -325,6 +325,15 @@ export default function HistoryList(props: TopListProps) {
             type={type}
           />
           <TableBody>
+            {!loading && rows.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Typography color="textSecondary" align="center">
+                    <FormattedMessage defaultMessage="Ingen data" />
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ) : null}
             {loading
               ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
                   <TableRow key={i}>

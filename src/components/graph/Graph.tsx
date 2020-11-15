@@ -13,12 +13,14 @@ import {
   Line,
   Label,
   LabelList,
+  Text,
 } from "recharts";
 import ToolTip from "./ToolTip";
 import useCalculateActiveData from "../../hooks/useCalculateActiveData";
 import { useDateFormat } from "../../translations/DateFormatterProvider";
 import { useTheme } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { maxLimitDate, minLimitDate } from "../../lib/rules";
 
 const colors = [red[900], green[900], blue[900], brown[500], orange[800]];
 
@@ -33,9 +35,6 @@ const Graph: FC<{
   const lines = [...data].reverse();
   const myColors = colors.slice(0, lines.length).reverse();
   const calculateActiveData = useCalculateActiveData(lines);
-  if (lines.length <= 0) {
-    return null; // TODO What to show with no lines?
-  }
   return (
     <ResponsiveContainer aspect={16 / 9} minHeight={(320 * 9) / 16}>
       {loading ? (
@@ -54,13 +53,13 @@ const Graph: FC<{
         >
           <XAxis
             dataKey="time"
-            domain={["dataMin", "dataMax"]}
+            domain={[minLimitDate.getTime(), maxLimitDate.getTime()]}
             name="Time"
             interval={0}
             allowDecimals={false}
             tickCount={20}
             tickFormatter={(unixTime) => {
-              if (!isFinite(unixTime)) {
+              if (!Number.isFinite(unixTime)) {
                 return "Infinity";
               }
               return lightFormat(new Date(unixTime), "d");
@@ -89,7 +88,13 @@ const Graph: FC<{
             allowEscapeViewBox={{ x: false, y: false }}
             offset={20}
             content={<ToolTip data={calculateActiveData(time)} />}
-            labelFormatter={(label) => format(new Date(label))}
+            labelFormatter={(label) => {
+              const d = new Date(label);
+              if (isNaN(d.getTime())) {
+                return "-";
+              }
+              return format(d);
+            }}
             formatter={(value) => {
               return intl.formatMessage(
                 { defaultMessage: "{value} liter" },

@@ -157,7 +157,7 @@ const EditUser: NextPage = () => {
           <Typography>
             <FormattedMessage defaultMessage="Rekommendation: Undvik att byta användarnamn när du väl valt ett." />
           </Typography>
-          {session?.user?.username ? (
+          {session?.user?.username && drinks.length > 0 ? (
             <Typography variant="body1">
               <Link
                 href={{
