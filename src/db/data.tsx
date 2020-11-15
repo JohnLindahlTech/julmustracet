@@ -34,31 +34,35 @@ const _useData = () => {
     loading: achievementsLoading,
   } = useLoadAchievements();
   const [loading, setLoading] = useState(true);
-  const db = useDB();
+  const { db, loading: dbLoading } = useDB();
 
   useEffect(() => {
-    loadDrinks();
-    loadAchievements();
-  }, [loadDrinks, loadAchievements]);
+    if (!dbLoading) {
+      loadDrinks();
+      loadAchievements();
+    }
+  }, [loadDrinks, loadAchievements, dbLoading]);
 
   useEffect(() => {
     setLoading(drinksLoading || achievementsLoading);
   }, [drinksLoading, achievementsLoading]);
 
   useEffect(() => {
-    const changes = db
-      .changes({
-        live: true,
-        since: "now",
-      })
-      .on("change", () => {
-        loadDrinks();
-        loadAchievements();
-      });
-    return () => {
-      changes.cancel();
-    };
-  }, [db, loadDrinks, loadAchievements]);
+    if (!dbLoading) {
+      const changes = db
+        .changes({
+          live: true,
+          since: "now",
+        })
+        .on("change", () => {
+          loadDrinks();
+          loadAchievements();
+        });
+      return () => {
+        changes.cancel();
+      };
+    }
+  }, [db, loadDrinks, loadAchievements, dbLoading]);
   return {
     drinks,
     achievements,

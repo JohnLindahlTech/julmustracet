@@ -28,7 +28,7 @@ const defaultBrands = [
 ];
 
 export function useBrands(): string[] {
-  const db = useDB();
+  const { db } = useDB();
   const [brands, setBrands] = useState(defaultBrands);
 
   const queryUniqueBrands = useCallback(async () => {

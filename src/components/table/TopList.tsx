@@ -265,7 +265,7 @@ export default function TopList(props: TopListProps): JSX.Element {
                   <TableRow key={i}>
                     <TableCell colSpan={3}>
                       <Skeleton />
-                    </TableCell>{" "}
+                    </TableCell>
                   </TableRow>
                 ))
               : stableSort(rows, getComparator(order, orderBy))

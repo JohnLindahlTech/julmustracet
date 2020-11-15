@@ -8,7 +8,7 @@ export default function usePutDrink(): [
   (data: unknown) => Promise<any>,
   { loading: boolean }
 ] {
-  const db = useDB();
+  const { db } = useDB();
   const [session] = useOfflineSession();
   const [loading, setLoading] = useState(false);
 

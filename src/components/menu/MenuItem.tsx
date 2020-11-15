@@ -28,7 +28,6 @@ const MenuItem: FC<MenuItemProps> = ({ item, session, loading }) => {
     return item;
   }
   const i = item as Item;
-  console.log(i, session);
   if (loading && i.requireLoggedOut) {
     return (
       <li>

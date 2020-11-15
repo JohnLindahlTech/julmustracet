@@ -11,7 +11,7 @@ type AchievementsReturn = {
   loading: boolean;
 };
 export default function useLoadAchievements(): AchievementsReturn {
-  const db = useDB();
+  const { db } = useDB();
   const [achievements, setAchievements] = useState([]);
   const [mappedAchievements, setMappedAchievements] = useState({});
   const [loading, setLoading] = useState(true);

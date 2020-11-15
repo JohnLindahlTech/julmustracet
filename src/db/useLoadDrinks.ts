@@ -10,7 +10,7 @@ type DrinkReturn = {
 };
 
 export default function useLoadDrinks(): DrinkReturn {
-  const db = useDB();
+  const { db } = useDB();
   const [drinks, setDrinks] = useState([]);
   const [loading, setLoading] = useState(true);
 

@@ -330,7 +330,7 @@ export default function HistoryList(props: TopListProps) {
                   <TableRow key={i}>
                     <TableCell colSpan={3}>
                       <Skeleton />
-                    </TableCell>{" "}
+                    </TableCell>
                   </TableRow>
                 ))
               : stableSort(rows, getComparator(order, orderBy))
