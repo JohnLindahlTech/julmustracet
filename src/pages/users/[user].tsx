@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useRouter } from "next/router";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Box, Typography, Grid } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import TopList from "../../components/table/TopList";
@@ -10,6 +10,7 @@ import { USER, BRAND } from "../../lib/mapGraphData";
 import Graph from "../../components/graph/Graph";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
 import { PageContent } from "../../components/PageContent";
+import { HeadTitle } from "../../components/HeadTitle";
 import { Achievement } from "../../components/Achievement";
 import { useGetAchievementsFor } from "../../db/useGetAchievements";
 import Error404 from "../404";
@@ -35,6 +36,7 @@ const LoadingUser: FC = () => {
 
 const User: FC = () => {
   const router = useRouter();
+  const intl = useIntl();
   const { user } = router.query;
   const { achievements, loading: achievementsLoading } = useGetAchievementsFor(
     user as string
@@ -48,14 +50,17 @@ const User: FC = () => {
     return <LoadingUser />;
   }
 
-  if (
-    (!achievementsLoading && (achievements?.length ?? 0) === 0) ||
-    (!drinksLoading && (drinks?.length ?? 0) === 0)
-  ) {
+  if (!drinksLoading && (drinks?.length ?? 0) === 0) {
     return <Error404 />;
   }
   return (
     <>
+      <HeadTitle
+        title={intl.formatMessage(
+          { defaultMessage: "Användare: {user}" },
+          { user }
+        )}
+      />
       <PageContent>
         <Typography variant="h1">{user}</Typography>
         <Typography variant="h2">

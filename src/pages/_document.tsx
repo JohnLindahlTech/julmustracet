@@ -12,10 +12,81 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
+          <meta name="application-name" content="JulmustRacet" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="default"
+          />
+          <meta name="apple-mobile-web-app-title" content="JulmustRacet" />
+          <meta name="description" content="Den legendariska Decemberleken." />
+          <meta name="format-detection" content="telephone=no" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="msapplication-config" content="/browserconfig.xml" />
+          <meta
+            name="msapplication-TileColor"
+            content={theme.palette.primary.main}
+          />
+          <meta name="msapplication-tap-highlight" content="no" />
           <meta name="theme-color" content={theme.palette.primary.main} />
+
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/manifest.json" />
+          <link
+            rel="mask-icon"
+            href="/safari-pinned-tab.svg"
+            color={theme.palette.primary.main}
+          />
+          <link rel="shortcut icon" href="/favicon.ico" />
+
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:url" content="https://julmustracet.se" />
+          <meta
+            name="twitter:title"
+            key="twitter:title"
+            content="JulmustRacet"
+          />
+          <meta
+            name="twitter:description"
+            content="Den legendariska Decemberleken."
+          />
+          <meta
+            name="twitter:image"
+            content="https://julmustracet.se/android-chrome-192x192.png"
+          />
+          <meta name="twitter:creator" content="@JohnPhotoSE" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" key="og:title" content="JulmustRacet" />
+          <meta
+            property="og:description"
+            content="Den legendariska Decemberleken."
+          />
+          <meta property="og:site_name" content="JulmustRacet" />
+          <meta property="og:url" content="https://julmustracet.se" />
+          <meta
+            property="og:image"
+            content="https://julmustracet.se/apple-touch-icon.png"
           />
         </Head>
         <body>

@@ -1,11 +1,14 @@
 import React, { FC } from "react";
 import { Typography } from "@material-ui/core";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { PageContent } from "../components/PageContent";
+import { HeadTitle } from "../components/HeadTitle";
 
 const Rules: FC = () => {
+  const intl = useIntl();
   return (
     <PageContent>
+      <HeadTitle title={intl.formatMessage({ defaultMessage: "Regler" })} />
       <Typography variant="h1">
         <FormattedMessage defaultMessage="Regler" />
       </Typography>

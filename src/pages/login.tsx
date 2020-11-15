@@ -10,6 +10,7 @@ import withEnsuredSession from "../hocs/withEnsuredSession";
 import { LOGGED_OUT } from "../hooks/useEnsureSession";
 import { Home } from "../routes";
 import { PageContent } from "../components/PageContent";
+import { HeadTitle } from "../components/HeadTitle";
 
 type Provider = {
   name: string;
@@ -46,6 +47,7 @@ const LogIn: FC<{ providers: Provider[] }> = (props) => {
 
   return (
     <PageContent>
+      <HeadTitle title={intl.formatMessage({ defaultMessage: "Logga in" })} />
       <Typography variant="h1" align="center">
         <FormattedMessage defaultMessage="Logga in" />
       </Typography>

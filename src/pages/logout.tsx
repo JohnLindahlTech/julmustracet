@@ -1,13 +1,15 @@
 import React, { FC, useCallback } from "react";
 import { signOut } from "next-auth/client";
 import { Button, Box, Typography } from "@material-ui/core";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Home } from "../routes";
 import withEnsuredSession from "../hocs/withEnsuredSession";
 import { useSessionDB } from "../db/sessionDB";
 import { PageContent } from "../components/PageContent";
+import { HeadTitle } from "../components/HeadTitle";
 
 const LogOut: FC = () => {
+  const intl = useIntl();
   const sessionDB = useSessionDB();
 
   const onSignoutClick = useCallback(
@@ -21,6 +23,7 @@ const LogOut: FC = () => {
 
   return (
     <PageContent>
+      <HeadTitle title={intl.formatMessage({ defaultMessage: "Logga ut" })} />
       <Box
         display="flex"
         flexDirection="column"

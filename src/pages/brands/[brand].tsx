@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "react-intl";
 import { Box, Typography } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useRouter } from "next/router";
@@ -10,10 +11,12 @@ import { BRAND, USER } from "../../lib/mapGraphData";
 import Graph from "../../components/graph/Graph";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
 import { PageContent } from "../../components/PageContent";
+import { HeadTitle } from "../../components/HeadTitle";
 import Error404 from "../404";
 
 const Brand = () => {
   const router = useRouter();
+  const intl = useIntl();
   const { brand } = router.query;
   const { graph, drinks, top, loading } = useGetDrinksFrom(
     BRAND,
@@ -26,6 +29,12 @@ const Brand = () => {
 
   return (
     <>
+      <HeadTitle
+        title={intl.formatMessage(
+          { defaultMessage: "Märke: {brand}" },
+          { brand }
+        )}
+      />
       <PageContent noPadding>
         <Box p={2}>
           <Typography variant="h1">{loading ? <Skeleton /> : brand}</Typography>

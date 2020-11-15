@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from "react";
 import { Typography } from "@material-ui/core";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import { UserEdit } from "../routes";
 import { PageContent } from "../components/PageContent";
+import { HeadTitle } from "../components/HeadTitle";
 import useOfflineSession from "../db/useOfflineSession";
 
 const VerifyRequest: FC = () => {
+  const intl = useIntl();
   const [session] = useOfflineSession();
   const router = useRouter();
 
@@ -17,6 +19,9 @@ const VerifyRequest: FC = () => {
   }, [session, router]);
   return (
     <PageContent>
+      <HeadTitle
+        title={intl.formatMessage({ defaultMessage: "Verifiera epost" })}
+      />
       <Typography variant="h1" align="center">
         <FormattedMessage defaultMessage="Notera!" />
       </Typography>

@@ -31,6 +31,7 @@ import { useGetDrink } from "../db/useGetDrinks";
 import { useRouter } from "next/router";
 import { Home, UserEdit } from "../routes";
 import { PageContent } from "../components/PageContent";
+import { HeadTitle } from "../components/HeadTitle";
 import useOfflineSession from "../db/useOfflineSession";
 
 type Option = {
@@ -170,6 +171,9 @@ const Add: FC = () => {
 
   return (
     <PageContent>
+      <HeadTitle
+        title={intl.formatMessage({ defaultMessage: "Lägg till dryck" })}
+      />
       <Typography variant="h1">
         {drinkItem ? (
           <FormattedMessage defaultMessage="Redigera dryck" />

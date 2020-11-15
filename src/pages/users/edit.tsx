@@ -26,6 +26,7 @@ import { AddDrink, UserDetails } from "../../routes";
 import usePutDrink from "../../db/usePutDrink";
 import { useRouter } from "next/router";
 import { PageContent } from "../../components/PageContent";
+import { HeadTitle } from "../../components/HeadTitle";
 import { NextPage } from "next";
 
 const messages = defineMessages({
@@ -126,16 +127,20 @@ const UserForm = ({ user }) => {
 
 const EditUser: NextPage = () => {
   const theme = useTheme();
+  const intl = useIntl();
   const [put] = usePutDrink();
   const [session] = useSession();
   const { drinks, loading } = useGetDrinksFrom(USER, session?.user?.username);
   const router = useRouter();
   return (
     <>
+      <HeadTitle
+        title={intl.formatMessage({ defaultMessage: "Redigera användare" })}
+      />
       <Box mb={2}>
         <PageContent>
           <Typography variant="h1">
-            <FormattedMessage defaultMessage="Redigera Användare" />
+            <FormattedMessage defaultMessage="Redigera användare" />
           </Typography>
           <Typography
             color={session?.user?.username ? "initial" : "primary"}

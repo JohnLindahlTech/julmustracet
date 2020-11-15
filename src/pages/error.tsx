@@ -1,14 +1,19 @@
 import React, { FC } from "react";
 import { Button, Box, Typography } from "@material-ui/core";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import { Home, LogIn } from "../routes";
 import { PageContent } from "../components/PageContent";
 import NextLink from "next/link";
 import { Link } from "../components/link";
+import { HeadTitle } from "../components/HeadTitle";
 
 const Error: FC = () => {
+  const intl = useIntl();
   return (
     <PageContent>
+      <HeadTitle
+        title={intl.formatMessage({ defaultMessage: "Inloggningsfel" })}
+      />
       <Box
         display="flex"
         flexDirection="column"

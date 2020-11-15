@@ -1,9 +1,10 @@
 import { Typography, createStyles, makeStyles, Theme } from "@material-ui/core";
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import { NextPage } from "next";
 import Users from "../../components/users";
 import { PageContent } from "../../components/PageContent";
-import { NextPage } from "next";
+import { HeadTitle } from "../../components/HeadTitle";
 
 const useStyles = makeStyles(({ spacing }: Theme) =>
   createStyles({
@@ -15,13 +16,19 @@ const useStyles = makeStyles(({ spacing }: Theme) =>
 
 const UsersPage: NextPage = () => {
   const classes = useStyles();
+  const intl = useIntl();
   return (
-    <PageContent noPadding>
-      <Typography className={classes.padding} variant="h1">
-        <FormattedMessage defaultMessage="Användarligan" />
-      </Typography>
-      <Users />
-    </PageContent>
+    <>
+      <HeadTitle
+        title={intl.formatMessage({ defaultMessage: "Användarligan" })}
+      />
+      <PageContent noPadding>
+        <Typography className={classes.padding} variant="h1">
+          <FormattedMessage defaultMessage="Användarligan" />
+        </Typography>
+        <Users />
+      </PageContent>
+    </>
   );
 };
 
