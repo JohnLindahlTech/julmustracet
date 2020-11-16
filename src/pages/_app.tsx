@@ -70,6 +70,9 @@ const App = ({ Component, pageProps }) => {
         />
         <meta name="twitter:creator" content={TWITTER_HANDLE} />
         <meta name="twitter:url" content={NEXTAUTH_URL} />
+        <link rel="alternate" href={`${NEXTAUTH_URL}`} hrefLang="x-default" />
+        <link rel="alternate" href={`${NEXTAUTH_URL}/sv`} hrefLang="sv" />
+        <link rel="alternate" href={`${NEXTAUTH_URL}/en`} hrefLang="en" />
         <meta
           name="twitter:image"
           content={`${NEXTAUTH_URL}/android-chrome-192x192.png`}

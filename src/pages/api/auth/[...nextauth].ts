@@ -15,6 +15,7 @@ import {
   jwtEncode,
   maxAge,
 } from "../../../lib/createAuthCookie";
+import { sendVerificationRequest } from "../../../lib/sendVerificationRequest";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -27,6 +28,7 @@ const options = {
       server: process.env.NEXTAUTH_EMAIL_SERVER,
       // Email services often only allow sending email from a valid/verified address
       from: process.env.NEXTAUTH_EMAIL_FROM,
+      sendVerificationRequest: sendVerificationRequest,
     }),
     // When configuring oAuth providers make sure you enabling requesting
     // permission to get the users email address (required to sign in)
@@ -130,6 +132,9 @@ const options = {
   debug: !isProd, // Use this option to enable debug messages in the console
 };
 
-const Auth = (req, res) => NextAuth(req, res, options);
+const Auth = (req, res) => {
+  const opt = { ...options, req, res };
+  return NextAuth(req, res, opt);
+};
 
 export default Auth;

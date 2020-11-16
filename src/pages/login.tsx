@@ -1,4 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { getProviders, signIn } from "next-auth/client";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Button, Box, Divider, Grid, Typography } from "@material-ui/core";
@@ -19,20 +20,22 @@ type Provider = {
 };
 
 const LogIn: FC<{ providers: Provider[] }> = (props) => {
+  const { locale } = useRouter();
   const intl = useIntl();
   const [providers, setProviders] = useState<Provider[]>(props.providers ?? []);
   const [loading, setLoading] = useState(props?.providers?.length === 0);
 
+  const fetchProviders = useCallback(async () => {
+    const providers = Object.values(await getProviders()) as Provider[];
+    setProviders(providers);
+    setLoading(false);
+  }, []);
+
   useEffect(() => {
-    const fetchProviders = async () => {
-      const providers = Object.values(await getProviders()) as Provider[];
-      setProviders(providers);
-      setLoading(false);
-    };
     if (!Array.isArray(providers) || !providers.length) {
       fetchProviders();
     }
-  }, [providers]);
+  }, [providers, fetchProviders]);
 
   const onSignInOauth = useCallback(
     (provider) => () => {
@@ -41,9 +44,12 @@ const LogIn: FC<{ providers: Provider[] }> = (props) => {
     []
   );
 
-  const onEmailLogin = useCallback((values) => {
-    signIn("email", { email: values.email });
-  }, []);
+  const onEmailLogin = useCallback(
+    (values) => {
+      signIn("email", { email: values.email, locale });
+    },
+    [locale]
+  );
 
   return (
     <PageContent>

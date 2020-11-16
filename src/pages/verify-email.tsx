@@ -1,13 +1,38 @@
-import React, { FC, useEffect } from "react";
-import { Typography, Box } from "@material-ui/core";
+import React, { FC, useEffect, useState } from "react";
+import {
+  Typography,
+  Box,
+  Paper,
+  CardContent,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import { UserEdit } from "../routes";
 import { PageContent } from "../components/PageContent";
 import { HeadTitle } from "../components/HeadTitle";
 import useOfflineSession from "../db/useOfflineSession";
+import * as cookie from "cookie";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    uniqueMessagePaper: {
+      color: theme.palette.secondary.contrastText,
+      backgroundColor: theme.palette.secondary.main,
+      padding: theme.spacing(2),
+      margin: theme.spacing(2),
+    },
+  })
+);
 
 const VerifyRequest: FC = () => {
+  const classes = useStyles();
+  const [uniqueMessage] = useState(
+    (typeof document !== "undefined" ? cookie.parse(document.cookie) : {})[
+      "JR.UNIQUE.MESSAGE"
+    ]
+  );
   const intl = useIntl();
   const [session] = useOfflineSession();
   const router = useRouter();
@@ -17,6 +42,7 @@ const VerifyRequest: FC = () => {
       router.push(UserEdit.href);
     }
   }, [session, router]);
+
   return (
     <PageContent>
       <Box
@@ -35,9 +61,16 @@ const VerifyRequest: FC = () => {
         <Typography align="center">
           <FormattedMessage defaultMessage="Du måste nu klicka på länken in eposten du bör ha fått." />
         </Typography>
-        <Typography align="center">
-          <FormattedMessage defaultMessage="När du loggat in kommer du automatiskt navigeras vidare." />
-        </Typography>
+        {uniqueMessage ? (
+          <>
+            <Typography align="center">
+              <FormattedMessage defaultMessage="I eposten ska följande meddelande finnas:" />
+            </Typography>
+            <Paper className={classes.uniqueMessagePaper}>
+              <Typography align="center">{uniqueMessage}</Typography>
+            </Paper>
+          </>
+        ) : null}
       </Box>
     </PageContent>
   );

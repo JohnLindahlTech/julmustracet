@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { serialize, CookieSerializeOptions } from "cookie";
 import * as Sentry from "@sentry/node";
 import {
   uniqueNamesGenerator,
@@ -16,6 +17,16 @@ import {
   IUser,
   ISession,
 } from "./models";
+
+type Style = "upperCase";
+
+const uniqueNamesConfig = {
+  dictionaries: [adjectives, colors, animals],
+  style: "upperCase" as Style,
+  separator: " ",
+};
+
+const uniqueMessageCookie = "JR.UNIQUE.MESSAGE";
 
 const NOT_FOUND_ERROR_NAME = "not_found";
 
@@ -288,13 +299,15 @@ const Adapter = (/* config, options = {} */) => {
       url,
       token,
       secret,
-      provider
+      provider,
+      options
     ) {
       _debug("createVerificationRequest", identifier);
       try {
-        const uniqueMessage = uniqueNamesGenerator({
-          dictionaries: [adjectives, colors, animals],
-        }); // big_red_donkey
+        const { req, res } = options;
+        const { locale } = req.body;
+        console.log({ locale });
+        const uniqueMessage = uniqueNamesGenerator(uniqueNamesConfig);
 
         const { baseUrl } = appOptions;
         const { sendVerificationRequest, maxAge } = provider;
@@ -328,7 +341,17 @@ const Adapter = (/* config, options = {} */) => {
           baseUrl,
           provider,
           uniqueMessage,
+          locale,
         });
+
+        res.setHeader(
+          "Set-Cookie",
+          serialize(uniqueMessageCookie, uniqueMessage, {
+            httpOnly: false,
+            path: "/",
+            maxAge: 60,
+          })
+        );
 
         return verificationRequest;
       } catch (error) {

@@ -6,10 +6,11 @@ import theme from "../theme";
 
 polyfill();
 
-export default class MyDocument extends Document {
+export default class MyDocument extends Document<{ locale: string }> {
   render(): JSX.Element {
+    const { locale = "sv" } = this.props;
     return (
-      <Html lang="en">
+      <Html lang={locale}>
         <Head>
           {/* PWA primary color */}
           <meta name="application-name" content="JulmustRacet" />
@@ -100,6 +101,7 @@ export default class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
+      locale: ctx.locale,
       styles: (
         <>
           {initialProps.styles}
