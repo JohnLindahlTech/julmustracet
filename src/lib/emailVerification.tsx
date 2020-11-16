@@ -54,7 +54,7 @@ const css = `
 }
 `;
 
-export const generate = ({ uniqueMessage, escapedEmail, url, intl }) => {
+export const generate = ({ uniqueMessage, url, intl }) => {
   return (
     <Mjml lang="sv" owa="desktop">
       <MjmlHead>

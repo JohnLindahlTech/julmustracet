@@ -38,7 +38,7 @@ export const sendVerificationRequest = ({
           { site }
         ),
         text: text({ url, site, uniqueMessage, intl }),
-        html: html({ url, site, email, uniqueMessage, intl }),
+        html: html({ url, uniqueMessage, intl }),
       },
       async (error) => {
         if (error) {
@@ -57,23 +57,20 @@ export const sendVerificationRequest = ({
 };
 
 // Email HTML body
-const html = ({ url, site, email, uniqueMessage, intl }) => {
+const html = ({ url, uniqueMessage, intl }) => {
   // Insert invisible space into domains and email address to prevent both the
   // email address and the domain from being turned into a hyperlink by email
   // clients like Outlook and Apple mail, as this is confusing because it seems
   // like they are supposed to click on their email address to sign in.
-  const escapedEmail = `${email.replace(/\./g, "&#8203;.")}`;
-  const escapedSite = `${site.replace(/\./g, "&#8203;.")}`;
+
+  // const escapedEmail = `${email.replace(/\./g, "&#8203;.")}`;
+  // const escapedSite = `${site.replace(/\./g, "&#8203;.")}`;
 
   const { html } = render(
     generate({
       url,
-      site,
-      escapedSite,
-      email,
-      escapedEmail,
-      intl,
       uniqueMessage,
+      intl,
     })
   );
   return html;

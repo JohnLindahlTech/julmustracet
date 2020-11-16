@@ -113,6 +113,16 @@
       "value": "Registrerat minst 1 dryck."
     }
   ],
+  "7rF0o4": [
+    {
+      "type": 0,
+      "value": "Logga in på "
+    },
+    {
+      "type": 1,
+      "value": "site"
+    }
+  ],
   "8QeM8A": [
     {
       "type": 0,
@@ -349,10 +359,16 @@
       "value": "Graf"
     }
   ],
-  "N91wcs": [
+  "MI3I6o": [
     {
       "type": 0,
-      "value": "Något gick väldigt fel"
+      "value": "Något gick väldigt tokigt"
+    }
+  ],
+  "NwhpsN": [
+    {
+      "type": 0,
+      "value": "FEL"
     }
   ],
   "OK+McJ": [
@@ -365,6 +381,18 @@
     {
       "type": 0,
       "value": "Provsmakare"
+    }
+  ],
+  "OQUAvA": [
+    {
+      "type": 0,
+      "value": "Om du inte kan klicka på knappen ovan kan du kopiera följande länk i din webbläsare:"
+    }
+  ],
+  "PWYWk5": [
+    {
+      "type": 0,
+      "value": "Logga in till JulmustRacet!"
     }
   ],
   "Pf7MV/": [
@@ -489,6 +517,12 @@
       "value": "Redigera dryck"
     }
   ],
+  "ZeCih0": [
+    {
+      "type": 0,
+      "value": "I eposten ska följande meddelande finnas:"
+    }
+  ],
   "aApUdB": [
     {
       "type": 0,
@@ -553,6 +587,12 @@
     {
       "type": 0,
       "value": "Avbryt"
+    }
+  ],
+  "e1qvQA": [
+    {
+      "type": 0,
+      "value": "Klicka på knappen här under för att logga in på JulmustRacet."
     }
   ],
   "eLKei0": [
@@ -739,6 +779,32 @@
       "value": "Du måste vara inloggad"
     }
   ],
+  "saidFH": [
+    {
+      "type": 0,
+      "value": "Logga in på "
+    },
+    {
+      "type": 1,
+      "value": "site"
+    },
+    {
+      "type": 0,
+      "value": " med denna länk "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " Följande meddelande visades vid inloggningen: "
+    },
+    {
+      "type": 1,
+      "value": "uniqueMessage"
+    }
+  ],
   "siIhVs": [
     {
       "type": 0,
@@ -797,10 +863,10 @@
       "value": "Obligatoriskt fält"
     }
   ],
-  "w6tfeY": [
+  "x0lhQY": [
     {
       "type": 0,
-      "value": "När du loggat in kommer du automatiskt navigeras vidare."
+      "value": "Följande meddelande visades vid inloggningen"
     }
   ],
   "x400Hl": [
