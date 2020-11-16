@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { getCsrfToken } from "next-auth/client";
 import { Formik, Field, Form } from "formik";
 import { FormattedMessage, useIntl, defineMessages } from "react-intl";
 import * as Sentry from "@sentry/node";
@@ -76,7 +77,16 @@ const getErrorMessage = (id: string): { defaultMessage: string } => {
 
 const UserForm = ({ user }) => {
   const intl = useIntl();
+  const [csrfToken, setCsrfToken] = useState();
 
+  const getCsrf = useCallback(async () => {
+    const csrf = await getCsrfToken();
+    setCsrfToken(csrf);
+  }, []);
+
+  useEffect(() => {
+    getCsrf();
+  }, [getCsrf]);
   const schema = object({
     username: string(intl.formatMessage(messages["username.string"]))
       .required(intl.formatMessage(messages["username.missing"]))
@@ -91,7 +101,7 @@ const UserForm = ({ user }) => {
   const onSubmit = useCallback(
     async (values, { setSubmitting, setErrors }) => {
       try {
-        await patchData("/api/users/me", values);
+        await patchData("/api/users/me", { ...values, csrfToken });
         window.location.reload();
       } catch (error) {
         if (error?.data?.errorCode) {
@@ -107,7 +117,7 @@ const UserForm = ({ user }) => {
         setSubmitting(false);
       }
     },
-    [intl]
+    [intl, csrfToken]
   );
 
   return (

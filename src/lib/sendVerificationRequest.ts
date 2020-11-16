@@ -3,6 +3,7 @@ import { render } from "mjml-react";
 import { createIntl, createIntlCache } from "react-intl";
 import { generate } from "./emailVerification";
 import { getMessages } from "../translations/messages";
+import * as Sentry from "@sentry/node";
 
 // This is optional but highly recommended
 // since it prevents memory leak
@@ -36,12 +37,14 @@ export const sendVerificationRequest = ({
           { defaultMessage: "Logga in på {site}" },
           { site }
         ),
-        text: text({ url, site, email, uniqueMessage, intl }),
+        text: text({ url, site, uniqueMessage, intl }),
         html: html({ url, site, email, uniqueMessage, intl }),
       },
-      (error) => {
+      async (error) => {
         if (error) {
-          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR", error));
+          Sentry.captureException(error);
+          await Sentry.flush(2000);
+          return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR"));
         }
         return resolve();
       }

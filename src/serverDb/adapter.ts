@@ -306,7 +306,6 @@ const Adapter = (/* config, options = {} */) => {
       try {
         const { req, res } = options;
         const { locale } = req.body;
-        console.log({ locale });
         const uniqueMessage = uniqueNamesGenerator(uniqueNamesConfig);
 
         const { baseUrl } = appOptions;

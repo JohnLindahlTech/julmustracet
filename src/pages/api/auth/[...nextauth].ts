@@ -48,6 +48,10 @@ const options = {
       clientId: process.env.NEXTAUTH_GITHUB_ID,
       clientSecret: process.env.NEXTAUTH_GITHUB_SECRET,
     }),
+    Providers.Discord({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    }),
   ],
 
   // @link https://next-auth.js.org/configuration/databases

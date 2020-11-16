@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { createHash } from "crypto";
 import { julmustracetDb, userDb } from "../../../serverDb/dbs";
 import { User } from "../../../serverDb/models";
 import { getSession } from "next-auth/client";
@@ -166,8 +167,42 @@ async function updateAllYearsAchievements(
 }
 
 async function editUser(req, res) {
+  const baseUrl = process.env.NEXTAUTH_URL;
+  const secret = process.env.NEXTAUTH_SECRET;
+
+  const useSecureCookies = baseUrl.startsWith("https://");
+
+  // Default to __Host- for CSRF token for additional protection if using useSecureCookies
+  // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
+  const csrfTokenCookieName = `${
+    useSecureCookies ? "__Host-" : ""
+  }next-auth.csrf-token`;
+
+  const { body } = req;
+  const { csrfToken: csrfTokenFromPost } = body;
+
+  let csrfTokenVerified = false;
+  if (req.cookies[csrfTokenCookieName]) {
+    const [csrfTokenValue, csrfTokenHash] = req.cookies[
+      csrfTokenCookieName
+    ].split("|");
+    if (
+      csrfTokenHash ===
+      createHash("sha256").update(`${csrfTokenValue}${secret}`).digest("hex")
+    ) {
+      // If hash matches then we trust the CSRF token value
+
+      // If this is a POST request and the CSRF Token in the Post request matches
+      // the cookie we have already verified is one we have set, then token is verified!
+      if (csrfTokenValue === csrfTokenFromPost) {
+        csrfTokenVerified = true;
+      }
+    }
+  }
+  if (!csrfTokenVerified) {
+    throw new RequestError("Invalid CSRF", 403, "csrf");
+  }
   try {
-    const { body } = req;
     const session = await getSession({ req });
     const currentUser = new User(
       await userDb.get(User.buildId(session.user.email))
