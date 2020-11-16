@@ -1233,12 +1233,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@formatjs/cli@^2.13.2":
-  version "2.13.8"
-  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-2.13.8.tgz#d359a6ddfc2973c5c95cbe077b872ee3ba13004e"
-  integrity sha512-IhxqoCpkt5sgm64iA6Hgxkhy0YRTZ6wMeZHphibipFM7IqJH17Khty/9sVY5d4pZmKST/BDsKXqSNTD/eNCW6g==
+"@formatjs/cli@^2.13.12":
+  version "2.13.12"
+  resolved "https://registry.yarnpkg.com/@formatjs/cli/-/cli-2.13.12.tgz#3f239b4723f66b7d559d2166538b031c8319ab3b"
+  integrity sha512-ZAIN1AG4/kUvBy0asWBGuVeT7xC3P8pIOJmjEzeULZ6k5j72fZ+csTNaBbTo779M3l8jgnY6/LXoS1z/gpyacg==
   dependencies:
-    "@formatjs/ts-transformer" "2.12.3"
+    "@formatjs/ts-transformer" "2.12.7"
     "@types/json-stable-stringify" "^1.0.32"
     "@types/lodash" "^4.14.150"
     "@types/loud-rejection" "^2.0.0"
@@ -1247,7 +1247,7 @@
     commander "^6.1.0"
     fast-glob "^3.2.4"
     fs-extra "^9.0.0"
-    intl-messageformat-parser "6.0.13"
+    intl-messageformat-parser "6.0.16"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.15"
     loud-rejection "^2.2.0"
@@ -1346,15 +1346,6 @@
     intl-messageformat "9.3.18"
     intl-messageformat-parser "6.0.16"
     tslib "^2.0.1"
-
-"@formatjs/ts-transformer@2.12.3":
-  version "2.12.3"
-  resolved "https://registry.yarnpkg.com/@formatjs/ts-transformer/-/ts-transformer-2.12.3.tgz#a05250fc9d15272dcab17ecc78c63b3ddc92bdeb"
-  integrity sha512-subR1DzJDeE14dZ+z8U2mUEtkf6ojJk8Ey8dYExXJ7U1VS7jcFgMSEMHO783N2aBFAdzO5N5H7DqAjwszCnR+A==
-  dependencies:
-    intl-messageformat-parser "6.0.13"
-    tslib "^2.0.1"
-    typescript "^4.0"
 
 "@formatjs/ts-transformer@2.12.7":
   version "2.12.7"
@@ -5866,14 +5857,6 @@ internal-slot@^1.0.2:
     es-abstract "^1.17.0-next.1"
     has "^1.0.3"
     side-channel "^1.0.2"
-
-intl-messageformat-parser@6.0.13:
-  version "6.0.13"
-  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-6.0.13.tgz#705ca7274f3eb9c67a81debb65c7582341d14d66"
-  integrity sha512-9B+pD1vUjDHEXQQeZR/7GNpQrxH7k1JmmV8dAz7OLA1Vln7cBH3f2cWa0BwwClSycLrkrMevEwemFch4PoZDaQ==
-  dependencies:
-    "@formatjs/ecma402-abstract" "1.3.0"
-    tslib "^2.0.1"
 
 intl-messageformat-parser@6.0.16:
   version "6.0.16"
