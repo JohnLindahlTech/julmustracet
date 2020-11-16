@@ -43,7 +43,11 @@ export const sendVerificationRequest = ({
       async (error) => {
         if (error) {
           Sentry.captureException(error);
-          await Sentry.flush(2000);
+          try {
+            await Sentry.flush(2000);
+          } catch (err) {
+            // if it fails it fails
+          }
           return reject(new Error("SEND_VERIFICATION_EMAIL_ERROR"));
         }
         return resolve();

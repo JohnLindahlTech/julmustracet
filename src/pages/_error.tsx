@@ -46,7 +46,11 @@ MyError.getInitialProps = async ({ res, err, asPath }) => {
 
     // Flushing before returning is necessary if deploying to Vercel, see
     // https://vercel.com/docs/platform/limits#streaming-responses
-    await Sentry.flush(2000);
+    try {
+      await Sentry.flush(2000);
+    } catch (err) {
+      // if it fails it fails
+    }
 
     return errorInitialProps;
   }
@@ -57,7 +61,11 @@ MyError.getInitialProps = async ({ res, err, asPath }) => {
   Sentry.captureException(
     new Error(`_error.js getInitialProps missing data at path: ${asPath}`)
   );
-  await Sentry.flush(2000);
+  try {
+    await Sentry.flush(2000);
+  } catch (err) {
+    // if it fails it fails
+  }
 
   return errorInitialProps;
 };

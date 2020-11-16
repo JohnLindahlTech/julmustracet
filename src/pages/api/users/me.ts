@@ -8,6 +8,17 @@ import cookies from "../../../lib/cookiesMiddleware";
 import { createAuthCookie } from "../../../lib/createAuthCookie";
 import * as Sentry from "@sentry/node";
 
+const baseUrl = process.env.NEXTAUTH_URL;
+const secret = process.env.NEXTAUTH_SECRET;
+
+const useSecureCookies = baseUrl.startsWith("https://");
+
+// Default to __Host- for CSRF token for additional protection if using useSecureCookies
+// NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
+const csrfTokenCookieName = `${
+  useSecureCookies ? "__Host-" : ""
+}next-auth.csrf-token`;
+
 const firstYear = 2020;
 
 class RequestError extends Error {
@@ -167,17 +178,6 @@ async function updateAllYearsAchievements(
 }
 
 async function editUser(req, res) {
-  const baseUrl = process.env.NEXTAUTH_URL;
-  const secret = process.env.NEXTAUTH_SECRET;
-
-  const useSecureCookies = baseUrl.startsWith("https://");
-
-  // Default to __Host- for CSRF token for additional protection if using useSecureCookies
-  // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
-  const csrfTokenCookieName = `${
-    useSecureCookies ? "__Host-" : ""
-  }next-auth.csrf-token`;
-
   const { body } = req;
   const { csrfToken: csrfTokenFromPost } = body;
 
@@ -278,7 +278,11 @@ async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
     res.send(result);
   } catch (error) {
     Sentry.captureException(error);
-    await Sentry.flush(2000);
+    try {
+      await Sentry.flush(2000);
+    } catch (err) {
+      // if it fails it fails
+    }
     console.error(error);
     res.status(error.statusCode ?? 400);
     res.send(error.format());

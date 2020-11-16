@@ -20,13 +20,21 @@ export default async function crunch() {
       } catch (error) {
         Sentry.captureException(error);
         console.error(error);
-        await Sentry.flush(2000);
+        try {
+          await Sentry.flush(2000);
+        } catch (err) {
+          // if it fails it fails
+        }
       }
     })
     .on("error", async (error) => {
       Sentry.captureException(error);
       console.error(error);
-      await Sentry.flush(2000);
+      try {
+        await Sentry.flush(2000);
+      } catch (err) {
+        // if it fails it fails
+      }
     });
   return () => {
     console.info("Closing Down Achievement Cruncher");

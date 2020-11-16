@@ -29,7 +29,11 @@ export default async function DBProxy(req, res) {
     if (result instanceof Error) {
       console.error(result);
       Sentry.captureException(result);
-      await Sentry.flush(2000);
+      try {
+        await Sentry.flush(2000);
+      } catch (err) {
+        // if it fails it fails
+      }
       throw result;
     }
 

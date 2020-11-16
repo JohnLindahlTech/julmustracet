@@ -29,7 +29,11 @@ export default async function saveAchievements(achievements) {
     return ret;
   }, []);
   if (hasSentryError) {
-    await Sentry.flush(2000);
+    try {
+      await Sentry.flush(2000);
+    } catch (err) {
+      // if it fails it fails
+    }
   }
   if (retries.length <= 0) {
     return;

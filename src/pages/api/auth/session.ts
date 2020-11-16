@@ -68,7 +68,11 @@ export default async (req, res) => {
     res.json(sessionPayload);
   } catch (error) {
     Sentry.captureException(error);
-    await Sentry.flush(2000);
+    try {
+      await Sentry.flush(2000);
+    } catch (err) {
+      // if it fails it fails
+    }
     // If JWT not verifiable, make sure the cookie for it is removed and return 401
     console.error("JWT_SESSION_ERROR", error);
     res.setHeader(
