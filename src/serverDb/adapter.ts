@@ -18,6 +18,7 @@ import {
   IUser,
   ISession,
 } from "./models";
+import { checkDBUsername } from "../pages/api/users/me";
 
 type Style = "upperCase";
 
@@ -31,6 +32,13 @@ const uniqueEmailConfig = {
   dictionaries: [colors, animals, names],
   style: "lowerCase" as Style,
   separator: ".",
+};
+
+const uniqueUsernameConfig = {
+  dictionaries: [colors, animals],
+  length: 2,
+  style: "capital" as Style,
+  separator: " ",
 };
 
 const uniqueMessageCookie = "JR.UNIQUE.MESSAGE";
@@ -58,14 +66,31 @@ const Adapter = (/* config, options = {} */) => {
         ? appOptions.session.updateAge * 1000
         : 0;
 
+    async function _recursiveGetValidUsername(
+      username: string
+    ): Promise<string> {
+      try {
+        return await checkDBUsername(username);
+      } catch (error) {
+        if (error.statusCode === 409) {
+          return await _recursiveGetValidUsername(
+            uniqueNamesGenerator(uniqueUsernameConfig)
+          );
+        }
+        throw error;
+      }
+    }
+
     async function createUser(profile) {
       try {
         _debug("createUser", profile);
         const email =
           profile.email || `${uniqueNamesGenerator(uniqueEmailConfig)}@local`;
+        const username = await _recursiveGetValidUsername(profile.name);
+
         const user = new User({
           name: email as string,
-          username: profile.name as string,
+          username: username as string,
           email: email as string,
           image: profile.image as string,
           emailVerified: profile.email ? profile.emailVerified : null,

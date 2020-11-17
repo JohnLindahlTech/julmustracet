@@ -85,7 +85,7 @@ function filterWhitelistedFields(user) {
   };
 }
 
-async function checkDBUsername(username) {
+export async function checkDBUsername(username) {
   let res;
   try {
     res = await userDb.find({
