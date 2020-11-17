@@ -81,7 +81,8 @@ export const jwtCallback = async (
     roles = [username, ...roles];
   }
 
-  token.sub = user?.email ?? profile?.email ?? token?.sub ?? token?.email;
+  token.sub =
+    user?.email ?? profile?.email ?? token?.sub ?? token?.email ?? token?.name;
   token["_couchdb.roles"] = roles;
   token.username = username;
   return Promise.resolve(token);
