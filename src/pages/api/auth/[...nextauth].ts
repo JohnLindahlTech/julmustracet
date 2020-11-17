@@ -18,6 +18,7 @@ import {
 import { sendVerificationRequest } from "../../../lib/sendVerificationRequest";
 
 const isProd = process.env.NODE_ENV === "production";
+const debugOverRide = process.env.DEBUG === "true";
 
 const options = {
   adapter: Adapter(),
@@ -133,7 +134,7 @@ const options = {
 
   // Additional options
   secret: process.env.NEXTAUTH_SECRET, // Recommended (but auto-generated if not specified)
-  debug: !isProd, // Use this option to enable debug messages in the console
+  debug: debugOverRide || !isProd, // Use this option to enable debug messages in the console
 };
 
 const Auth = (req, res) => {
