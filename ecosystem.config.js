@@ -2,10 +2,13 @@ module.exports = {
   apps: [
     {
       name: "julmustracet",
-      instances: 2,
-      script: "node_modules/.bin/next start",
+      instances: 1,
+      script: "node_modules/.bin/next",
+      interpreter: "none",
+      interpreter_args: "-x",
+      args: "start",
       watch: [".next"],
-      exec_mode: "cluster",
+      exec_mode: "fork",
       max_memory_restart: "1G",
     },
     {
@@ -32,3 +35,5 @@ module.exports = {
     },
   },
 };
+
+// pm2 start yarn --name "nextjs" --interpreter bash -- start
