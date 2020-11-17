@@ -6,6 +6,7 @@ import {
   adjectives,
   colors,
   animals,
+  names,
 } from "unique-names-generator";
 import { userDb, authDb } from "./dbs";
 import Manager from "./manager";
@@ -24,6 +25,12 @@ const uniqueNamesConfig = {
   dictionaries: [adjectives, colors, animals],
   style: "upperCase" as Style,
   separator: " ",
+};
+
+const uniqueEmailConfig = {
+  dictionaries: [colors, animals, names],
+  style: "lowerCase" as Style,
+  separator: ".",
 };
 
 const uniqueMessageCookie = "JR.UNIQUE.MESSAGE";
@@ -54,8 +61,9 @@ const Adapter = (/* config, options = {} */) => {
     async function createUser(profile) {
       try {
         _debug("createUser", profile);
+        const backupEmail = `${uniqueNamesGenerator(uniqueEmailConfig)}@local`;
         const user = new User({
-          name: profile.email as string,
+          name: profile.email || (backupEmail as string),
           username: profile.name as string,
           email: profile.email as string,
           image: profile.image as string,
