@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withPWA = require("next-pwa");
 const withSourceMaps = require("@zeit/next-source-maps")();
-const SentryWebpackPlugin = require("@sentry/webpack-plugin");
+// const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 const {
   NEXT_PUBLIC_SENTRY_DSN: SENTRY_DSN,
   SENTRY_ORG,
@@ -42,7 +42,7 @@ module.exports = withSourceMaps(
           "process.env.NEXT_IS_SERVER": JSON.stringify(isServer.toString()),
         })
       );
-
+      /*
       if (
         SENTRY_DSN &&
         SENTRY_ORG &&
@@ -61,7 +61,7 @@ module.exports = withSourceMaps(
           })
         );
       }
-
+*/
       if (isServer) {
         return {
           ...config,
