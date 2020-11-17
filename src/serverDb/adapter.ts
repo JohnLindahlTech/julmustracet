@@ -61,13 +61,14 @@ const Adapter = (/* config, options = {} */) => {
     async function createUser(profile) {
       try {
         _debug("createUser", profile);
-        const backupEmail = `${uniqueNamesGenerator(uniqueEmailConfig)}@local`;
+        const email =
+          profile.email || `${uniqueNamesGenerator(uniqueEmailConfig)}@local`;
         const user = new User({
-          name: profile.email || (backupEmail as string),
+          name: email as string,
           username: profile.name as string,
-          email: profile.email as string,
+          email: email as string,
           image: profile.image as string,
-          emailVerified: profile.emailVerified as boolean,
+          emailVerified: profile.email ? profile.emailVerified : null,
         });
         await manager.saveDoc(user);
         return user;
