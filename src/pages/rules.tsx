@@ -1,8 +1,12 @@
 import React, { FC } from "react";
 import { Typography } from "@material-ui/core";
+import Link from "../components/link";
 import { FormattedMessage, useIntl } from "react-intl";
 import { PageContent } from "../components/PageContent";
 import { HeadTitle } from "../components/HeadTitle";
+import { UserEdit } from "../routes";
+
+const link = (data) => <Link {...UserEdit}>{data}</Link>;
 
 const Rules: FC = () => {
   const intl = useIntl();
@@ -40,6 +44,34 @@ const Rules: FC = () => {
           </Typography>
         </li>
       </ol>
+      <Typography variant="h2">
+        <FormattedMessage defaultMessage="Övrig information" />
+      </Typography>
+      <ul>
+        <li>
+          <Typography>
+            <FormattedMessage defaultMessage="Epost-adressen som du uppger vid inloggning används enbart till just inloggning och Julmustracet kommer ej dela denna till tredje part eller skicka oönskad epost till dig." />
+          </Typography>
+        </li>
+        <li>
+          <Typography>
+            <FormattedMessage defaultMessage="Användarnamnet som du själv väljer när du loggat in är publik data och kommer att synas så fort du har matat in dryck." />
+          </Typography>
+        </li>
+        <li>
+          <Typography>
+            <FormattedMessage
+              defaultMessage="Om du ej längre vill vara med och synas på sidan kan du välja att ta bort din användare längst ner på sidan, <link>redigera användare</link>."
+              values={{ link }}
+            />
+          </Typography>
+        </li>
+        <li>
+          <Typography>
+            <FormattedMessage defaultMessage="Denna sida använder endast kakor för att hantera din inloggning. Detta betyder att inga kakor sparas om du inte loggar in." />
+          </Typography>
+        </li>
+      </ul>
     </PageContent>
   );
 };

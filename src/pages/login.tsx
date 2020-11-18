@@ -12,12 +12,16 @@ import { LOGGED_OUT } from "../hooks/useEnsureSession";
 import { Home } from "../routes";
 import { PageContent } from "../components/PageContent";
 import { HeadTitle } from "../components/HeadTitle";
+import { Link } from "../components/link";
+import { Rules } from "../routes";
 
 type Provider = {
   name: string;
   id: string;
   type: string;
 };
+
+const link = (data) => <Link {...Rules}>{data}</Link>;
 
 const LogIn: FC<{ providers: Provider[] }> = (props) => {
   const { locale } = useRouter();
@@ -67,6 +71,14 @@ const LogIn: FC<{ providers: Provider[] }> = (props) => {
           <Typography variant="h1" align="center">
             <FormattedMessage defaultMessage="Logga in" />
           </Typography>
+          <Box py={2}>
+            <Typography align="center">
+              <FormattedMessage
+                defaultMessage="När du loggar in, godkänner du även <link>reglerna</link>."
+                values={{ link }}
+              />
+            </Typography>
+          </Box>
           <Formik
             initialValues={{ email: "" }}
             onSubmit={onEmailLogin}

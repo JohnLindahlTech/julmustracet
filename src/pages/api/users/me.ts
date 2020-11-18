@@ -3,7 +3,7 @@ import { createHash } from "crypto";
 import { authDb, julmustracetDb, userDb } from "../../../serverDb/dbs";
 import { User } from "../../../serverDb/models";
 import { getSession } from "next-auth/client";
-import { toDrinkId, toAchievementId, toId } from "../../../db/toId";
+import { toId } from "../../../db/toId";
 import cookies from "../../../lib/cookiesMiddleware";
 import {
   createAuthCookie,
@@ -21,8 +21,6 @@ const useSecureCookies = baseUrl.startsWith("https://");
 const csrfTokenCookieName = `${
   useSecureCookies ? "__Host-" : ""
 }next-auth.csrf-token`;
-
-const firstYear = 2020;
 
 class RequestError extends Error {
   name: string;

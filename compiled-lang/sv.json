@@ -35,6 +35,12 @@
       "value": "Nu"
     }
   ],
+  "1I/WNq": [
+    {
+      "type": 0,
+      "value": "Du måste skriva in ditt användarnamn för att bekräfta borttagningen."
+    }
+  ],
   "1RnFdK": [
     {
       "type": 0,
@@ -57,6 +63,12 @@
     {
       "type": 0,
       "value": "Regler"
+    }
+  ],
+  "40DLE5": [
+    {
+      "type": 0,
+      "value": "Varning! Detta går ej att återställa."
     }
   ],
   "4L4PqZ": [
@@ -171,6 +183,12 @@
     {
       "type": 1,
       "value": "date"
+    }
+  ],
+  "AfGVzm": [
+    {
+      "type": 0,
+      "value": "Ta bort användare"
     }
   ],
   "BOQjpt": [
@@ -451,6 +469,12 @@
       "value": "Tävlingen pågår från 1 december till och med slutet av 20 dember."
     }
   ],
+  "RAYA8J": [
+    {
+      "type": 0,
+      "value": "Övrig information"
+    }
+  ],
   "RlLmd0": [
     {
       "type": 0,
@@ -561,6 +585,12 @@
       "value": "Mängd (Liter)"
     }
   ],
+  "cbYD1n": [
+    {
+      "type": 0,
+      "value": "Misslyckades med att ta bort din användare."
+    }
+  ],
   "ceANBr": [
     {
       "type": 1,
@@ -569,6 +599,26 @@
     {
       "type": 0,
       "value": " JohnPhoto/JulmustRacet"
+    }
+  ],
+  "dB8BF9": [
+    {
+      "type": 0,
+      "value": "Om du ej längre vill vara med och synas på sidan kan du välja att ta bort din användare längst ner på sidan, "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "redigera användare"
+        }
+      ],
+      "type": 8,
+      "value": "link"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "dF1qpM": [
@@ -583,6 +633,12 @@
       "value": "Första"
     }
   ],
+  "dSA8tG": [
+    {
+      "type": 0,
+      "value": "Användarnamnet som du själv väljer när du loggat in är publik data och kommer att synas så fort du har matat in dryck."
+    }
+  ],
   "dsvntS": [
     {
       "type": 0,
@@ -593,6 +649,26 @@
     {
       "type": 0,
       "value": "Klicka på knappen här under för att logga in på JulmustRacet."
+    }
+  ],
+  "eBR6h2": [
+    {
+      "type": 0,
+      "value": "När du loggar in, godkänner du även "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "reglerna"
+        }
+      ],
+      "type": 8,
+      "value": "link"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "eLKei0": [
@@ -719,6 +795,12 @@
       "value": "Double tap"
     }
   ],
+  "odJzop": [
+    {
+      "type": 0,
+      "value": "Ta Bort"
+    }
+  ],
   "ol0llA": [
     {
       "type": 0,
@@ -773,6 +855,12 @@
       "value": "Arbetsmyra"
     }
   ],
+  "rAfShW": [
+    {
+      "type": 0,
+      "value": "Epost-adressen som du uppger vid inloggning används enbart till just inloggning och Julmustracet kommer ej dela denna till tredje part eller skicka oönskad epost till dig."
+    }
+  ],
   "s5BjWo": [
     {
       "type": 0,
@@ -815,6 +903,12 @@
     {
       "type": 0,
       "value": "Chug! Chug! Chug!"
+    }
+  ],
+  "tckjB6": [
+    {
+      "type": 0,
+      "value": "Denna sida använder endast kakor för att hantera din inloggning. Detta betyder att inga kakor sparas om du inte loggar in."
     }
   ],
   "tuu5lA": [
