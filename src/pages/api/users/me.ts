@@ -284,7 +284,6 @@ async function removeUser({ req, res, session }) {
     await deleteJulmust(currentUser.username);
     await deleteAccounts(currentUser.email);
     await deleteVerificationRequests(currentUser.email);
-    console.log(currentUser.toDoc(true));
     await userDb.put(currentUser.toDoc(true));
     res.cookie(authCookies.sessionToken.name, "", {
       ...authCookies.sessionToken.options,
