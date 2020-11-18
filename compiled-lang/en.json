@@ -2,121 +2,133 @@
   "+MIbE1": [
     {
       "type": 0,
-      "value": "EN Märkesligan"
+      "value": "Brands"
     }
   ],
   "/VQFb1": [
     {
       "type": 0,
-      "value": "EN Utmärkelser"
+      "value": "Achievements"
     }
   ],
   "/xP+8y": [
     {
       "type": 0,
-      "value": "EN Rekommendation: Undvik att byta användarnamn när du väl valt ett."
+      "value": "Recommendation: Do not alter your username once you have picked one."
     }
   ],
   "0Jc90u": [
     {
       "type": 0,
-      "value": "EN Notera!"
+      "value": "Note!"
     }
   ],
   "0hQb6G": [
     {
       "type": 0,
-      "value": "EN Gå till din publika profil här"
+      "value": "Go to your public profile"
     }
   ],
   "17ffRf": [
     {
       "type": 0,
-      "value": "EN Nu"
+      "value": "Now"
+    }
+  ],
+  "1I/WNq": [
+    {
+      "type": 0,
+      "value": "You must type your username to verify the delete."
     }
   ],
   "1RnFdK": [
     {
       "type": 0,
-      "value": "EN Gå till startsidan"
+      "value": "Go to start"
     }
   ],
   "1mPJgd": [
     {
       "type": 0,
-      "value": "EN Nybörjare"
+      "value": "Beginner"
     }
   ],
   "3Jmkih": [
     {
       "type": 0,
-      "value": "EN Change to english"
+      "value": "Byt till svenska"
     }
   ],
   "3qcD8Q": [
     {
       "type": 0,
-      "value": "EN Regler"
+      "value": "Rules"
+    }
+  ],
+  "40DLE5": [
+    {
+      "type": 0,
+      "value": "Warning! This action can not be reverted."
     }
   ],
   "4L4PqZ": [
     {
       "type": 0,
-      "value": "EN Dag"
+      "value": "Day"
     }
   ],
   "4pn0ju": [
     {
       "type": 0,
-      "value": "EN Är du säker på att du vill logga ut?"
+      "value": "Are you sure you want to log out?"
     }
   ],
   "5c7jHv": [
     {
       "type": 0,
-      "value": "EN Pos."
+      "value": "Pos."
     }
   ],
   "66X3jL": [
     {
       "type": 0,
-      "value": "EN Ogiltigt namn, pröva ett annat."
+      "value": "Invalid name, try another one."
     }
   ],
   "6Ngt4g": [
     {
       "type": 0,
-      "value": "EN Mängd"
+      "value": "Amount"
     }
   ],
   "6wJ81A": [
     {
       "type": 0,
-      "value": "EN Användarnamnet är redan upptaget"
+      "value": "Username is taken"
     }
   ],
   "7R04rK": [
     {
       "type": 0,
-      "value": "EN Du måste nu klicka på länken in eposten du bör ha fått."
+      "value": "Klick the link you have gotten in your email."
     }
   ],
   "7W7Msi": [
     {
       "type": 0,
-      "value": "EN Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på."
+      "value": "If you change your username, you must log in again on your other devices."
     }
   ],
   "7r4Wdu": [
     {
       "type": 0,
-      "value": "EN Registrerat minst 1 dryck."
+      "value": "Registered atleast 1 drink."
     }
   ],
   "7rF0o4": [
     {
       "type": 0,
-      "value": "EN Logga in på "
+      "value": "Log into "
     },
     {
       "type": 1,
@@ -126,7 +138,7 @@
   "8QeM8A": [
     {
       "type": 0,
-      "value": "EN Lägsta tillåtna värde är "
+      "value": "Lowest allowed amount is "
     },
     {
       "type": 1,
@@ -136,188 +148,186 @@
   "8iRvwS": [
     {
       "type": 0,
-      "value": "EN JulmustRacet"
+      "value": "JulmustRacet"
     }
   ],
   "A0XkO3": [
     {
       "type": 0,
-      "value": "EN Hoppsan!"
+      "value": "Whoopsie!"
     }
   ],
   "AAS1Iy": [
     {
       "type": 0,
-      "value": "EN Druckit must 20 dagar i rad"
+      "value": "Consumed Julmust every day for 20 days."
     }
   ],
   "ADPaxD": [
     {
       "type": 0,
-      "value": "EN Slutmålet är alltså att dricka julmust."
+      "value": "The main target is to consume Julmust."
     }
   ],
   "AIklJ7": [
     {
       "type": 0,
-      "value": "EN Druckit 5 liter must."
+      "value": "Consumed 5 litre of Julmust."
     }
   ],
   "AdBqXu": [
     {
       "type": 0,
-      "value": "EN Lägsta tillåtna datum är "
+      "value": "Earliest allowed date is "
     },
     {
       "type": 1,
       "value": "date"
     }
   ],
+  "AfGVzm": [
+    {
+      "type": 0,
+      "value": "Delete user"
+    }
+  ],
   "BOQjpt": [
     {
       "type": 0,
-      "value": "EN 24/7"
+      "value": "24/7"
     }
   ],
   "BXAPNS": [
     {
       "type": 0,
-      "value": "EN Druckit must 14 dagar i rad."
+      "value": "Consumed Julmust every day for 14 days."
     }
   ],
   "CHrETt": [
     {
       "type": 0,
-      "value": "EN Välkommen till JulmustRacet"
+      "value": "Welcome to JulmustRacet"
     }
   ],
   "Cr0JiH": [
     {
       "type": 0,
-      "value": "EN Spara"
+      "value": "Save"
     }
   ],
   "D+v+VA": [
     {
       "type": 0,
-      "value": "EN Around the Clock"
+      "value": "Around the Clock"
     }
   ],
   "DRXWXB": [
     {
       "type": 0,
-      "value": "EN 404"
+      "value": "404"
     }
   ],
   "DXulP5": [
     {
       "type": 0,
-      "value": "EN Namn"
+      "value": "Name"
     }
   ],
   "DcvA3/": [
-    {
-      "type": 0,
-      "value": "EN "
-    },
     {
       "type": 1,
       "value": "user"
     },
     {
       "type": 0,
-      "value": " har inga utmärkelser."
+      "value": " has no achievements."
     }
   ],
   "E9HhI2": [
     {
       "type": 0,
-      "value": "EN Måste vara en textsträng"
+      "value": "Must be text"
     }
   ],
   "ECpecS": [
     {
       "type": 0,
-      "value": "EN Druckit 30 liter must."
+      "value": "Consumed 30 litre Julmust"
     }
   ],
   "FTp79N": [
     {
       "type": 0,
-      "value": "EN Måste vara text"
+      "value": "Must be text"
     }
   ],
   "FWoUv0": [
     {
       "type": 0,
-      "value": "EN Något gick visst väldigt fel med inloggningen. Prova gärna igen på länken nedan."
+      "value": "Something went wrong with login. Try again in the link below."
     }
   ],
   "FfjY/n": [
     {
       "type": 0,
-      "value": "EN Registret dryck på dygnets alla timmar."
+      "value": "Registered Julmust on every hour of the day."
     }
   ],
   "FiMHjD": [
     {
       "type": 0,
-      "value": "EN Måste välja ett märke"
+      "value": "You must pick a brand."
     }
   ],
   "GWFDx7": [
     {
       "type": 0,
-      "value": "EN Max-ad"
+      "value": "Max-ed"
     }
   ],
   "GgLd/W": [
     {
       "type": 0,
-      "value": "EN Halvtomt glas"
+      "value": "Half empty glass"
     }
   ],
   "GwAqlg": [
     {
       "type": 0,
-      "value": "EN Druckit must 5 dagar i rad."
+      "value": "Consumed Julmust every day for 5 days."
     }
   ],
   "H+HYP7": [
     {
       "type": 0,
-      "value": "EN Halvmåne"
+      "value": "Halfmoon"
     }
   ],
   "H/zrb8": [
     {
       "type": 0,
-      "value": "EN Märke"
+      "value": "Brand"
     }
   ],
   "HAUJds": [
     {
       "type": 0,
-      "value": "EN Ogiltigt datum"
+      "value": "Invalid Date"
     }
   ],
   "HEQzSa": [
     {
       "type": 0,
-      "value": "EN Du får ej ange en tid i framtiden"
+      "value": "Ju must not pick a date in the future."
     }
   ],
   "HFI/5/": [
     {
       "type": 0,
-      "value": "EN Epost"
+      "value": "Email"
     }
   ],
   "HHJbbG": [
-    {
-      "type": 0,
-      "value": "EN "
-    },
     {
       "type": 1,
       "value": "title"
@@ -330,25 +340,25 @@
   "IZ5/Dz": [
     {
       "type": 0,
-      "value": "EN Rapportera enskilda gånger du dricker, dvs. varje flaska för sig."
+      "value": "Register every bottle as a separate instance."
     }
   ],
   "JC3MvR": [
     {
       "type": 0,
-      "value": "EN L"
+      "value": "L"
     }
   ],
   "JGVuI3": [
     {
       "type": 0,
-      "value": "EN Socialt"
+      "value": "Social"
     }
   ],
   "JhBkIw": [
     {
       "type": 0,
-      "value": "EN Användare: "
+      "value": "User: "
     },
     {
       "type": 1,
@@ -358,73 +368,73 @@
   "LSnLNY": [
     {
       "type": 0,
-      "value": "EN Användarnamn är obligatoriskt"
+      "value": "Username is required"
     }
   ],
   "LeTcKf": [
     {
       "type": 0,
-      "value": "EN Graf"
+      "value": "Graph"
     }
   ],
   "MI3I6o": [
     {
       "type": 0,
-      "value": "EN Något gick väldigt tokigt"
+      "value": "Something went very wrong."
     }
   ],
   "NwhpsN": [
     {
       "type": 0,
-      "value": "EN FEL"
+      "value": "Error"
     }
   ],
   "OK+McJ": [
     {
       "type": 0,
-      "value": "EN Användarligan"
+      "value": "Users"
     }
   ],
   "OPEvAE": [
     {
       "type": 0,
-      "value": "EN Provsmakare"
+      "value": "Taster"
     }
   ],
   "OQUAvA": [
     {
       "type": 0,
-      "value": "EN Om du inte kan klicka på knappen ovan kan du kopiera följande länk i din webbläsare:"
+      "value": "If you can not click the button above, copy this link into your browser:"
     }
   ],
   "PWYWk5": [
     {
       "type": 0,
-      "value": "EN Logga in till JulmustRacet!"
+      "value": "Log in to JulmustRacet!"
     }
   ],
   "Pf7MV/": [
     {
       "type": 0,
-      "value": "EN Något är okänt fel med användarnamnet"
+      "value": "Something is wrong with the username"
     }
   ],
   "PqaMrh": [
     {
       "type": 0,
-      "value": "EN Tid"
+      "value": "Time"
     }
   ],
   "PszYZZ": [
     {
       "type": 0,
-      "value": "EN Rensa"
+      "value": "Clear"
     }
   ],
   "Q5PZU+": [
     {
       "type": 0,
-      "value": "EN Högsta tillåtna datum är "
+      "value": "Latest allowed date is "
     },
     {
       "type": 1,
@@ -434,7 +444,7 @@
   "QBMTbA": [
     {
       "type": 0,
-      "value": "EN Maxlängd är "
+      "value": "Max length is "
     },
     {
       "type": 1,
@@ -444,110 +454,112 @@
   "QW7MYQ": [
     {
       "type": 0,
-      "value": "EN Druckit 10 liter must."
+      "value": "Consumed 10 litre of Julmust."
     }
   ],
   "QptW68": [
     {
       "type": 0,
-      "value": "EN Topplistan"
+      "value": "Top list"
     }
   ],
   "R0XbHE": [
     {
       "type": 0,
-      "value": "EN Tävlingen pågår från 1 december till och med slutet av 20 dember."
+      "value": "The competition is active between 1st December and 20th December."
+    }
+  ],
+  "RAYA8J": [
+    {
+      "type": 0,
+      "value": "Miscellaneous information"
     }
   ],
   "RlLmd0": [
     {
       "type": 0,
-      "value": "EN Tidpunkt"
+      "value": "Time"
     }
   ],
   "Sc3hSg": [
     {
       "type": 0,
-      "value": "EN Big Gulp"
+      "value": "Big Gulp"
     }
   ],
   "Tcbx1p": [
     {
       "type": 0,
-      "value": "EN Användarnamn"
+      "value": "Username"
     }
   ],
   "TiXXxS": [
     {
       "type": 0,
-      "value": "EN Redan 2006 slogs det nuvarande officiella rekordet på 90 liter av NightHawk."
+      "value": "In 2006 the current official record was set by NightHawk with the amount of 90 litre of Julmust."
     }
   ],
   "U7FELD": [
     {
       "type": 0,
-      "value": "EN Denna tävling har anor sedan 2005. Vi var ett gäng i en liten håla i nordligaste Norrland som förfinade denna konstform."
+      "value": "This competition dates back to 2005. We were a bunch of persons in the most northern parts of Norrland, who tuned this life style into an art form."
     }
   ],
   "UPtLs1": [
     {
       "type": 0,
-      "value": "EN Okänd"
+      "value": "Unknown"
     }
   ],
   "VyIApP": [
     {
       "type": 0,
-      "value": "EN Måste ange en giltig epost"
+      "value": "Must provide a valid email."
     }
   ],
   "X0vUWo": [
     {
       "type": 0,
-      "value": "EN Denna utmärkelse finns egentligen inte."
+      "value": "This achievement does not really exist."
     }
   ],
   "X1tUUu": [
     {
       "type": 0,
-      "value": "EN Lägg till dryck"
+      "value": "Add Julmust"
     }
   ],
   "YfgGdS": [
     {
       "type": 0,
-      "value": "EN 404 - Kan inte hitta sidan"
+      "value": "404 - Page can not be found"
     }
   ],
   "YxLXnd": [
     {
       "type": 0,
-      "value": "EN Redigera dryck"
+      "value": "Edit drink"
     }
   ],
   "ZeCih0": [
     {
       "type": 0,
-      "value": "EN I eposten ska följande meddelande finnas:"
+      "value": "The following message should be present in the email:"
     }
   ],
   "aApUdB": [
     {
       "type": 0,
-      "value": "EN Halvfullt glas"
+      "value": "Half filled glass"
     }
   ],
   "aJBiSZ": [
     {
       "type": 0,
-      "value": "EN Druckit must 3 dagar i rad."
+      "value": "Consumed Julmust 3 days in a row."
     }
   ],
   "c4nNn5": [
-    {
-      "type": 0,
-      "value": "EN "
-    },
     {
       "type": 1,
       "value": "amount"
@@ -560,7 +572,7 @@
   "cAtjhT": [
     {
       "type": 0,
-      "value": "EN Märke: "
+      "value": "Brand: "
     },
     {
       "type": 1,
@@ -570,14 +582,16 @@
   "cGotG6": [
     {
       "type": 0,
-      "value": "EN Mängd (Liter)"
+      "value": "Amount (Litre)"
+    }
+  ],
+  "cbYD1n": [
+    {
+      "type": 0,
+      "value": "Failed to delete your user."
     }
   ],
   "ceANBr": [
-    {
-      "type": 0,
-      "value": "EN "
-    },
     {
       "type": 1,
       "value": "icon"
@@ -587,70 +601,116 @@
       "value": " JohnPhoto/JulmustRacet"
     }
   ],
+  "dB8BF9": [
+    {
+      "type": 0,
+      "value": "If you no longer wish to participate in this competition, you can delete your user and all it's data, at the bottom of the page "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "edit user"
+        }
+      ],
+      "type": 8,
+      "value": "link"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
   "dF1qpM": [
     {
       "type": 0,
-      "value": "EN Mustdag"
+      "value": "Day of Julmust"
     }
   ],
   "dPEYFF": [
     {
       "type": 0,
-      "value": "EN Första"
+      "value": "First"
+    }
+  ],
+  "dSA8tG": [
+    {
+      "type": 0,
+      "value": "The username that you pick yourself when you log in is public information and will be visible when you register Julmust."
     }
   ],
   "dsvntS": [
     {
       "type": 0,
-      "value": "EN Avbryt"
+      "value": "Cancel"
     }
   ],
   "e1qvQA": [
     {
       "type": 0,
-      "value": "EN Klicka på knappen här under för att logga in på JulmustRacet."
+      "value": "Click the button below to log into JulmustRacet."
+    }
+  ],
+  "eBR6h2": [
+    {
+      "type": 0,
+      "value": "When you log in, you approve of the "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "rules"
+        }
+      ],
+      "type": 8,
+      "value": "link"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "eLKei0": [
     {
       "type": 0,
-      "value": "EN Du måste ha ett användarnamn för att kunna mata in dryck"
+      "value": "You must have a username to be able to register Julmust."
     }
   ],
   "eosocV": [
     {
       "type": 0,
-      "value": "EN Logga in"
+      "value": "Log in"
     }
   ],
   "fREWx7": [
     {
       "type": 0,
-      "value": "EN Hela veckan"
+      "value": "Whole Week"
     }
   ],
   "fSZkoi": [
     {
       "type": 0,
-      "value": "EN Inloggningsfel"
+      "value": "Log in error"
     }
   ],
   "faXeYB": [
     {
       "type": 0,
-      "value": "EN Druckit 50 liter must."
+      "value": "Consumed 50 litre of Julmust."
     }
   ],
   "g9//QL": [
     {
       "type": 0,
-      "value": "EN Druckit 20 liter must."
+      "value": "EConsumed 20 litre of Julmust."
     }
   ],
   "gITiyo": [
     {
       "type": 0,
-      "value": "EN Högsta tillåtna värde är "
+      "value": "Highest allowed amount is "
     },
     {
       "type": 1,
@@ -660,145 +720,157 @@
   "gLUIxi": [
     {
       "type": 0,
-      "value": "EN Registrerat minst 2 drycker inom 15 minuter."
+      "value": "Consumed Julmust twice in 15 minutes."
     }
   ],
   "glsAsK": [
     {
       "type": 0,
-      "value": "EN Registrerat orimligt mycket dryck."
+      "value": "Registered unreasonable amount of Julmust."
     }
   ],
   "gwmpEQ": [
     {
       "type": 0,
-      "value": "EN Druckit must på dygnets alla timmar och alla veckodagar."
+      "value": "Consumed Julmust every day of the week and every hour of the day."
     }
   ],
   "iZuO+L": [
     {
       "type": 0,
-      "value": "EN Legend"
+      "value": "Legend"
     }
   ],
   "jP8UQ6": [
     {
       "type": 0,
-      "value": "EN Märken"
+      "value": "Brands"
     }
   ],
   "jenDvk": [
     {
       "type": 0,
-      "value": "EN Fuskare"
+      "value": "Cheater"
     }
   ],
   "jtpO3M": [
     {
       "type": 0,
-      "value": "EN Ingen data"
+      "value": "No data"
     }
   ],
   "kAEQyV": [
     {
       "type": 0,
-      "value": "EN OK"
+      "value": "OK"
     }
   ],
   "lK147u": [
     {
       "type": 0,
-      "value": "EN Druckit must 7 dagar i rad."
+      "value": "Consumed Julmust 7 days in a row."
     }
   ],
   "llsg1f": [
     {
       "type": 0,
-      "value": "EN Tredje gången gillt"
+      "value": "Third's the charm."
     }
   ],
   "m1rNPm": [
     {
       "type": 0,
-      "value": "EN Kan inte hitta sidan"
+      "value": "Page can not be found"
     }
   ],
   "mOFG3K": [
     {
       "type": 0,
-      "value": "EN Start"
+      "value": "Start"
     }
   ],
   "nDoCQ3": [
     {
       "type": 0,
-      "value": "EN Double tap"
+      "value": "Double tap"
+    }
+  ],
+  "odJzop": [
+    {
+      "type": 0,
+      "value": "Delete"
     }
   ],
   "ol0llA": [
     {
       "type": 0,
-      "value": "EN Druckit 3 liter must."
+      "value": "Consumed 3 litre Julmust."
     }
   ],
   "onhmIw": [
     {
       "type": 0,
-      "value": "EN Historik"
+      "value": "History"
     }
   ],
   "p0wP1I": [
     {
       "type": 0,
-      "value": "EN Något är fel med fältet"
+      "value": "Something is wrong here"
     }
   ],
   "p4ZQh/": [
     {
       "type": 0,
-      "value": "EN Druckit 90 liter must."
+      "value": "Consumed 90 litre of Julmust."
     }
   ],
   "p70I/0": [
     {
       "type": 0,
-      "value": "EN Fallande sortering"
+      "value": "Descending order"
     }
   ],
   "q9L7L0": [
     {
       "type": 0,
-      "value": "EN Connoisseur"
+      "value": "Connoisseur"
     }
   ],
   "qwV6A9": [
     {
       "type": 0,
-      "value": "EN Du får inte byta användare"
+      "value": "You can not switch user."
     }
   ],
   "r0R22a": [
     {
       "type": 0,
-      "value": "EN Ihärdig"
+      "value": "Persistent"
     }
   ],
   "r71a4u": [
     {
       "type": 0,
-      "value": "EN Arbetsmyra"
+      "value": "Workoholic"
+    }
+  ],
+  "rAfShW": [
+    {
+      "type": 0,
+      "value": "The email address you provide at log in is only used for login and is never shared with any third party, nor do JulmustRacet send any unwanted emails to you."
     }
   ],
   "s5BjWo": [
     {
       "type": 0,
-      "value": "EN Du måste vara inloggad"
+      "value": "You must log in"
     }
   ],
   "saidFH": [
     {
       "type": 0,
-      "value": "EN Logga in på "
+      "value": "Log in to "
     },
     {
       "type": 1,
@@ -806,7 +878,7 @@
     },
     {
       "type": 0,
-      "value": " med denna länk "
+      "value": " with this link "
     },
     {
       "type": 1,
@@ -814,7 +886,7 @@
     },
     {
       "type": 0,
-      "value": " Följande meddelande visades vid inloggningen: "
+      "value": ". The following message was shown: "
     },
     {
       "type": 1,
@@ -824,111 +896,113 @@
   "siIhVs": [
     {
       "type": 0,
-      "value": "EN Verifiera epost"
+      "value": "Verify email"
     }
   ],
   "tEcVAb": [
     {
       "type": 0,
-      "value": "EN Chug! Chug! Chug!"
+      "value": "Chug! Chug! Chug!"
+    }
+  ],
+  "tckjB6": [
+    {
+      "type": 0,
+      "value": "This site only uses cookies to handle your login. This means that no cookies are saved if you do not log in."
     }
   ],
   "tuu5lA": [
-    {
-      "type": 0,
-      "value": "EN "
-    },
     {
       "type": 1,
       "value": "value"
     },
     {
       "type": 0,
-      "value": " liter"
+      "value": " litre"
     }
   ],
   "tvgump": [
     {
       "type": 0,
-      "value": "EN Druckit 1 liter must."
+      "value": "Consumed 1 litre of Julmust."
     }
   ],
   "ubH4NT": [
     {
       "type": 0,
-      "value": "EN Redigera användare"
+      "value": "Edit user"
     }
   ],
   "v8JVRB": [
     {
       "type": 0,
-      "value": "EN Måste vara en siffra"
+      "value": "Must be a number"
     }
   ],
   "vXkiFm": [
     {
       "type": 0,
-      "value": "EN Det går att själv lägga till julmustmärken i formuläret genom att skriva in en sökning och välja sista raden."
+      "value": "You can add your own brand by typing in the name and pick the last one in the list."
     }
   ],
   "vY+ww2": [
     {
       "type": 0,
-      "value": "EN Användarnamnet får vara max 32 tecken"
+      "value": "Username can be at most 32 characters."
     }
   ],
   "vrAIMW": [
     {
       "type": 0,
-      "value": "EN Obligatoriskt fält"
+      "value": "Required field"
     }
   ],
   "x0lhQY": [
     {
       "type": 0,
-      "value": "EN Följande meddelande visades vid inloggningen"
+      "value": "The following message was shown at log in"
     }
   ],
   "x400Hl": [
     {
       "type": 0,
-      "value": "EN Druckit must på varje veckodag."
+      "value": "Consumed Julmust every day of the week."
     }
   ],
   "xC27yX": [
     {
       "type": 0,
-      "value": "EN Stigande sortering"
+      "value": "Aschending order"
     }
   ],
   "xI/Jma": [
     {
       "type": 0,
-      "value": "EN Användare"
+      "value": "User"
     }
   ],
   "y+Bozn": [
     {
       "type": 0,
-      "value": "EN Måste vara ett giltigt datum"
+      "value": "Must be a valid date"
     }
   ],
   "yl9iLw": [
     {
       "type": 0,
-      "value": "EN ...nu med utmärkelser!"
+      "value": "...now with achievements!"
     }
   ],
   "z7w9N6": [
     {
       "type": 0,
-      "value": "EN Smakat minst 5 olika märken."
+      "value": "Consumed atleast 5 different brands."
     }
   ],
   "zVob30": [
     {
       "type": 0,
-      "value": "EN Logga ut"
+      "value": "Log out"
     }
   ]
 }
