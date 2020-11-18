@@ -1,0 +1,20 @@
+{
+  "language": "query",
+  "views": {
+    "find-by-username": {
+      "map": {
+        "fields": {
+          "username": "asc"
+        },
+        "partial_filter_selector": {}
+      },
+      "options": {
+        "def": {
+          "fields": [
+            "username"
+          ]
+        }
+      }
+    }
+  }
+}

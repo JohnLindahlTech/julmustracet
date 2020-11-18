@@ -11,17 +11,11 @@ PouchDB.plugin(Validation);
 
 const DBProvider = ({ remote, local, children }) => {
   const remoteDb = useRef(new PouchDB(remote, { skip_setup: true }));
-  const localDb = useRef(local ? new PouchDB(local) : null);
+  const localDb = useRef(
+    local ? new PouchDB(local, { auto_compaction: true }) : null
+  );
   const [loading, setLoading] = useState(true);
   const replication = useRef(null);
-
-  // db.replicate.from(url).on('complete', function(info) {
-  //   // then two-way, continuous, retriable sync
-  //   db.sync(url, opts)
-  //     .on('change', onSyncChange)
-  //     .on('paused', onSyncPaused)
-  //     .on('error', onSyncError);
-  // }).on('error', onSyncError);
 
   const onOnline = useCallback(() => {
     if (remoteDb.current && localDb.current) {

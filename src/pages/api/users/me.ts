@@ -1,11 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { createHash } from "crypto";
-import { julmustracetDb, userDb } from "../../../serverDb/dbs";
+import { authDb, julmustracetDb, userDb } from "../../../serverDb/dbs";
 import { User } from "../../../serverDb/models";
 import { getSession } from "next-auth/client";
 import { toDrinkId, toAchievementId, toId } from "../../../db/toId";
 import cookies from "../../../lib/cookiesMiddleware";
-import { createAuthCookie } from "../../../lib/createAuthCookie";
+import {
+  createAuthCookie,
+  cookies as authCookies,
+} from "../../../lib/createAuthCookie";
 import * as Sentry from "@sentry/node";
 
 const baseUrl = process.env.NEXTAUTH_URL;
@@ -118,19 +121,15 @@ async function validateUsername(username, currentUsername) {
   return username;
 }
 
-async function updateItems(
-  year: number | string,
-  currentUsername: string,
-  newUsername: string,
-  idGen: (year: number | string, username: string) => string
-) {
-  const startId = idGen(year, currentUsername);
-  const res = await julmustracetDb.allDocs({
-    include_docs: true,
-    startkey: startId,
-    endkey: `${startId}:\ufff0`,
+async function updateItems(currentUsername: string, newUsername: string) {
+  const { docs } = await julmustracetDb.find({
+    selector: {
+      username: currentUsername,
+    },
+    use_index: "find-by-username",
   });
-  const toUpdate = res.rows.reduce((a, { doc }) => {
+
+  const toUpdate = docs.reduce((a, doc) => {
     a.push({ ...doc, _deleted: true });
     a.push({
       ...doc,
@@ -144,40 +143,7 @@ async function updateItems(
   return julmustracetDb.bulkDocs(toUpdate);
 }
 
-function createYears(start, end) {
-  const res = [];
-  let i = start;
-  while (i <= end) {
-    res.push(i++);
-  }
-  return res;
-}
-
-async function updateAllYearsDrinks(
-  years: number[],
-  currentUsername: string,
-  newUsername: string
-) {
-  return Promise.all(
-    years.map((year) =>
-      updateItems(year, currentUsername, newUsername, toDrinkId)
-    )
-  );
-}
-
-async function updateAllYearsAchievements(
-  years: number[],
-  currentUsername: string,
-  newUsername: string
-) {
-  return Promise.all(
-    years.map((year) =>
-      updateItems(year, currentUsername, newUsername, toAchievementId)
-    )
-  );
-}
-
-async function editUser(req, res) {
+async function checkCSRF(req): Promise<void> {
   const { body } = req;
   const { csrfToken: csrfTokenFromPost } = body;
 
@@ -202,8 +168,12 @@ async function editUser(req, res) {
   if (!csrfTokenVerified) {
     throw new RequestError("Invalid CSRF", 403, "csrf");
   }
+}
+
+async function editUser({ req, res, session }) {
+  await checkCSRF(req);
+  const { body } = req;
   try {
-    const session = await getSession({ req });
     const currentUser = new User(
       await userDb.get(User.buildId(session.user.email))
     );
@@ -216,12 +186,7 @@ async function editUser(req, res) {
       currentUser?.username
     );
     currentUser.changeUsername(username);
-    const years = createYears(firstYear, new Date().getFullYear());
-
-    await Promise.all([
-      updateAllYearsAchievements(years, currentUsername, username),
-      updateAllYearsDrinks(years, currentUsername, username),
-    ]);
+    await updateItems(currentUsername, username);
 
     const doc = currentUser.toDoc(true);
     try {
@@ -246,9 +211,8 @@ async function editUser(req, res) {
   }
 }
 
-async function getUser(req) {
+async function getUser({ req, session }) {
   try {
-    const session = await getSession({ req });
     const user = await userDb.get(User.buildId(session.user.email));
     return filterWhitelistedFields(user);
   } catch (error) {
@@ -256,12 +220,92 @@ async function getUser(req) {
   }
 }
 
-async function getResultFromMethod(req, res) {
+async function deleteJulmust(username) {
+  const { docs } = await julmustracetDb.find({
+    selector: {
+      username,
+    },
+    use_index: "find-by-username",
+  });
+  docs.forEach((d) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d._deleted = true;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d.updatedAt = new Date().toJSON();
+  });
+  await julmustracetDb.bulkDocs(docs);
+}
+
+async function deleteAccounts(email) {
+  const { docs } = await authDb.find({
+    selector: {
+      type: "account",
+      userId: User.buildId(email),
+    },
+    use_index: "account-by-userid",
+  });
+  docs.forEach((d) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d._deleted = true;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d.updatedAt = new Date().toJSON();
+  });
+  await authDb.bulkDocs(docs);
+}
+
+async function deleteVerificationRequests(email) {
+  const { docs } = await authDb.find({
+    selector: {
+      type: "verification-request",
+      identifier: email,
+    },
+    use_index: "verification-request-by-email",
+  });
+  docs.forEach((d) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d._deleted = true;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    d.updatedAt = new Date().toJSON();
+  });
+  await authDb.bulkDocs(docs);
+}
+
+async function removeUser({ req, res, session }) {
+  await checkCSRF(req);
+  try {
+    const currentUser = new User(
+      await userDb.get(User.buildId(session.user.email))
+    );
+    currentUser.delete();
+    await deleteJulmust(currentUser.username);
+    await deleteAccounts(currentUser.email);
+    await deleteVerificationRequests(currentUser.email);
+    console.log(currentUser.toDoc(true));
+    await userDb.put(currentUser.toDoc(true));
+    res.cookie(authCookies.sessionToken.name, "", {
+      ...authCookies.sessionToken.options,
+      maxAge: 0,
+    });
+    return {};
+  } catch (error) {
+    throw new RequestError("DB Error", error.status ?? 400, "db", error);
+  }
+}
+
+async function getResultFromMethod({ req, res, session }) {
   switch (req.method.toUpperCase()) {
     case "GET":
-      return await getUser(req);
+      return await getUser({ req, session });
     case "PATCH":
-      return await editUser(req, res);
+      return await editUser({ req, res, session });
+    case "DELETE":
+      return await removeUser({ req, res, session });
     default:
       throw new RequestError("Method not allowed", 405, "method.not_allowed");
   }
@@ -274,7 +318,7 @@ async function UserEndpoint(req: NextApiRequest, res: NextApiResponse) {
     return res.status(401).end();
   }
   try {
-    const result = await getResultFromMethod(req, res);
+    const result = await getResultFromMethod({ req, res, session });
     res.send(result);
   } catch (error) {
     Sentry.captureException(error);

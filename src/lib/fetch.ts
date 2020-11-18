@@ -63,3 +63,7 @@ export async function patchData(url: string, data: unknown): Promise<unknown> {
 export async function putData(url: string, data: unknown): Promise<unknown> {
   return sendData("PUT", url, data);
 }
+
+export async function delData(url: string, data: unknown): Promise<unknown> {
+  return sendData("DELETE", url, data);
+}

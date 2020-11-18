@@ -19,7 +19,7 @@ import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import Link from "../../components/link";
 import withEnsuredSession from "../../hocs/withEnsuredSession";
-import { patchData } from "../../lib/fetch";
+import { patchData, delData } from "../../lib/fetch";
 import HistoryList from "../../components/table/HistoryList";
 import { USER, BRAND } from "../../lib/mapGraphData";
 import { useGetDrinksFrom } from "../../db/useGetDrinks";
@@ -29,6 +29,12 @@ import { useRouter } from "next/router";
 import { PageContent } from "../../components/PageContent";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NextPage } from "next";
+import { useSessionDB } from "../../db/sessionDB";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
+
+const { NEXTAUTH_URL } = publicRuntimeConfig;
 
 function getAllCases(input = "") {
   const res = [];
@@ -75,18 +81,9 @@ const getErrorMessage = (id: string): { defaultMessage: string } => {
   return messages[id] ?? messages["username.unknown"];
 };
 
-const UserForm = ({ user }) => {
+const UserForm = ({ user, csrfToken }) => {
   const intl = useIntl();
-  const [csrfToken, setCsrfToken] = useState();
 
-  const getCsrf = useCallback(async () => {
-    const csrf = await getCsrfToken();
-    setCsrfToken(csrf);
-  }, []);
-
-  useEffect(() => {
-    getCsrf();
-  }, [getCsrf]);
   const schema = object({
     username: string(intl.formatMessage(messages["username.string"]))
       .required(intl.formatMessage(messages["username.missing"]))
@@ -164,6 +161,85 @@ const UserForm = ({ user }) => {
   );
 };
 
+const DeleteForm = ({ user, csrfToken }) => {
+  const intl = useIntl();
+
+  const sessionDb = useSessionDB();
+
+  const schema = object({
+    username: string(intl.formatMessage(messages["username.string"]))
+      .required(intl.formatMessage(messages["username.missing"]))
+      .oneOf(
+        [user.username],
+        intl.formatMessage({
+          defaultMessage:
+            "Du måste skriva in ditt användarnamn för att bekräfta borttagningen.",
+        })
+      )
+      .label(intl.formatMessage({ defaultMessage: "Användarnamn" })),
+  });
+
+  const onSubmit = useCallback(
+    async (values, { setSubmitting, setErrors }) => {
+      try {
+        await delData("/api/users/me", { csrfToken });
+        await sessionDb.destroy();
+        setTimeout(() => {
+          window.location = NEXTAUTH_URL;
+        }, 100);
+      } catch (error) {
+        if (error?.data?.errorCode) {
+          setErrors({
+            username: intl.formatMessage({
+              defaultMessage: "Misslyckades med att ta bort din användare.",
+            }),
+          });
+        } else {
+          Sentry.captureException(error);
+        }
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [intl, sessionDb, csrfToken]
+  );
+
+  return (
+    <Formik
+      initialValues={{
+        username: "",
+      }}
+      validationSchema={schema}
+      onSubmit={onSubmit}
+    >
+      {({ submitForm, isSubmitting }) => (
+        <Form>
+          <FormControl fullWidth margin="normal">
+            <Field
+              variant="outlined"
+              component={TextField}
+              name="username"
+              label={<FormattedMessage defaultMessage="Användarnamn" />}
+              placeholder="Tomten"
+            />
+          </FormControl>
+          <FormControl margin="normal">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+              onClick={submitForm}
+            >
+              <FormattedMessage defaultMessage="Ta Bort" />
+            </Button>
+          </FormControl>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
 const EditUser: NextPage = () => {
   const theme = useTheme();
   const intl = useIntl();
@@ -171,6 +247,17 @@ const EditUser: NextPage = () => {
   const [session] = useSession();
   const { drinks, loading } = useGetDrinksFrom(USER, session?.user?.username);
   const router = useRouter();
+  const [csrfToken, setCsrfToken] = useState();
+
+  const getCsrf = useCallback(async () => {
+    const csrf = await getCsrfToken();
+    setCsrfToken(csrf);
+  }, []);
+
+  useEffect(() => {
+    getCsrf();
+  }, [getCsrf]);
+
   return (
     <>
       <HeadTitle
@@ -206,36 +293,49 @@ const EditUser: NextPage = () => {
               </Link>
             </Typography>
           ) : null}
-          {session?.user ? <UserForm user={session.user} /> : null}
+          {session?.user ? (
+            <UserForm csrfToken={csrfToken} user={session.user} />
+          ) : null}
         </PageContent>
       </Box>
       {session && session.user && (
-        <PageContent noPadding>
-          <HistoryList
-            loading={loading}
-            type={BRAND}
-            title={
-              <Box display="flex">
-                <Box flexGrow={1}>
-                  <FormattedMessage defaultMessage="Historik" />
+        <>
+          <PageContent noPadding>
+            <HistoryList
+              loading={loading}
+              type={BRAND}
+              title={
+                <Box display="flex">
+                  <Box flexGrow={1}>
+                    <FormattedMessage defaultMessage="Historik" />
+                  </Box>
+                  <NextLink {...AddDrink} passHref>
+                    <Button color="primary" variant="contained">
+                      <AddIcon size={theme.spacing(2)} />
+                    </Button>
+                  </NextLink>
                 </Box>
-                <NextLink {...AddDrink} passHref>
-                  <Button color="primary" variant="contained">
-                    <AddIcon size={theme.spacing(2)} />
-                  </Button>
-                </NextLink>
-              </Box>
-            }
-            rows={drinks}
-            onDelete={(row) => put({ ...row, _deleted: true })}
-            onEdit={(row) => {
-              router.push({
-                pathname: AddDrink.href,
-                query: { drink: row._id },
-              });
-            }}
-          />
-        </PageContent>
+              }
+              rows={drinks}
+              onDelete={(row) => put({ ...row, _deleted: true })}
+              onEdit={(row) => {
+                router.push({
+                  pathname: AddDrink.href,
+                  query: { drink: row._id },
+                });
+              }}
+            />
+          </PageContent>
+          <PageContent>
+            <Typography variant="h3">
+              <FormattedMessage defaultMessage="Ta bort användare" />
+            </Typography>
+            <Typography color="primary">
+              <FormattedMessage defaultMessage="Varning! Detta går ej att återställa." />
+            </Typography>
+            <DeleteForm user={session.user} csrfToken={csrfToken} />
+          </PageContent>
+        </>
       )}
     </>
   );

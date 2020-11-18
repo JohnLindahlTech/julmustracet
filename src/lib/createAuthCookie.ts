@@ -55,7 +55,7 @@ export const jwtDecode = async ({
 
 export const sessionCallback = async (session, user) => {
   session.user.username = user.username;
-  session.user.roles = user?.["_couchdb.roles"];
+  session.user.roles = Array.from(new Set(user?.["_couchdb.roles"]));
   return Promise.resolve(session);
 };
 
@@ -71,7 +71,7 @@ export const jwtCallback = async (
   // if (isSignIn) { token.auth_time = Math.floor(Date.now() / 1000) }
 
   const username = user?.username ?? profile?.username ?? token?.username;
-  let roles = user?.roles ?? token?.["_couchdb.roles"];
+  let roles = user?.roles ?? token?.["_couchdb.roes"];
 
   if (!roles) {
     roles = [];
@@ -83,7 +83,7 @@ export const jwtCallback = async (
 
   token.sub =
     user?.email ?? profile?.email ?? token?.sub ?? token?.email ?? token?.name;
-  token["_couchdb.roles"] = roles;
+  token["_couchdb.roles"] = Array.from(new Set(roles));
   token.username = username;
   return Promise.resolve(token);
 };

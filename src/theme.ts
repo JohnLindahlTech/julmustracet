@@ -1,7 +1,12 @@
 import { red, grey } from "@material-ui/core/colors";
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  responsiveFontSizes,
+  Theme,
+} from "@material-ui/core/styles";
+import { svSE, enUS } from "@material-ui/core/locale";
 
-let theme = createMuiTheme({
+const config = {
   palette: {
     primary: {
       main: red[900],
@@ -15,8 +20,29 @@ let theme = createMuiTheme({
     // so a smaller fontsize may be appropriate.
     fontSize: 14,
   },
-});
+};
 
-theme = responsiveFontSizes(theme, { factor: 3 });
+const themeCache = {};
 
-export default theme;
+function getLocale(locale) {
+  switch (locale) {
+    case "en":
+    case "en-US":
+    case "en-GB":
+      return enUS;
+    default:
+      return svSE;
+  }
+}
+
+export function getLocalizedTheme(locale?: string): Theme {
+  if (themeCache[locale]) {
+    return themeCache[locale];
+  }
+  const localization = getLocale(locale);
+  const theme = responsiveFontSizes(createMuiTheme(config, localization));
+  themeCache[locale] = theme;
+  return theme;
+}
+
+export default getLocalizedTheme();

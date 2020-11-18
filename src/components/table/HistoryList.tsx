@@ -327,7 +327,7 @@ export default function HistoryList(props: TopListProps) {
           <TableBody>
             {!loading && rows.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={3}>
+                <TableCell colSpan={hasModifications ? 4 : 3}>
                   <Typography color="textSecondary" align="center">
                     <FormattedMessage defaultMessage="Ingen data" />
                   </Typography>
@@ -337,7 +337,7 @@ export default function HistoryList(props: TopListProps) {
             {loading
               ? Array.from({ length: 10 }, (k, i) => i).map((i) => (
                   <TableRow key={i}>
-                    <TableCell colSpan={3}>
+                    <TableCell colSpan={hasModifications ? 4 : 3}>
                       <Skeleton animation="wave" />
                     </TableCell>
                   </TableRow>

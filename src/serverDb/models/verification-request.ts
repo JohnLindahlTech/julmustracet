@@ -67,6 +67,7 @@ export class VerificationRequest implements Model {
 
   toDoc(updated: boolean): IVerificationRequest {
     const doc = {
+      type: this.type,
       _id: this._id,
       identifier: this.identifier,
       token: this.token,

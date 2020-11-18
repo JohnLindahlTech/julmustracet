@@ -1,0 +1,22 @@
+{
+  "language": "query",
+  "views": {
+    "account-by-userid": {
+      "map": {
+        "fields": {
+          "type": "asc",
+          "userId": "asc"
+        },
+        "partial_filter_selector": {}
+      },
+      "options": {
+        "def": {
+          "fields": [
+            "type",
+            "userId"
+          ]
+        }
+      }
+    }
+  }
+}

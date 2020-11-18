@@ -80,7 +80,7 @@ export class User implements Model {
     } else if (emailVerified) {
       this.emailVerified = new Date(emailVerified);
     }
-    this.roles = roles;
+    this.roles = Array.from(new Set(roles));
     this.changeUsername(username);
     this.password = password;
     this.createdAt = new Date(createdAt);
@@ -92,10 +92,13 @@ export class User implements Model {
   }
 
   changeUsername(username: string): void {
-    this.roles = [
-      username,
-      ...this.roles.filter((r) => r !== this.username),
-    ].filter(Boolean);
+    this.roles = Array.from(
+      new Set(
+        [username, ...this.roles.filter((r) => r !== this.username)].filter(
+          Boolean
+        )
+      )
+    );
     this.username = username;
   }
 
@@ -106,7 +109,7 @@ export class User implements Model {
       name: this.name,
       email: this.email,
       image: this.image,
-      roles: this.roles,
+      roles: Array.from(new Set(this.roles)),
       username: this.username,
       password: this.password,
       createdAt: this.createdAt.toJSON(),

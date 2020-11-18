@@ -5,6 +5,48 @@
       "value": "EN Märkesligan"
     }
   ],
+  "/VQFb1": [
+    {
+      "type": 0,
+      "value": "EN Utmärkelser"
+    }
+  ],
+  "/xP+8y": [
+    {
+      "type": 0,
+      "value": "EN Rekommendation: Undvik att byta användarnamn när du väl valt ett."
+    }
+  ],
+  "0Jc90u": [
+    {
+      "type": 0,
+      "value": "EN Notera!"
+    }
+  ],
+  "0hQb6G": [
+    {
+      "type": 0,
+      "value": "EN Gå till din publika profil här"
+    }
+  ],
+  "17ffRf": [
+    {
+      "type": 0,
+      "value": "EN Nu"
+    }
+  ],
+  "1RnFdK": [
+    {
+      "type": 0,
+      "value": "EN Gå till startsidan"
+    }
+  ],
+  "1mPJgd": [
+    {
+      "type": 0,
+      "value": "EN Nybörjare"
+    }
+  ],
   "3Jmkih": [
     {
       "type": 0,
@@ -23,16 +65,72 @@
       "value": "EN Dag"
     }
   ],
+  "4pn0ju": [
+    {
+      "type": 0,
+      "value": "EN Är du säker på att du vill logga ut?"
+    }
+  ],
   "5c7jHv": [
     {
       "type": 0,
       "value": "EN Pos."
     }
   ],
-  "82pu5M": [
+  "66X3jL": [
     {
       "type": 0,
-      "value": "EN Tillverkardetaljer"
+      "value": "EN Ogiltigt namn, pröva ett annat."
+    }
+  ],
+  "6Ngt4g": [
+    {
+      "type": 0,
+      "value": "EN Mängd"
+    }
+  ],
+  "6wJ81A": [
+    {
+      "type": 0,
+      "value": "EN Användarnamnet är redan upptaget"
+    }
+  ],
+  "7R04rK": [
+    {
+      "type": 0,
+      "value": "EN Du måste nu klicka på länken in eposten du bör ha fått."
+    }
+  ],
+  "7W7Msi": [
+    {
+      "type": 0,
+      "value": "EN Om du byter användarnamn måste du logga ut och in igen på andra enheter du är inloggad på."
+    }
+  ],
+  "7r4Wdu": [
+    {
+      "type": 0,
+      "value": "EN Registrerat minst 1 dryck."
+    }
+  ],
+  "7rF0o4": [
+    {
+      "type": 0,
+      "value": "EN Logga in på "
+    },
+    {
+      "type": 1,
+      "value": "site"
+    }
+  ],
+  "8QeM8A": [
+    {
+      "type": 0,
+      "value": "EN Lägsta tillåtna värde är "
+    },
+    {
+      "type": 1,
+      "value": "min"
     }
   ],
   "8iRvwS": [
@@ -41,10 +139,74 @@
       "value": "EN JulmustRacet"
     }
   ],
+  "A0XkO3": [
+    {
+      "type": 0,
+      "value": "EN Hoppsan!"
+    }
+  ],
+  "AAS1Iy": [
+    {
+      "type": 0,
+      "value": "EN Druckit must 20 dagar i rad"
+    }
+  ],
+  "ADPaxD": [
+    {
+      "type": 0,
+      "value": "EN Slutmålet är alltså att dricka julmust."
+    }
+  ],
+  "AIklJ7": [
+    {
+      "type": 0,
+      "value": "EN Druckit 5 liter must."
+    }
+  ],
+  "AdBqXu": [
+    {
+      "type": 0,
+      "value": "EN Lägsta tillåtna datum är "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    }
+  ],
+  "BOQjpt": [
+    {
+      "type": 0,
+      "value": "EN 24/7"
+    }
+  ],
+  "BXAPNS": [
+    {
+      "type": 0,
+      "value": "EN Druckit must 14 dagar i rad."
+    }
+  ],
   "CHrETt": [
     {
       "type": 0,
       "value": "EN Välkommen till JulmustRacet"
+    }
+  ],
+  "Cr0JiH": [
+    {
+      "type": 0,
+      "value": "EN Spara"
+    }
+  ],
+  "D+v+VA": [
+    {
+      "type": 0,
+      "value": "EN Around the Clock"
+    }
+  ],
+  "DRXWXB": [
+    {
+      "type": 0,
+      "value": "EN 404"
     }
   ],
   "DXulP5": [
@@ -53,10 +215,168 @@
       "value": "EN Namn"
     }
   ],
+  "DcvA3/": [
+    {
+      "type": 0,
+      "value": "EN "
+    },
+    {
+      "type": 1,
+      "value": "user"
+    },
+    {
+      "type": 0,
+      "value": " har inga utmärkelser."
+    }
+  ],
+  "E9HhI2": [
+    {
+      "type": 0,
+      "value": "EN Måste vara en textsträng"
+    }
+  ],
+  "ECpecS": [
+    {
+      "type": 0,
+      "value": "EN Druckit 30 liter must."
+    }
+  ],
+  "FTp79N": [
+    {
+      "type": 0,
+      "value": "EN Måste vara text"
+    }
+  ],
+  "FWoUv0": [
+    {
+      "type": 0,
+      "value": "EN Något gick visst väldigt fel med inloggningen. Prova gärna igen på länken nedan."
+    }
+  ],
+  "FfjY/n": [
+    {
+      "type": 0,
+      "value": "EN Registret dryck på dygnets alla timmar."
+    }
+  ],
+  "FiMHjD": [
+    {
+      "type": 0,
+      "value": "EN Måste välja ett märke"
+    }
+  ],
+  "GWFDx7": [
+    {
+      "type": 0,
+      "value": "EN Max-ad"
+    }
+  ],
+  "GgLd/W": [
+    {
+      "type": 0,
+      "value": "EN Halvtomt glas"
+    }
+  ],
+  "GwAqlg": [
+    {
+      "type": 0,
+      "value": "EN Druckit must 5 dagar i rad."
+    }
+  ],
+  "H+HYP7": [
+    {
+      "type": 0,
+      "value": "EN Halvmåne"
+    }
+  ],
+  "H/zrb8": [
+    {
+      "type": 0,
+      "value": "EN Märke"
+    }
+  ],
+  "HAUJds": [
+    {
+      "type": 0,
+      "value": "EN Ogiltigt datum"
+    }
+  ],
+  "HEQzSa": [
+    {
+      "type": 0,
+      "value": "EN Du får ej ange en tid i framtiden"
+    }
+  ],
   "HFI/5/": [
     {
       "type": 0,
       "value": "EN Epost"
+    }
+  ],
+  "HHJbbG": [
+    {
+      "type": 0,
+      "value": "EN "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " - JulmustRacet"
+    }
+  ],
+  "IZ5/Dz": [
+    {
+      "type": 0,
+      "value": "EN Rapportera enskilda gånger du dricker, dvs. varje flaska för sig."
+    }
+  ],
+  "JC3MvR": [
+    {
+      "type": 0,
+      "value": "EN L"
+    }
+  ],
+  "JGVuI3": [
+    {
+      "type": 0,
+      "value": "EN Socialt"
+    }
+  ],
+  "JhBkIw": [
+    {
+      "type": 0,
+      "value": "EN Användare: "
+    },
+    {
+      "type": 1,
+      "value": "user"
+    }
+  ],
+  "LSnLNY": [
+    {
+      "type": 0,
+      "value": "EN Användarnamn är obligatoriskt"
+    }
+  ],
+  "LeTcKf": [
+    {
+      "type": 0,
+      "value": "EN Graf"
+    }
+  ],
+  "MI3I6o": [
+    {
+      "type": 0,
+      "value": "EN Något gick väldigt tokigt"
+    }
+  ],
+  "NwhpsN": [
+    {
+      "type": 0,
+      "value": "EN FEL"
     }
   ],
   "OK+McJ": [
@@ -65,10 +385,126 @@
       "value": "EN Användarligan"
     }
   ],
-  "X1syBG": [
+  "OPEvAE": [
     {
       "type": 0,
-      "value": "EN Användardetaljer"
+      "value": "EN Provsmakare"
+    }
+  ],
+  "OQUAvA": [
+    {
+      "type": 0,
+      "value": "EN Om du inte kan klicka på knappen ovan kan du kopiera följande länk i din webbläsare:"
+    }
+  ],
+  "PWYWk5": [
+    {
+      "type": 0,
+      "value": "EN Logga in till JulmustRacet!"
+    }
+  ],
+  "Pf7MV/": [
+    {
+      "type": 0,
+      "value": "EN Något är okänt fel med användarnamnet"
+    }
+  ],
+  "PqaMrh": [
+    {
+      "type": 0,
+      "value": "EN Tid"
+    }
+  ],
+  "PszYZZ": [
+    {
+      "type": 0,
+      "value": "EN Rensa"
+    }
+  ],
+  "Q5PZU+": [
+    {
+      "type": 0,
+      "value": "EN Högsta tillåtna datum är "
+    },
+    {
+      "type": 1,
+      "value": "date"
+    }
+  ],
+  "QBMTbA": [
+    {
+      "type": 0,
+      "value": "EN Maxlängd är "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    }
+  ],
+  "QW7MYQ": [
+    {
+      "type": 0,
+      "value": "EN Druckit 10 liter must."
+    }
+  ],
+  "QptW68": [
+    {
+      "type": 0,
+      "value": "EN Topplistan"
+    }
+  ],
+  "R0XbHE": [
+    {
+      "type": 0,
+      "value": "EN Tävlingen pågår från 1 december till och med slutet av 20 dember."
+    }
+  ],
+  "RlLmd0": [
+    {
+      "type": 0,
+      "value": "EN Tidpunkt"
+    }
+  ],
+  "Sc3hSg": [
+    {
+      "type": 0,
+      "value": "EN Big Gulp"
+    }
+  ],
+  "Tcbx1p": [
+    {
+      "type": 0,
+      "value": "EN Användarnamn"
+    }
+  ],
+  "TiXXxS": [
+    {
+      "type": 0,
+      "value": "EN Redan 2006 slogs det nuvarande officiella rekordet på 90 liter av NightHawk."
+    }
+  ],
+  "U7FELD": [
+    {
+      "type": 0,
+      "value": "EN Denna tävling har anor sedan 2005. Vi var ett gäng i en liten håla i nordligaste Norrland som förfinade denna konstform."
+    }
+  ],
+  "UPtLs1": [
+    {
+      "type": 0,
+      "value": "EN Okänd"
+    }
+  ],
+  "VyIApP": [
+    {
+      "type": 0,
+      "value": "EN Måste ange en giltig epost"
+    }
+  ],
+  "X0vUWo": [
+    {
+      "type": 0,
+      "value": "EN Denna utmärkelse finns egentligen inte."
     }
   ],
   "X1tUUu": [
@@ -77,10 +513,108 @@
       "value": "EN Lägg till dryck"
     }
   ],
+  "YfgGdS": [
+    {
+      "type": 0,
+      "value": "EN 404 - Kan inte hitta sidan"
+    }
+  ],
+  "YxLXnd": [
+    {
+      "type": 0,
+      "value": "EN Redigera dryck"
+    }
+  ],
+  "ZeCih0": [
+    {
+      "type": 0,
+      "value": "EN I eposten ska följande meddelande finnas:"
+    }
+  ],
+  "aApUdB": [
+    {
+      "type": 0,
+      "value": "EN Halvfullt glas"
+    }
+  ],
+  "aJBiSZ": [
+    {
+      "type": 0,
+      "value": "EN Druckit must 3 dagar i rad."
+    }
+  ],
+  "c4nNn5": [
+    {
+      "type": 0,
+      "value": "EN "
+    },
+    {
+      "type": 1,
+      "value": "amount"
+    },
+    {
+      "type": 0,
+      "value": " L"
+    }
+  ],
+  "cAtjhT": [
+    {
+      "type": 0,
+      "value": "EN Märke: "
+    },
+    {
+      "type": 1,
+      "value": "brand"
+    }
+  ],
   "cGotG6": [
     {
       "type": 0,
       "value": "EN Mängd (Liter)"
+    }
+  ],
+  "ceANBr": [
+    {
+      "type": 0,
+      "value": "EN "
+    },
+    {
+      "type": 1,
+      "value": "icon"
+    },
+    {
+      "type": 0,
+      "value": " JohnPhoto/JulmustRacet"
+    }
+  ],
+  "dF1qpM": [
+    {
+      "type": 0,
+      "value": "EN Mustdag"
+    }
+  ],
+  "dPEYFF": [
+    {
+      "type": 0,
+      "value": "EN Första"
+    }
+  ],
+  "dsvntS": [
+    {
+      "type": 0,
+      "value": "EN Avbryt"
+    }
+  ],
+  "e1qvQA": [
+    {
+      "type": 0,
+      "value": "EN Klicka på knappen här under för att logga in på JulmustRacet."
+    }
+  ],
+  "eLKei0": [
+    {
+      "type": 0,
+      "value": "EN Du måste ha ett användarnamn för att kunna mata in dryck"
     }
   ],
   "eosocV": [
@@ -89,10 +623,104 @@
       "value": "EN Logga in"
     }
   ],
+  "fREWx7": [
+    {
+      "type": 0,
+      "value": "EN Hela veckan"
+    }
+  ],
+  "fSZkoi": [
+    {
+      "type": 0,
+      "value": "EN Inloggningsfel"
+    }
+  ],
+  "faXeYB": [
+    {
+      "type": 0,
+      "value": "EN Druckit 50 liter must."
+    }
+  ],
+  "g9//QL": [
+    {
+      "type": 0,
+      "value": "EN Druckit 20 liter must."
+    }
+  ],
+  "gITiyo": [
+    {
+      "type": 0,
+      "value": "EN Högsta tillåtna värde är "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    }
+  ],
+  "gLUIxi": [
+    {
+      "type": 0,
+      "value": "EN Registrerat minst 2 drycker inom 15 minuter."
+    }
+  ],
+  "glsAsK": [
+    {
+      "type": 0,
+      "value": "EN Registrerat orimligt mycket dryck."
+    }
+  ],
+  "gwmpEQ": [
+    {
+      "type": 0,
+      "value": "EN Druckit must på dygnets alla timmar och alla veckodagar."
+    }
+  ],
+  "iZuO+L": [
+    {
+      "type": 0,
+      "value": "EN Legend"
+    }
+  ],
   "jP8UQ6": [
     {
       "type": 0,
       "value": "EN Märken"
+    }
+  ],
+  "jenDvk": [
+    {
+      "type": 0,
+      "value": "EN Fuskare"
+    }
+  ],
+  "jtpO3M": [
+    {
+      "type": 0,
+      "value": "EN Ingen data"
+    }
+  ],
+  "kAEQyV": [
+    {
+      "type": 0,
+      "value": "EN OK"
+    }
+  ],
+  "lK147u": [
+    {
+      "type": 0,
+      "value": "EN Druckit must 7 dagar i rad."
+    }
+  ],
+  "llsg1f": [
+    {
+      "type": 0,
+      "value": "EN Tredje gången gillt"
+    }
+  ],
+  "m1rNPm": [
+    {
+      "type": 0,
+      "value": "EN Kan inte hitta sidan"
     }
   ],
   "mOFG3K": [
@@ -101,22 +729,108 @@
       "value": "EN Start"
     }
   ],
+  "nDoCQ3": [
+    {
+      "type": 0,
+      "value": "EN Double tap"
+    }
+  ],
+  "ol0llA": [
+    {
+      "type": 0,
+      "value": "EN Druckit 3 liter must."
+    }
+  ],
+  "onhmIw": [
+    {
+      "type": 0,
+      "value": "EN Historik"
+    }
+  ],
+  "p0wP1I": [
+    {
+      "type": 0,
+      "value": "EN Något är fel med fältet"
+    }
+  ],
+  "p4ZQh/": [
+    {
+      "type": 0,
+      "value": "EN Druckit 90 liter must."
+    }
+  ],
   "p70I/0": [
     {
       "type": 0,
       "value": "EN Fallande sortering"
     }
   ],
-  "qeWjpq": [
+  "q9L7L0": [
     {
       "type": 0,
-      "value": "EN Redigera profil"
+      "value": "EN Connoisseur"
     }
   ],
-  "sLY0ma": [
+  "qwV6A9": [
     {
       "type": 0,
-      "value": "EN Kontrollera din epost för inloggningslänk"
+      "value": "EN Du får inte byta användare"
+    }
+  ],
+  "r0R22a": [
+    {
+      "type": 0,
+      "value": "EN Ihärdig"
+    }
+  ],
+  "r71a4u": [
+    {
+      "type": 0,
+      "value": "EN Arbetsmyra"
+    }
+  ],
+  "s5BjWo": [
+    {
+      "type": 0,
+      "value": "EN Du måste vara inloggad"
+    }
+  ],
+  "saidFH": [
+    {
+      "type": 0,
+      "value": "EN Logga in på "
+    },
+    {
+      "type": 1,
+      "value": "site"
+    },
+    {
+      "type": 0,
+      "value": " med denna länk "
+    },
+    {
+      "type": 1,
+      "value": "url"
+    },
+    {
+      "type": 0,
+      "value": " Följande meddelande visades vid inloggningen: "
+    },
+    {
+      "type": 1,
+      "value": "uniqueMessage"
+    }
+  ],
+  "siIhVs": [
+    {
+      "type": 0,
+      "value": "EN Verifiera epost"
+    }
+  ],
+  "tEcVAb": [
+    {
+      "type": 0,
+      "value": "EN Chug! Chug! Chug!"
     }
   ],
   "tuu5lA": [
@@ -133,10 +847,52 @@
       "value": " liter"
     }
   ],
-  "wh8uro": [
+  "tvgump": [
     {
       "type": 0,
-      "value": "EN Logga in med epost"
+      "value": "EN Druckit 1 liter must."
+    }
+  ],
+  "ubH4NT": [
+    {
+      "type": 0,
+      "value": "EN Redigera användare"
+    }
+  ],
+  "v8JVRB": [
+    {
+      "type": 0,
+      "value": "EN Måste vara en siffra"
+    }
+  ],
+  "vXkiFm": [
+    {
+      "type": 0,
+      "value": "EN Det går att själv lägga till julmustmärken i formuläret genom att skriva in en sökning och välja sista raden."
+    }
+  ],
+  "vY+ww2": [
+    {
+      "type": 0,
+      "value": "EN Användarnamnet får vara max 32 tecken"
+    }
+  ],
+  "vrAIMW": [
+    {
+      "type": 0,
+      "value": "EN Obligatoriskt fält"
+    }
+  ],
+  "x0lhQY": [
+    {
+      "type": 0,
+      "value": "EN Följande meddelande visades vid inloggningen"
+    }
+  ],
+  "x400Hl": [
+    {
+      "type": 0,
+      "value": "EN Druckit must på varje veckodag."
     }
   ],
   "xC27yX": [
@@ -149,6 +905,24 @@
     {
       "type": 0,
       "value": "EN Användare"
+    }
+  ],
+  "y+Bozn": [
+    {
+      "type": 0,
+      "value": "EN Måste vara ett giltigt datum"
+    }
+  ],
+  "yl9iLw": [
+    {
+      "type": 0,
+      "value": "EN ...nu med utmärkelser!"
+    }
+  ],
+  "z7w9N6": [
+    {
+      "type": 0,
+      "value": "EN Smakat minst 5 olika märken."
     }
   ],
   "zVob30": [

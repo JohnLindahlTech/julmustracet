@@ -8,7 +8,7 @@ import Layout from "../components/layout";
 import ErrorBoundary from "../components/ErrorBoundary";
 import { getMessages } from "../translations/messages";
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "../theme";
+import { getLocalizedTheme } from "../theme";
 import Head from "next/head";
 import DBProvider from "../db/provider";
 import { DataProvider } from "../db/data";
@@ -37,7 +37,7 @@ if (typeof window !== "undefined") {
       // TODO Handle every !response.ok here? Probably not...
       // TODO CouchDB only answers with 403
       if (response.status === 401) {
-        await new PouchDB("_local/session").destroy();
+        await new PouchDB("session").destroy();
         window.location.href = LogIn.href;
       }
       return response;
@@ -83,7 +83,7 @@ const App = ({ Component, pageProps }) => {
           content={`${NEXTAUTH_URL}/apple-touch-icon.png`}
         />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={getLocalizedTheme(locale)}>
         <CssBaseline />
         <IntlProvider
           locale={locale}

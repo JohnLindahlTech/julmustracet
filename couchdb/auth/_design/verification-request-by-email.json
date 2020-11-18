@@ -1,0 +1,22 @@
+{
+  "language": "query",
+  "views": {
+    "verification-request-by-email": {
+      "map": {
+        "fields": {
+          "type": "asc",
+          "identifier": "asc"
+        },
+        "partial_filter_selector": {}
+      },
+      "options": {
+        "def": {
+          "fields": [
+            "type",
+            "identifier"
+          ]
+        }
+      }
+    }
+  }
+}
