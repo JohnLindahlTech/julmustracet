@@ -59,7 +59,7 @@ const VerifyRequest: FC = () => {
           <FormattedMessage defaultMessage="Notera!" />
         </Typography>
         <Typography align="center">
-          <FormattedMessage defaultMessage="Du måste nu klicka på länken in eposten du bör ha fått." />
+          <FormattedMessage defaultMessage="Du måste nu klicka på länken i eposten du bör ha fått." />
         </Typography>
         {uniqueMessage ? (
           <>

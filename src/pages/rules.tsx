@@ -30,7 +30,7 @@ const Rules: FC = () => {
         </li>
         <li>
           <Typography>
-            <FormattedMessage defaultMessage="Tävlingen pågår från 1 december till och med slutet av 20 dember." />
+            <FormattedMessage defaultMessage="Tävlingen pågår från 1 december till och med slutet av 20 december." />
           </Typography>
         </li>
         <li>
