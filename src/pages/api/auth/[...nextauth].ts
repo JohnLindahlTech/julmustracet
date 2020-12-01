@@ -36,22 +36,27 @@ const options = {
     Providers.Google({
       clientId: process.env.NEXTAUTH_GOOGLE_ID,
       clientSecret: process.env.NEXTAUTH_GOOGLE_SECRET,
+      state: false,
     }),
     Providers.Facebook({
       clientId: process.env.NEXTAUTH_FACEBOOK_ID,
       clientSecret: process.env.NEXTAUTH_FACEBOOK_SECRET,
+      state: false,
     }),
     Providers.Twitter({
       clientId: process.env.NEXTAUTH_TWITTER_ID,
       clientSecret: process.env.NEXTAUTH_TWITTER_SECRET,
+      state: false,
     }),
     Providers.GitHub({
       clientId: process.env.NEXTAUTH_GITHUB_ID,
       clientSecret: process.env.NEXTAUTH_GITHUB_SECRET,
+      state: false,
     }),
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      state: false,
     }),
   ],
 
