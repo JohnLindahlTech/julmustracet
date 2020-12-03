@@ -59,7 +59,7 @@ const messages = defineMessages({
   },
   "max.string": {
     defaultMessage: "Maxlängd är {max}",
-    values: { max: 32 },
+    values: { max: 50 },
   },
   "min.number": {
     defaultMessage: "Lägsta tillåtna värde är {min}",
@@ -138,7 +138,7 @@ const Add: FC = () => {
     brand: string(intl.formatMessage(messages.string))
       .typeError(intl.formatMessage(messages.type))
       .required(intl.formatMessage(messages.required))
-      .max(32, intl.formatMessage(messages["max.string"], { max: 32 })),
+      .max(50, intl.formatMessage(messages["max.string"], { max: 50 })),
     amount: number()
       .required(intl.formatMessage(messages.required))
       .min(0, intl.formatMessage(messages["min.number"], { min: 0 }))

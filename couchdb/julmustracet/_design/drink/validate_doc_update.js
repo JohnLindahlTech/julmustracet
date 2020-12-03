@@ -41,8 +41,8 @@ var schema = {
     reject('brand/required');
   }
 
-  if(newDoc.brand.length > 32){
-    reject('brand/max.string/max!32');
+  if(newDoc.brand.length > 50){
+    reject('brand/max.string/max!50');
   }
 
   if(!newDoc.amount){
@@ -73,19 +73,19 @@ var schema = {
 
   // TODO Enable time-checking in prod
   // Ensure after 1 dec
-  // if(time.getTime() < first.getTime()){
-  //   reject('time/min.date/date!'+ first.toJSON());
-  // }
+  if(time.getTime() < first.getTime()){
+    reject('time/min.date/date!'+ first.toJSON());
+  }
 
-  // // ensure before 20 dec
-  // if(time.getTime() >= last.getTime()){
-  //   reject('time/max.date/date!' + last.toJSON());
-  // }
+  // ensure before 20 dec
+  if(time.getTime() >= last.getTime()){
+    reject('time/max.date/date!' + last.toJSON());
+  }
 
-  // // ensure before right now
-  // if(time.getTime() >= now.getTime()){ 
-  //   reject('time/future.date');
-  // }
+  // ensure before right now
+  if(time.getTime() >= now.getTime()){ 
+    reject('time/future.date');
+  }
 }
 
 
