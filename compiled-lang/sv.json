@@ -107,12 +107,6 @@
       "value": "Användarnamnet är redan upptaget"
     }
   ],
-  "7R04rK": [
-    {
-      "type": 0,
-      "value": "Du måste nu klicka på länken i eposten du bör ha fått."
-    }
-  ],
   "7W7Msi": [
     {
       "type": 0,
@@ -191,6 +185,12 @@
       "value": "Ta bort användare"
     }
   ],
+  "B+6Cao": [
+    {
+      "type": 0,
+      "value": "Du måste nu klicka på länken i eposten du bör ha fått."
+    }
+  ],
   "BOQjpt": [
     {
       "type": 0,
@@ -219,6 +219,12 @@
     {
       "type": 0,
       "value": "Around the Clock"
+    }
+  ],
+  "D0ccYB": [
+    {
+      "type": 0,
+      "value": "Tävlingen pågår från 1 december till och med slutet av 20 december."
     }
   ],
   "DRXWXB": [
@@ -461,12 +467,6 @@
     {
       "type": 0,
       "value": "Topplistan"
-    }
-  ],
-  "R0XbHE": [
-    {
-      "type": 0,
-      "value": "Tävlingen pågår från 1 december till och med slutet av 20 dember."
     }
   ],
   "RAYA8J": [

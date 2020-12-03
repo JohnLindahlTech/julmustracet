@@ -17,7 +17,6 @@
   "66X3jL": "Invalid name, try another one.",
   "6Ngt4g": "Amount",
   "6wJ81A": "Username is taken",
-  "7R04rK": "Klick the link you have gotten in your email.",
   "7W7Msi": "If you change your username, you must log in again on your other devices.",
   "7r4Wdu": "Registered atleast 1 drink.",
   "7rF0o4": "Log into {site}",
@@ -71,7 +70,6 @@
   "QBMTbA": "Max length is {max}",
   "QW7MYQ": "Consumed 10 litre of Julmust.",
   "QptW68": "Top list",
-  "R0XbHE": "The competition is active between 1st December and 20th December.",
   "RAYA8J": "Miscellaneous information",
   "RlLmd0": "Time",
   "Sc3hSg": "Big Gulp",
@@ -149,5 +147,7 @@
   "y+Bozn": "Must be a valid date",
   "yl9iLw": "...now with achievements!",
   "z7w9N6": "Consumed atleast 5 different brands.",
-  "zVob30": "Log out"
+  "zVob30": "Log out",
+  "B+6Cao": "Click the link you have gotten in your email.",
+  "D0ccYB": "The competition is active between 1st December and 20th December."
 }
